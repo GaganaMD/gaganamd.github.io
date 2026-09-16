@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Gagana M D is an AI Safety Researcher based in Bengaluru, working on agent evaluation, monitoring and control, interpretability, and world models.">
+    <meta name="author" content="Gagana M D">
+    <meta property="og:title" content="Gagana M D — AI Safety Research">
+    <meta property="og:description" content="AI safety research on agent evaluation, monitoring and control, interpretability, and world models.">
+    <meta property="og:type" content="website">
+    <!-- TODO: Replace this with https://gaganamd.github.io/ after publishing. -->
+    <link rel="canonical" href="https://gaganamd.github.io/">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232c3675'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='700' fill='white'%3EG%3C/text%3E%3C/svg%3E">
+    <title>Gagana M D — AI Safety Research</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+      <nav class="navigation container" aria-label="Primary navigation">
+        <a class="wordmark" href="#top" aria-label="Gagana M D, home">Gagana M D</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+        <div class="nav-links" id="nav-links">
+          <a href="#research">Research</a>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#about">About</a>
+          <!-- TODO: Add a CV PDF to assets/ and change this href. -->
+          <a class="cv-link is-hidden" data-link="cv" href="#">CV</a>
+          <!-- TODO: Add GitHub URL in script.js -->
+          <a class="icon-link is-hidden" data-link="github" href="#" aria-label="GitHub profile">GH</a>
+          <a class="icon-link" href="https://www.linkedin.com/in/gaganamd/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile (opens in a new tab)">in</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="hero container" id="top" aria-labelledby="page-title">
+        <p class="eyebrow">Bengaluru, India</p>
+        <h1 id="page-title">Gagana M D</h1>
+        <p class="role">AI Safety Researcher</p>
+        <p class="intro">I work on AI safety, particularly agent evaluation, monitoring and control. I’m interested in how we can evaluate and constrain increasingly capable AI systems when their behaviour is only partially observable, and in using interpretability and world-model analysis to better understand those systems.</p>
+        <div class="hero-links" aria-label="Profile links">
+          <a class="button button-primary" href="#projects">Selected Research <span aria-hidden="true">↓</span></a>
+          <!-- URLs supplied through script.js only appear when populated. -->
+          <a class="text-link is-hidden" data-link="github" href="#">GitHub <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://www.linkedin.com/in/gaganamd/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a class="text-link is-hidden" data-link="cv" href="#">CV <span aria-hidden="true">↗</span></a>
+          <a class="text-link is-hidden" data-link="email" href="#">Email <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="section section-research container" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading"><p class="section-number">01</p><h2 id="projects-title">Selected Research</h2></div>
+        <p class="section-lede">Research on how to evaluate, monitor, and constrain AI agents when complete observability and reliable behaviour cannot be assumed.</p>
+        <div class="project-list">
+          <article class="project"><p class="project-number">01</p><div class="project-content"><p class="project-context">PRISM Research · AI Control / Agent Security</p><h3>Intervention-Aware Monitoring</h3><p>Exploring monitoring and control mechanisms for AI agents operating in environments with restricted actions and safety-critical boundaries. The work connects systems-security ideas such as fail-closed authorization, privilege separation, and provenance with agent-control approaches.</p><ul class="tags" aria-label="Topics"><li>AI Control</li><li>Monitoring</li><li>Agent Security</li><li>Authorization</li></ul><div class="project-links" data-project-links="intervention-aware-monitoring"></div></div></article>
+          <article class="project"><p class="project-number">02</p><div class="project-content"><p class="project-context">PRISM Research · NeurIPS 2026 Workshop submission</p><h3>World Models in Physical AI</h3><p>Investigating whether generated world models preserve the decision-relevant structure of interactive environments. The work uses exact finite-horizon planning, reachability and reversibility analysis, controlled perturbations, trace-equivalence analysis, and planning-regret transfer to test whether structurally similar representations preserve behaviourally important information.</p><ul class="tags" aria-label="Topics"><li>World Models</li><li>Evaluation</li><li>Planning</li><li>Representation</li></ul><div class="project-links" data-project-links="world-models-physical-ai"></div></div></article>
+          <article class="project"><p class="project-number">03</p><div class="project-content"><p class="project-context">Agent Evaluation</p><h3>Secret Loyalties</h3><p>An agent-evaluation project studying whether hidden loyalties and competing objectives can be detected when evaluators have limited observability into an agent’s behaviour. It explores evaluator affordances, evidence-recovery audits, and how available evidence shapes evaluator conclusions.</p><ul class="tags" aria-label="Topics"><li>Agent Evaluation</li><li>Hidden Objectives</li><li>Auditing</li><li>Limited Observability</li></ul><div class="project-links" data-project-links="secret-loyalties"></div></div></article>
+          <article class="project"><p class="project-number">04</p><div class="project-content"><p class="project-context">Apart Research hackathon work</p><h3>Agent-Trace</h3><p>Investigating how much safety-relevant information can be lost when agent activity is reconstructed from incomplete traces rather than observed through native tool events. The work compares native tool events with reconstructed traces and examines how observability differences can affect downstream safety evaluation.</p><ul class="tags" aria-label="Topics"><li>Agent Traces</li><li>Observability</li><li>Safety Evaluation</li><li>Tool Use</li></ul><div class="project-links" data-project-links="agent-trace"></div></div></article>
+        </div>
+      </section>
+
+      <section class="section section-interests container" id="research" aria-labelledby="research-title">
+        <div class="section-heading"><p class="section-number">02</p><h2 id="research-title">Research Interests</h2></div>
+        <div class="interests-grid">
+          <article><h3>AI Control &amp; Monitoring</h3><p>Monitoring agent behaviour, intervention-aware control, threat monitoring, and mechanisms for keeping increasingly capable agents within intended boundaries.</p></article>
+          <article><h3>Agent Evaluations</h3><p>Evaluating hidden objectives, limited observability, agent traces, monitoring failures, and other safety-relevant agent behaviours.</p></article>
+          <article><h3>Interpretability</h3><p>Understanding model representations and exploring interpretability methods for safety-relevant reasoning, monitoring, and evaluation.</p></article>
+          <article><h3>World Models &amp; Representations</h3><p>Studying structural representations, world-model evaluation, planning, and representation geometry.</p></article>
+        </div>
+      </section>
+
+      <section class="section section-other-research container" aria-labelledby="other-research-title">
+        <div class="section-heading"><p class="section-number">03</p><h2 id="other-research-title">Other Research &amp; Explorations</h2></div>
+        <article class="project project-secondary"><p class="project-number">05</p><div class="project-content"><p class="project-context">Experimental research sandbox</p><h3>Latent Manifold Reasoning Sandbox</h3><p>An experimental sandbox for studying how reasoning-related representations behave under structured routing operations compared with isotropic perturbations. The work examines representation geometry through k-nearest-neighbour overlap, path distortion, and angular changes.</p><ul class="tags" aria-label="Topics"><li>Representation Geometry</li><li>Manifolds</li><li>Reasoning</li><li>Interpretability</li></ul><div class="project-links" data-project-links="latent-manifold-sandbox"></div></div></article>
+      </section>
+
+      <!-- Research & Writing is intentionally hidden until a verified entry is added. See README.md. -->
+      <section class="section container is-hidden" id="writing" aria-labelledby="writing-title">
+        <div class="section-heading"><p class="section-number">04</p><h2 id="writing-title">Research &amp; Writing</h2></div>
+        <!-- Future entry format: title · authors · status · venue · year · Paper · Code -->
+      </section>
+
+      <section class="section container" id="experience" aria-labelledby="experience-title">
+        <div class="section-heading"><p class="section-number">04</p><h2 id="experience-title">Research &amp; Experience</h2></div>
+        <div class="timeline">
+          <article><div class="timeline-meta"><p>May 2026 – Present</p></div><div><h3>PRISM Research</h3><p class="position">Program Support Volunteer</p><p>Supporting AI safety research across interpretability, synchronous threat monitoring, and safe-by-design AI projects.</p></div></article>
+          <article><div class="timeline-meta"><p>April – July 2026</p><p>Bengaluru</p></div><div><h3>BaseThesis Labs</h3><p class="position">Applied Research</p><p>Worked on AI agent evaluation and benchmarking, with a focus on evaluating agent behaviour and observability in tool-using workflows.</p></div></article>
+          <article><div class="timeline-meta"><p>January – August 2025</p></div><div><h3>DREAM Lab, IISc</h3><p class="position">Research Intern</p><p>Worked on fog-assisted UAV routing and reinforcement-learning-based split inference for resource-constrained systems.</p></div></article>
+        </div>
+      </section>
+
+      <section class="section container about-section" id="about" aria-labelledby="about-title">
+        <div class="section-heading"><p class="section-number">05</p><h2 id="about-title">About</h2></div>
+        <div class="about-copy"><p>I’m an AI safety researcher based in Bengaluru, working primarily on agent evaluation, monitoring and control, with additional interests in interpretability and world models.</p><p>I completed my B.E. in Artificial Intelligence and Machine Learning in 2025. I’m particularly interested in research connecting empirical AI safety with systems security, formal reasoning, and representation analysis.</p></div>
+        <aside class="education" aria-labelledby="education-title"><h3 id="education-title">Education</h3><p><strong>Acharya Institute of Technology</strong><br>B.E. Artificial Intelligence &amp; Machine Learning, 2025</p></aside>
+      </section>
+
+      <section class="section section-compact container" id="community" aria-labelledby="community-title">
+        <div class="section-heading"><p class="section-number">06</p><h2 id="community-title">Community &amp; Leadership</h2></div>
+        <div class="community-list"><article><h3>Women in Big Data India</h3><p class="position">Program Lead — Shakti Program</p><p>Led and supported a six-month mentoring and upskilling program for women returning to or advancing in technical careers.</p></article><article><h3>WiDS Ambassador</h3><p class="position">2026</p></article><article><h3>Women Who Code</h3><p class="position">Data community volunteer · 2022 – Present</p></article></div>
+      </section>
+
+      <section class="contact container" aria-labelledby="contact-title">
+        <p class="eyebrow">Contact</p><h2 id="contact-title">Let’s Connect</h2><p>I’m interested in research collaborations and opportunities in AI safety, particularly around evaluations, monitoring and control, interpretability, and related areas.</p><div class="contact-links"><a class="is-hidden" data-link="email" href="#">Email <span aria-hidden="true">↗</span></a><a class="is-hidden" data-link="github" href="#">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/gaganamd/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a class="is-hidden" data-link="cv" href="#">CV <span aria-hidden="true">↗</span></a></div>
+      </section>
+    </main>
+
+    <footer class="footer"><div class="container"><p>Gagana M D · Bengaluru, India</p><p>Built with HTML/CSS and hosted on GitHub Pages.</p></div></footer>
+    <script src="script.js"></script>
+  </body>
+</html>
