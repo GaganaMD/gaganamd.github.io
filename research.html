@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research · Gagana M D</title>
+<meta name="description" content="AI safety research by Gagana M D on agent monitoring, AI control, world-model evaluation and auditing under limited observability, with the status of each project.">
+<meta name="author" content="Gagana M D">
+<meta name="theme-color" content="#f8f7f3">
+<link rel="canonical" href="https://gaganamd.github.io/research.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gagana M D">
+<meta property="og:title" content="Research · Gagana M D">
+<meta property="og:description" content="AI safety research by Gagana M D on agent monitoring, AI control, world-model evaluation and auditing under limited observability, with the status of each project.">
+<meta property="og:url" content="https://gaganamd.github.io/research.html">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f8f7f3'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' text-anchor='middle' fill='%23202c32'%3EG%3Ctspan fill='%23305d64'%3E.%3C/tspan%3E%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">Gagana M D<span class="brand-dot">.</span></a>
+    <button class="menu" id="menu" type="button" aria-controls="nav-links" aria-expanded="false">Menu</button>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="projects.html">Projects</a>
+      <a href="writing.html">Writing</a>
+      <a href="about.html">About</a>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <a href="speaking.html">Speaking</a>
+      <a href="consulting.html">Consulting</a>
+      <a class="nav-contact" href="mailto:gaganaaa.dev@gmail.com">Email me</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero wrap" aria-labelledby="page-title">
+  <p class="eyebrow">Research</p>
+  <h1 id="page-title">Monitoring, evaluation and what evidence <em>can support.</em></h1>
+  <p class="lede">Most of my work comes back to one question: what can we justifiably conclude about an AI agent from the evidence we actually have, and is that evidence available in time to act on? Below is everything, with the stage each piece is at. Where something isn't public yet, I say so instead of describing results you can't check.</p>
+</section>
+
+<section class="section wrap tight" aria-labelledby="main-title">
+  <div class="section-top"><div><p class="eyebrow">AI safety research</p><h2 id="main-title">Main projects<span class="period">.</span></h2></div></div>
+  <div class="entries">
+
+    <article class="entry" id="dinc">
+      <div>
+        <span class="tag">AI control · Monitoring</span>
+        <h3><a href="detection-is-not-containment.html">Detection Is Not Containment</a></h3>
+        <p>Measures whether a monitor flags a prohibited action early enough for an intervention to prevent it, then replays the intervention to measure both prevention and the cost of false alarms.</p>
+        <dl class="facts">
+          <dt>Method</dt><dd>Synthetic authorization environment. Three monitor views (actions; plus reasoning; plus environment telemetry). Local <code>qwen3:14b</code> monitor with a frozen prompt and oracle. Threshold calibrated on benign controls only. Preregistered follow-up phases.</dd>
+          <dt>Result</dt><dd>Grounded detection was timely by one step (margin +1). Decisions held in 8 of 12 meaning-preserving identifier renamings. In a closed-loop replay, a false alarm revoked a benign agent's authority and failed its task.</dd>
+          <dt>Limits</dt><dd>One environment, single deterministic draws, fixed prompts. Says nothing about chain-of-thought faithfulness or general control performance.</dd>
+          <dt>Role</dt><dd>Team of three (with Kaustubh Gupta and Maria Ines). I'm the first-listed author and I maintain the public repository.</dd>
+        </dl>
+      </div>
+      <div class="entry-side">
+        <span class="status done">Completed · code and data public</span>
+        <span>Apart Research AI Incident Response Sprint, 2026</span>
+        <div class="links"><a href="detection-is-not-containment.html">Case study →</a><a href="https://github.com/GaganaMD/detection-is-not-containment">Repository ↗</a></div>
+      </div>
+    </article>
+
+    <article class="entry" id="world-models">
+      <div>
+        <span class="tag">World models · Evaluation</span>
+        <h3>Trustworthy LLM-generated world models</h3>
+        <p>LLMs are increasingly used to write the environments that agents are trained and tested in. If a generated environment quietly changes the decision structure (which states are reachable, which actions are reversible), any safety conclusion drawn inside it inherits that error.</p>
+        <dl class="facts">
+          <dt>Method</dt><dd>Evaluation of executable world models across mechanical validity (does it run), structural fidelity (does it encode the intended game), and semantic consistency. Five LLMs, 44 scenarios, 410 generated POSGs.</dd>
+          <dt>Why it matters</dt><dd>Downstream safety reasoning about reachability, reversibility and empowerment depends on the environment being right.</dd>
+          <dt>Role</dt><dd>Research Fellow, mentored by Jobst Heitzig. Co-author on the write-up.</dd>
+        </dl>
+      </div>
+      <div class="entry-side">
+        <span class="status ongoing">Fellowship project · write-up not yet public</span>
+        <span>PRISM AI Safety Research Fellowship, May–Oct 2026</span>
+      </div>
+    </article>
+
+    <article class="entry" id="auditing">
+      <div>
+        <span class="tag">Auditing · Hidden objectives</span>
+        <h3>Agent auditing under limited observability</h3>
+        <p>An auditor rarely sees everything an agent did. This line of work asks which conclusions about an agent's objectives survive when traces are incomplete or reconstructed after the fact.</p>
+        <dl class="facts">
+          <dt>Secret Loyalties</dt><dd>An agent-evaluation setup for hidden loyalties: what an evaluator needs, in affordances and evidence, to recover them.</dd>
+          <dt>Agent-Trace</dt><dd>Compares native tool events with reconstructed traces, to measure what is lost before a downstream safety evaluation sees the data.</dd>
+          <dt>Status</dt><dd>In progress. No public code or write-up yet, so I'm not reporting results here.</dd>
+        </dl>
+      </div>
+      <div class="entry-side">
+        <span class="status private">Ongoing · not yet public</span>
+        <span>Independent and collaborative work</span>
+      </div>
+    </article>
+
+    <article class="entry" id="intervention-aware">
+      <div>
+        <span class="tag">Control · Agent security</span>
+        <h3>Intervention-aware monitoring</h3>
+        <p>A research direction rather than a result. It asks how authorization boundaries, fail-closed checks, privilege separation and auditable traces could make monitoring of tool-using agents actionable. Detection Is Not Containment tested one narrow version of this idea: revoking a single capability.</p>
+      </div>
+      <div class="entry-side">
+        <span class="status private">Exploratory direction</span>
+      </div>
+    </article>
+
+    <article class="entry" id="post-control">
+      <div>
+        <span class="tag">Cooperation · Governance</span>
+        <h3>Post-Control Initiative</h3>
+        <p>An interdisciplinary project on trust, negotiation and credible commitments between humans and advanced AI systems, for situations where capabilities are asymmetric and enforcement may be limited. My part so far is research roundtables and looking into technical and institutional mechanisms. This work is mostly conceptual, not empirical.</p>
+      </div>
+      <div class="entry-side">
+        <span class="status ongoing">Ongoing</span>
+        <span>Sentient Futures, Research Fellow, Sep 2026 – present. Mentored by Julia Bossmann.</span>
+      </div>
+    </article>
+
+    <article class="entry" id="synth-benchmark">
+      <div>
+        <span class="tag">Evaluation infrastructure</span>
+        <h3>Synth Benchmark</h3>
+        <p>An offline-first harness for long-horizon agent tasks in finance and due diligence. The engineering choices are the interesting part: there is one canonical task file, task packages are generated rather than hand-edited, and grading is rubric-based with criteria that score precision, recall and F1. Contradictions, unsafe actions and prompt-injection compliance are automatic failures, and a leakage guard refuses to load ground truth if grading assets are visible in the agent's workspace.</p>
+        <dl class="facts">
+          <dt>Status</dt><dd>Infrastructure and first multi-system tabulations exist. Live side-effect auditing against real systems is not implemented. Mock mode only.</dd>
+        </dl>
+      </div>
+      <div class="entry-side">
+        <span class="status ongoing">Engineering · in progress</span>
+        <div class="links"><a href="https://github.com/GaganaMD/synth-benchmark">Repository ↗</a></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section wrap" aria-labelledby="smaller-title">
+  <div class="section-top">
+    <div><p class="eyebrow">Smaller studies</p><h2 id="smaller-title">Exploratory and earlier work<span class="period">.</span></h2></div>
+    <p class="section-desc">Independent or team projects with public code. Useful for showing how I work. None of them make strong claims.</p>
+  </div>
+  <div class="entries">
+    <article class="entry" id="interp-causal">
+      <div>
+        <span class="tag">Interpretability</span>
+        <h3>Prompt sensitivity and latent drift in a small causal-reasoning model</h3>
+        <p>Does a model's answer flip when a causal-reasoning prompt is reworded while the causal structure stays the same, and do those flips line up with hidden-state movement? I built synthetic vignettes covering confounding, mediation and selection bias, plus variants that remove a confounder or rename terms. On Qwen2.5-0.5B-Instruct I ran prompt-stability analysis, layerwise probes and activation contrasts.</p>
+        <p>Early runs showed high answer flip rates across reframings, and the largest drift with "mechanistic" prompts. The repository is explicit that probe separability and drift are correlational and don't establish mechanism.</p>
+      </div>
+      <div class="entry-side">
+        <span class="status ongoing">Exploratory · independent</span>
+        <div class="links"><a href="https://github.com/GaganaMD/Interpretability-for-Scientific-Causal-Reasoning">Repository ↗</a><a href="https://github.com/GaganaMD/Interpretability-for-Scientific-Causal-Reasoning/blob/main/docs/limitations.md">Limitations ↗</a></div>
+      </div>
+    </article>
+    <article class="entry" id="latent-manifold">
+      <div>
+        <span class="tag">Representations</span>
+        <h3>Latent manifold reasoning</h3>
+        <p>A toy study of what happens when a smooth latent trajectory is forced through a narrow, discrete interface. It uses PCA embeddings of the scikit-learn digits data. Early versions had no baselines, and almost any perturbation looked like "collapse". Later versions compare structured routing against isotropic noise and shuffled anchors, with bootstrap intervals and permutation tests.</p>
+        <p>The result I find most interesting is a mixed one: routing damaged neighbourhood preservation while <em>shortening</em> one path-length measure. One metric isn't enough to judge it. None of this is evidence about real transformer hidden states.</p>
+      </div>
+      <div class="entry-side">
+        <span class="status done">Exploratory · independent</span>
+        <div class="links"><a href="https://github.com/GaganaMD/latent-manifold-reasoning">Repository ↗</a></div>
+      </div>
+    </article>
+    <article class="entry" id="matching-law">
+      <div>
+        <span class="tag">Reinforcement learning</span>
+        <h3>The Matching Law in transformer-based RL agents</h3>
+        <p>A Neuromatch Impact Scholars team project. It asks whether a transformer-based agent trained with Q-learning on a two-choice, MNIST-cued task allocates its choices in proportion to reward rates, as the Matching Law from behavioural psychology predicts.</p>
+      </div>
+      <div class="entry-side">
+        <span class="status done">Team project · Oct 2024 – Mar 2025</span>
+        <div class="links"><a href="https://github.com/GaganaMD/Investigating-the-Matching-Law-in-Transformer-Based-Reinforcement-Learning-Agents">Repository ↗</a></div>
+      </div>
+    </article>
+    <article class="entry" id="split-inference">
+      <div>
+        <span class="tag">Systems · RL</span>
+        <h3>Fog-assisted UAV routing and split inference</h3>
+        <p>Research internship work at IISc's DREAM Lab on routing UAVs under resource constraints, and on using reinforcement learning to decide where to split a model's inference between devices.</p>
+      </div>
+      <div class="entry-side">
+        <span class="status done">Internship · Jan – Aug 2025</span>
+        <div class="links"><a href="https://github.com/GaganaMD/split-inferencing">Split-inference code ↗</a></div>
+      </div>
+    </article>
+    <article class="entry" id="biornet">
+      <div>
+        <span class="tag">Remote sensing</span>
+        <h3>Hyperspectral BiorNet: wavelets for unmixing</h3>
+        <p>A hyperspectral unmixing framework that combines biorthogonal wavelet features with a CNN–LSTM model, evaluated with RMSE and spectral angle distance. Submitted to IGARSS 2025.</p>
+      </div>
+      <div class="entry-side">
+        <span class="status done">Paper submission · IGARSS 2025</span>
+        <div class="links"><a href="https://github.com/GaganaMD/Hyperspectral-Wavenet">Repository ↗</a></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section wrap" aria-labelledby="statuses-title">
+  <div class="section-top"><div><p class="eyebrow">How to read this page</p><h2 id="statuses-title">Status labels<span class="period">.</span></h2></div></div>
+  <ul class="list-plain">
+    <li><strong>Completed · code and data public</strong>Finished, with an artifact you can run or inspect.</li>
+    <li><strong>Fellowship project / Ongoing</strong>Real work in progress. Results stay off this site until there's something to link to.</li>
+    <li><strong>Exploratory</strong>Small independent studies, mostly useful for showing method and judgment.</li>
+    <li><strong>Paper submission</strong>Submitted for review. I'll update this when there's a decision.</li>
+  </ul>
+  <p class="small muted section-more">Nothing on this page is a peer-reviewed publication unless it says so.</p>
+</section>
+<section class="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><p class="eyebrow">Contact</p><h2 id="contact-title">Let's talk about <em>the problem you're working on.</em></h2><p>I'm open to funded fellowships, research assistant and predoctoral positions, research engineering roles, and collaborations in empirical AI safety. Email is the best way to reach me.</p><div class="contact-actions"><a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/GaganaMD">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/gaganamd/">LinkedIn <span aria-hidden="true">↗</span></a></div></div></section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Gagana M D · <a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com</a></span>
+    <nav aria-label="Elsewhere">
+      <a href="https://github.com/GaganaMD" rel="me noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/gaganamd/" rel="me noopener">LinkedIn</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>

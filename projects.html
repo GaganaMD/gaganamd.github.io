@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects · Gagana M D</title>
+<meta name="description" content="Projects by Gagana M D: agent evaluation infrastructure, reinforcement learning, interpretability, remote sensing and applied ML, with links to code.">
+<meta name="author" content="Gagana M D">
+<meta name="theme-color" content="#f8f7f3">
+<link rel="canonical" href="https://gaganamd.github.io/projects.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gagana M D">
+<meta property="og:title" content="Projects · Gagana M D">
+<meta property="og:description" content="Projects by Gagana M D: agent evaluation infrastructure, reinforcement learning, interpretability, remote sensing and applied ML, with links to code.">
+<meta property="og:url" content="https://gaganamd.github.io/projects.html">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f8f7f3'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' text-anchor='middle' fill='%23202c32'%3EG%3Ctspan fill='%23305d64'%3E.%3C/tspan%3E%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">Gagana M D<span class="brand-dot">.</span></a>
+    <button class="menu" id="menu" type="button" aria-controls="nav-links" aria-expanded="false">Menu</button>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="research.html">Research</a>
+      <a href="projects.html" aria-current="page">Projects</a>
+      <a href="writing.html">Writing</a>
+      <a href="about.html">About</a>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <a href="speaking.html">Speaking</a>
+      <a href="consulting.html">Consulting</a>
+      <a class="nav-contact" href="mailto:gaganaaa.dev@gmail.com">Email me</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero wrap" aria-labelledby="page-title">
+  <p class="eyebrow">Projects</p>
+  <h1 id="page-title">Things I've built, <em>and where they started.</em></h1>
+  <p class="lede">This is a full archive. It covers engineering for agent evaluations, reinforcement learning, and my earlier applied ML work in remote sensing, forecasting and NLP. Research projects are described in more depth on the <a href="research.html">research page</a>. Where there's public code, it's linked.</p>
+</section>
+
+<section class="section wrap tight" aria-labelledby="archive-title">
+  <h2 id="archive-title" class="visually-hidden">Project archive</h2>
+  <div class="filters" role="group" aria-label="Filter projects by area">
+    <button class="filter" type="button" data-category="all" aria-pressed="true">All</button>
+    <button class="filter" type="button" data-category="safety" aria-pressed="false">AI safety &amp; evaluation</button>
+    <button class="filter" type="button" data-category="rl" aria-pressed="false">Reinforcement learning</button>
+    <button class="filter" type="button" data-category="interp" aria-pressed="false">Interpretability</button>
+    <button class="filter" type="button" data-category="cv" aria-pressed="false">Vision &amp; remote sensing</button>
+    <button class="filter" type="button" data-category="applied" aria-pressed="false">Applied ML &amp; NLP</button>
+  </div>
+  <p class="project-count" id="project-count" aria-live="polite">Showing all projects</p>
+
+  <div class="archive" id="archive">
+    <article class="archive-item" data-category="safety">
+      <span class="category">AI safety &amp; evaluation</span>
+      <h3>Detection Is Not Containment</h3>
+      <p>Timing and cost of monitor-triggered interventions in a synthetic authorization environment. Frozen oracle, preregistered phases, deterministic tests.</p>
+      <p class="meta">2026 · team · <a href="detection-is-not-containment.html">Case study</a> · <a href="https://github.com/GaganaMD/detection-is-not-containment">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="safety">
+      <span class="category">AI safety &amp; evaluation</span>
+      <h3>Synth Benchmark</h3>
+      <p>Offline-first harness for long-horizon finance and due-diligence agent tasks. Rubric grading, safety dealbreakers, leakage guard, CI validation.</p>
+      <p class="meta">2026 · in progress · <a href="https://github.com/GaganaMD/synth-benchmark">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="safety">
+      <span class="category">AI safety &amp; evaluation</span>
+      <h3>Agent orchestration benchmark (Hermes + Fabric)</h3>
+      <p>Compares direct Codex runs, prompt restructuring, and multi-agent orchestration on coding, reconciliation and due-diligence tasks. The question is at what task complexity orchestration overhead pays off.</p>
+      <p class="meta">2026 · <a href="https://github.com/GaganaMD/benchmark_hermes-fabric">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="safety">
+      <span class="category">AI safety &amp; evaluation</span>
+      <h3>Secret Loyalties</h3>
+      <p>Hidden-loyalty agent evaluation: what an evaluator needs to see to recover a concealed objective.</p>
+      <p class="meta">Ongoing · not yet public</p>
+    </article>
+    <article class="archive-item" data-category="safety">
+      <span class="category">AI safety &amp; evaluation</span>
+      <h3>Agent-Trace</h3>
+      <p>Native tool events compared with reconstructed traces, to measure information lost before a safety evaluation.</p>
+      <p class="meta">Ongoing · not yet public</p>
+    </article>
+    <article class="archive-item" data-category="safety">
+      <span class="category">AI safety &amp; evaluation</span>
+      <h3>SnapInspect AI</h3>
+      <p>Edge AI evaluation across multiple devices: latency, throughput, CPU use and memory.</p>
+      <p class="meta">No public code</p>
+    </article>
+    <article class="archive-item" data-category="interp">
+      <span class="category">Interpretability</span>
+      <h3>Causal-reasoning prompt sensitivity and latent drift</h3>
+      <p>Synthetic causal vignettes, prompt-stability analysis, layerwise probes and activation contrasts on Qwen2.5-0.5B.</p>
+      <p class="meta">2026 · independent · <a href="https://github.com/GaganaMD/Interpretability-for-Scientific-Causal-Reasoning">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="interp">
+      <span class="category">Interpretability</span>
+      <h3>Latent Manifold Reasoning</h3>
+      <p>Toy geometry of routing a latent trajectory through a bottleneck, compared with noise and shuffled-anchor baselines.</p>
+      <p class="meta">2026 · independent · <a href="https://github.com/GaganaMD/latent-manifold-reasoning">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="rl">
+      <span class="category">Reinforcement learning</span>
+      <h3>Matching Law in transformer-based RL agents</h3>
+      <p>Neuromatch team project on whether a transformer Q-learning agent matches choice rates to reward rates.</p>
+      <p class="meta">2024–25 · team · <a href="https://github.com/GaganaMD/Investigating-the-Matching-Law-in-Transformer-Based-Reinforcement-Learning-Agents">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="rl">
+      <span class="category">Reinforcement learning</span>
+      <h3>Fog-assisted UAV routing and split inference</h3>
+      <p>IISc DREAM Lab internship on resource-constrained UAV routing and RL-based split inference.</p>
+      <p class="meta">2025 · <a href="https://github.com/GaganaMD/split-inferencing">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="rl">
+      <span class="category">Reinforcement learning</span>
+      <h3>CartPole PPO, end to end</h3>
+      <p>A PPO agent served through FastAPI with a Streamlit front end, Docker Compose and CI. Includes a comparison against a random policy.</p>
+      <p class="meta">2026 · <a href="https://github.com/GaganaMD/cartpole-rl">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="cv">
+      <span class="category">Vision &amp; remote sensing</span>
+      <h3>Hyperspectral BiorNet</h3>
+      <p>Wavelet features with a CNN–LSTM model for hyperspectral unmixing. Submitted to IGARSS 2025.</p>
+      <p class="meta">2024–25 · <a href="https://github.com/GaganaMD/Hyperspectral-Wavenet">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="cv">
+      <span class="category">Vision &amp; remote sensing</span>
+      <h3>Mapping seagrass meadows</h3>
+      <p>Satellite imagery classification and segmentation for Posidonia oceanica, checked against habitat suitability models.</p>
+      <p class="meta">Omdena · Dec 2023 – Jun 2024</p>
+    </article>
+    <article class="archive-item" data-category="cv">
+      <span class="category">Vision &amp; remote sensing</span>
+      <h3>Cultivate: urban gardening</h3>
+      <p>ML and geospatial data for plant recommendations in urban gardens.</p>
+      <p class="meta">Omdena · Jun – Aug 2024</p>
+    </article>
+    <article class="archive-item" data-category="applied">
+      <span class="category">Applied ML &amp; NLP</span>
+      <h3>Crisis impact forecasting</h3>
+      <p>Crisis-severity forecasting, missing-data prediction and visualization from ACAPS and other humanitarian sources.</p>
+      <p class="meta">Omdena · Sep 2024 – Jan 2025</p>
+    </article>
+    <article class="archive-item" data-category="applied">
+      <span class="category">Applied ML &amp; NLP</span>
+      <h3>Conflict forecasting with GDELT and ACLED</h3>
+      <p>Forecast-team work combining conflict-event datasets with human-intelligence signals.</p>
+      <p class="meta">World Disaster Center · 2024–25 · <a href="https://github.com/GaganaMD/GDELT-Dataset-Analysis-Event-Frequency-Comparison-and-Temporal-Analysis">GDELT analysis ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="applied">
+      <span class="category">Applied ML &amp; NLP</span>
+      <h3>News article categorization</h3>
+      <p>ANN, linear SVM and Naive Bayes compared on more than 210,000 news articles.</p>
+      <p class="meta">Neuromatch Academy · 2024 · <a href="https://github.com/GaganaMD/NMA-DL-NLP">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="applied">
+      <span class="category">Applied ML &amp; NLP</span>
+      <h3>Adverse drug reaction extraction</h3>
+      <p>Extracting and encoding adverse drug reactions from biomedical publications.</p>
+      <p class="meta">2024 · <a href="https://github.com/GaganaMD/Adverse-Drug-Reaction-Extractor-from-Biomedical-Publications">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="applied">
+      <span class="category">Applied ML &amp; NLP</span>
+      <h3>Protein structure prediction</h3>
+      <p>Student project on protein structure prediction and visualization.</p>
+      <p class="meta">2024 · <a href="https://github.com/GaganaMD/Protein-Structure-Prediction">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="applied">
+      <span class="category">Applied ML &amp; NLP</span>
+      <h3>Plante Aroghya: crop recommendation</h3>
+      <p>Data-driven crop recommendation for sustainable farming.</p>
+      <p class="meta">2023 · <a href="https://github.com/GaganaMD/Crop-Recommendation-System-for-Sustainable-Farming">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="applied">
+      <span class="category">Applied ML &amp; NLP</span>
+      <h3>Early LLM applications</h3>
+      <p>A LangChain chatbot and a generative-AI education prototype, from when I was learning the tooling.</p>
+      <p class="meta">2023 · <a href="https://github.com/GaganaMD/End-to-end-chatbot-using-LangChain">Chatbot code ↗</a></p>
+    </article>
+  </div>
+</section>
+<section class="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><p class="eyebrow">Contact</p><h2 id="contact-title">Let's talk about <em>the problem you're working on.</em></h2><p>I'm open to funded fellowships, research assistant and predoctoral positions, research engineering roles, and collaborations in empirical AI safety. Email is the best way to reach me.</p><div class="contact-actions"><a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/GaganaMD">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/gaganamd/">LinkedIn <span aria-hidden="true">↗</span></a></div></div></section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Gagana M D · <a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com</a></span>
+    <nav aria-label="Elsewhere">
+      <a href="https://github.com/GaganaMD" rel="me noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/gaganamd/" rel="me noopener">LinkedIn</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>

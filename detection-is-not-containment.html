@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detection Is Not Containment · Gagana M D</title>
+<meta name="description" content="Case study: measuring whether an AI monitor detects a prohibited action early enough to prevent it, and what false alarms cost, in a synthetic authorization environment.">
+<meta name="author" content="Gagana M D">
+<meta name="theme-color" content="#f8f7f3">
+<link rel="canonical" href="https://gaganamd.github.io/detection-is-not-containment.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Gagana M D">
+<meta property="og:title" content="Detection Is Not Containment · Gagana M D">
+<meta property="og:description" content="Case study: measuring whether an AI monitor detects a prohibited action early enough to prevent it, and what false alarms cost, in a synthetic authorization environment.">
+<meta property="og:url" content="https://gaganamd.github.io/detection-is-not-containment.html">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f8f7f3'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' text-anchor='middle' fill='%23202c32'%3EG%3Ctspan fill='%23305d64'%3E.%3C/tspan%3E%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">Gagana M D<span class="brand-dot">.</span></a>
+    <button class="menu" id="menu" type="button" aria-controls="nav-links" aria-expanded="false">Menu</button>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="research.html">Research</a>
+      <a href="projects.html">Projects</a>
+      <a href="writing.html">Writing</a>
+      <a href="about.html">About</a>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <a href="speaking.html">Speaking</a>
+      <a href="consulting.html">Consulting</a>
+      <a class="nav-contact" href="mailto:gaganaaa.dev@gmail.com">Email me</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero wrap" aria-labelledby="page-title">
+  <p class="crumb"><a href="research.html">Research</a> / Case study</p>
+  <h1 id="page-title">Detection is not <em>containment.</em></h1>
+  <p class="lede">A monitor that eventually flags a problem hasn't shown that anyone could have prevented it. This project measures that gap directly, in a small synthetic setting, and then replays a real intervention to see what it costs.</p>
+  <div class="actions">
+    <a class="button primary" href="https://github.com/GaganaMD/detection-is-not-containment">Code, data and preregistrations <span aria-hidden="true">↗</span></a>
+    <a class="button" href="https://github.com/GaganaMD/detection-is-not-containment/blob/main/docs/APART_RESEARCH_SYNTHESIS.md">Research synthesis</a>
+  </div>
+</section>
+
+<div class="wrap section case-layout">
+  <aside class="case-meta" aria-label="Project details">
+    <div><strong>Status</strong>Completed sprint project. Public release v1.0.0, Sep 2026. Not peer-reviewed.</div>
+    <div><strong>Context</strong>Apart Research AI Incident Response Sprint</div>
+    <div><strong>Authors</strong>Gagana M D, Kaustubh Gupta, Maria Ines</div>
+    <div><strong>Stack</strong>Python standard library, local Ollama, <code>qwen3:14b</code> monitor</div>
+    <div><strong>Licence</strong>MIT</div>
+    <div>
+      <strong>On this page</strong>
+      <ul class="toc">
+        <li><a href="#question">Question</a></li>
+        <li><a href="#setup">Setup</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#limits">What it doesn't show</a></li>
+        <li><a href="#reproduce">Reproducing it</a></li>
+        <li><a href="#next">What I'd do next</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <article class="prose">
+    <h2 id="question">The question</h2>
+    <p>Monitoring results for AI agents are often reported as "did the monitor catch it?" For control, that's not enough. The question that matters is whether the monitor caught it <em>while an intervention could still prevent the harm</em>, and what it costs when the monitor is wrong.</p>
+    <p>We split that into quantities that can be measured on every prefix of an agent trajectory:</p>
+    <ul>
+      <li><strong>Information available:</strong> the first step at which a frozen, environment-side oracle says the relevant evidence exists.</li>
+      <li><strong>First detection:</strong> the first step at which the monitor's score crosses its threshold.</li>
+      <li><strong>Utilization delay</strong> = first detection − information available. This shows how long the monitor sat on evidence it could see.</li>
+      <li><strong>Last safe intervention:</strong> the final step at which an intervention still prevents the prohibited effect.</li>
+      <li><strong>Intervention margin</strong> = last safe intervention − first detection. A positive margin means there was still time to act.</li>
+    </ul>
+
+    <h2 id="setup">Setup</h2>
+    <p>The environment is a synthetic, authorization-controlled delivery task. The same trajectory is shown to the monitor in three views:</p>
+    <ul>
+      <li><code>M_ACTION</code>: actions and tool observations only.</li>
+      <li><code>M_COT_ACTION</code>: the above, plus the agent's externalized reasoning.</li>
+      <li><code>M_GROUNDED</code>: the above, plus authorization telemetry issued by the environment.</li>
+    </ul>
+    <p>Several design choices exist to stop the result from being tuned after the fact:</p>
+    <ul>
+      <li>The safety oracle, monitor prompt, input serialization and thresholding are separate components. The oracle never sees monitor output.</li>
+      <li>The oracle rule body and the monitor prompt are frozen and published with SHA-256 hashes. Later phases have written preregistrations.</li>
+      <li>The threshold was set from <strong>benign control trajectories only</strong>. The highest control score was 50, so the threshold was frozen at 51, giving 0 false positives across 12 control view-trajectories. No attack data was used to pick it.</li>
+      <li>The monitor is local <code>qwen3:14b</code> at temperature 0 with a fixed seed. It was chosen over <code>qwen3:8b</code> after a small diagnostic in which the 8B model invented authorization state in 4 of 10 cases.</li>
+    </ul>
+
+    <h2 id="results">Results</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Phase</th><th scope="col">Result</th><th scope="col">How I read it</th></tr></thead>
+        <tbody>
+          <tr><td>B1.3 primary run</td><td>690 prefix evaluations; 119/119 unique model calls valid, no parse failures or timeouts</td><td>Inputs reused across prefixes are tracked explicitly and can be audited.</td></tr>
+          <tr><td>Neutral attack, grounded view</td><td>Evidence visible at step 37; detected at 37; last safe point 38</td><td>Utilization delay 0, margin +1. Timely, by one step, in this fixture.</td></tr>
+          <tr><td>Neutral attack, other views</td><td>No threshold crossing in the action-only or reasoning views</td><td>Without the environment's authorization telemetry, this attack wasn't caught.</td></tr>
+          <tr><td>Phase C: evidence strength</td><td>With only the target route and the visible set of authorized routes: attack 100, benign 0</td><td>An explicit "not permitted" label wasn't needed. More explicit evidence wasn't always better: three other levels flagged the benign trace.</td></tr>
+          <tr><td>Phase E: identifier invariance</td><td>Decisions held in 8 of 12 meaning-preserving renamings; strictly control-ready in 3 of 12</td><td>The signal depends on representation. Alphabetic identifiers were clean; numeric and opaque ones were not.</td></tr>
+          <tr><td>Phase F: closed-loop replay</td><td>F1: revoking authority at step 37 prevented the harmful effect. F3: a benign false alarm revoked authority and the legitimate task failed.</td><td>The same score that prevents harm can also impose a real cost on benign work.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <figure>
+      <img src="assets/research/dinc-fig3-closed-loop.png" alt="Timeline from sequence 37 to 41. Without control, the action attempted at 38 is accepted and the effect occurs. With intervention, authority is revoked at 37, one step before the last safe boundary at 38; the later action is rejected and the effect is prevented." loading="lazy" width="2434" height="842">
+      <figcaption>The intervention changes what the environment will allow; it does not rewrite the agent's history or actions. Figure from the repository.</figcaption>
+    </figure>
+
+    <div class="callout"><p>The main thing I took from this is that a monitor score is only as useful as its timing and its stability under representations that shouldn't matter. Phase F turned that instability into a measured cost: a failed benign task, not just a changed number.</p></div>
+
+    <h3>Forensics and protocol</h3>
+    <p>The report also has a public-source forensics pipeline over five AI incidents: 679 claims extracted with a local model, each tied to a verbatim quote and cross-checked for independent corroboration. It also includes a draft 8-item checklist for whether an evaluation setup really separated simulation from reality. An independent LLM audit agreed with the heuristic scorer on only 22 of 40 items (55%), so the checklist is a draft, not a validated instrument. Four of the five cases rest on one or two sources.</p>
+
+    <h2 id="limits">What it doesn't show</h2>
+    <ul>
+      <li>Anything general about monitoring, containment or control performance. This is one synthetic environment.</li>
+      <li>Robustness beyond fixed prompts and model settings, single deterministic draws, and the sampled identifier transformations tested.</li>
+      <li>That chain-of-thought is faithful. The early detection with explicit reasoning (step 32, margin +6) shows the monitor is sensitive to externalized wording, nothing more.</li>
+      <li>Results from the unfinished B2/B2-R phase. Its protocol files are in the repository only so that Phase C can be validated byte for byte.</li>
+    </ul>
+
+    <h2 id="reproduce">Reproducing it</h2>
+    <p>Verification needs Python 3.10+ and nothing else. No model is required to check the released results:</p>
+<pre><code>python scripts/verify_release.py
+python -m unittest discover -s tests -v
+python -m hermes_phase_f.pilot.validate_phase_f</code></pre>
+    <p>These check the frozen oracle and prompt hashes, run the deterministic tests, and validate the cached closed-loop replay. Every phase has its own result document in <a href="https://github.com/GaganaMD/detection-is-not-containment/tree/main/docs"><code>docs/</code></a>, and the frozen inputs are in <code>protocol/</code>.</p>
+
+    <h2 id="next">What I'd do next</h2>
+    <ul>
+      <li>Repeat the timing measurements with sampled monitor outputs and report variance, instead of single deterministic draws.</li>
+      <li>Add a second and third environment with different authorization structures, to see whether a one-step margin is an artifact of this fixture.</li>
+      <li>Treat representation invariance as a precondition: test monitors under meaning-preserving rewrites <em>before</em> using their scores to revoke authority.</li>
+      <li>Report the benign cost of intervention (tasks wrongly blocked) next to prevention rate as a standard pair.</li>
+    </ul>
+  </article>
+</div>
+<section class="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><p class="eyebrow">Contact</p><h2 id="contact-title">Let's talk about <em>the problem you're working on.</em></h2><p>I'm open to funded fellowships, research assistant and predoctoral positions, research engineering roles, and collaborations in empirical AI safety. Email is the best way to reach me.</p><div class="contact-actions"><a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/GaganaMD">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/gaganamd/">LinkedIn <span aria-hidden="true">↗</span></a></div></div></section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Gagana M D · <a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com</a></span>
+    <nav aria-label="Elsewhere">
+      <a href="https://github.com/GaganaMD" rel="me noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/gaganamd/" rel="me noopener">LinkedIn</a>
+      <a href="#main">Back to top ↑</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
