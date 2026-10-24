@@ -194,13 +194,19 @@
       <p class="pub-title"><a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">Hyperspectral BiorNet: A Complete Wavelet Framework for Unmixing</a></p>
       <p class="pub-authors"><strong>Gagana M D</strong>, Ajay Kumar K, Vijayashekhar S S, Jignesh S. Bhatt</p>
       <p class="pub-venue">2025 IEEE India Geoscience and Remote Sensing Symposium (InGARSS), Bhubaneswar, pp. 15–19. DOI <a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">10.1109/InGARSS67683.2025.11584022</a> · <a href="https://github.com/GaganaMD/Hyperspectral-Wavenet">Code</a></p>
-      <p class="pub-note">Peer-reviewed. First author.</p>
+      <p class="pub-note">Peer-reviewed. A wavelet-domain unmixing framework with a custom wavelet-shaped activation function. <a href="#biornet">More</a></p>
+    </li>
+    <li>
+      <p class="pub-title">Mobility-Aware Cost-Efficient Co-Scheduling of UAV Routes and Analytics across Edge and Fog Computing</p>
+      <p class="pub-authors">Suman Raj, Arindam Khanda, <strong>Gagana M D</strong>, Yogesh Simmhan, Sajal K. Das</p>
+      <p class="pub-venue">Manuscript · IISc DREAM Lab</p>
+      <p class="pub-note">Drone route planning and analytics scheduling using rural buses as mobile fog nodes. <a href="#uav-fog">More</a></p>
     </li>
     <li>
       <p class="pub-title"><a href="https://doi.org/10.5281/zenodo.15462678">Investigating the Matching Law in Transformer-Based Reinforcement Learning Agents</a></p>
       <p class="pub-authors">Y. Karakoc, E. Sharifi, <strong>M. D. Gagana</strong>, Z. Sarayloo</p>
       <p class="pub-venue">Zenodo, May 2025. DOI <a href="https://doi.org/10.5281/zenodo.15462678">10.5281/zenodo.15462678</a> · <a href="https://github.com/GaganaMD/Investigating-the-Matching-Law-in-Transformer-Based-Reinforcement-Learning-Agents">Code</a></p>
-      <p class="pub-note">Neuromatch Impact Scholars project report, not peer-reviewed. Supporting contributor per the published CRediT statement.</p>
+      <p class="pub-note">Neuromatch Impact Scholars report, not peer-reviewed. I worked on the experiment design, methodology and experiments.</p>
     </li>
     <li>
       <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs">Detection Is Not Containment: Timely Monitoring Determines Whether AI Agent Failures Can Be Prevented</a></p>
@@ -221,29 +227,61 @@
 
 <section class="section wrap" id="smaller" aria-labelledby="smaller-title">
   <div class="section-top">
-    <div><p class="eyebrow">Smaller studies</p><h2 id="smaller-title">Exploratory and earlier work<span class="period">.</span></h2></div>
-    <p class="section-desc">Independent or team projects with public code. None of them make strong claims, and each says what it doesn't show.</p>
+    <div><p class="eyebrow">Earlier and exploratory work</p><h2 id="smaller-title">Before and beside AI safety<span class="period">.</span></h2></div>
+    <p class="section-desc">Two papers from before I moved into AI safety, a published RL study, and two independent explorations. The common thread is mathematical modelling, careful measurement, and saying what a result doesn't show.</p>
   </div>
   <div class="entries">
-    <article class="entry" id="interp-causal">
+    <article class="entry" id="biornet">
       <div>
-        <span class="tag">Interpretability</span>
-        <h3>Prompt sensitivity and latent drift in a small causal-reasoning model</h3>
-        <p>Does a model's answer flip when a causal-reasoning prompt is reworded while the causal structure stays the same, and do those flips line up with hidden-state movement? I built synthetic vignettes covering confounding, mediation and selection bias, plus variants that remove a confounder or rename terms. On Qwen2.5-0.5B-Instruct I ran prompt-stability analysis, layerwise probes and activation contrasts.</p>
-        <p>Early runs showed high answer flip rates across reframings, and the largest drift with "mechanistic" prompts. The repository is explicit that probe separability and drift are correlational and don't establish mechanism.</p>
-        <p class="role"><strong>My part:</strong> built this pipeline as part of my PRISM research support. Every run saves its config and a run manifest.</p>
+        <span class="tag">Signal processing · Deep learning</span>
+        <h3>Hyperspectral BiorNet: a complete wavelet framework for unmixing</h3>
+        <p>Each pixel of a hyperspectral image mixes the spectra of several materials. Unmixing recovers the pure spectra (endmembers) and their proportions (abundances), under the linear mixing model <span class="math">x ≈ E a</span>, with <span class="math">a ≥ 0</span> and <span class="math">Σa = 1</span>. The problem is ill-posed: there are more unknowns than observations, and noise and spectral variability blur the signatures.</p>
+        <p>BiorNet does the whole thing in the wavelet domain. A biorthogonal discrete wavelet transform splits each pixel's spectrum into approximation and detail coefficients, and the endmembers and abundances are learned from those. The network's nonlinearity is a wavelet as well: a custom biorthogonal-inspired activation,</p>
+        <p class="formula">φ(x) = max(0, x) · sin(5x) · e<sup>−x²/2</sup></p>
+        <p>This is a Gaussian-windowed oscillation, so the activation has the same localised, oscillatory shape as the basis the data is expressed in. A ReLU can't respond that way. We evaluated it on synthetic data and the HYDICE Urban benchmark against state-of-the-art unmixing models, using RMSE, spectral angle distance and spectral information divergence.</p>
+        <p class="role"><strong>My part:</strong> first author. I worked on the wavelet framework and the design of the activation function, and built the implementation.</p>
       </div>
       <div class="entry-side">
-        <span class="status ongoing">Exploratory · PRISM team</span>
-        <div class="links"><a href="https://github.com/GaganaMD/Interpretability-for-Scientific-Causal-Reasoning">Code ↗</a><a href="https://github.com/GaganaMD/Interpretability-for-Scientific-Causal-Reasoning/blob/main/docs/limitations.md">Limitations ↗</a></div>
+        <span class="status done">Published · IEEE InGARSS 2025</span>
+        <div class="links"><a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">Paper ↗</a><a href="https://github.com/GaganaMD/Hyperspectral-Wavenet">Code ↗</a></div>
       </div>
     </article>
+
+    <article class="entry" id="uav-fog">
+      <div>
+        <span class="tag">Optimisation · Edge–fog systems</span>
+        <h3>Co-scheduling UAV routes and analytics across edge and fog</h3>
+        <p>Drones used for crop monitoring and inspection need to run analytics such as DNN inference on what they capture. In rural areas there is little connectivity to offload that work. The idea here is to use rural transit buses, which increasingly carry compute and Wi-Fi hotspots, as <em>mobile</em> fog nodes. A drone can hand data to a passing bus, and the bus can compute on it or forward it once it reaches network coverage.</p>
+        <p>We formulated this as a Mission Scheduling Problem: choose drone flight paths that cover every task waypoint, and co-schedule each analytics task on board, on a static fog node, or on a bus, in line with bus timetables and task deadlines. Our Divide and Assign heuristic trades optimality for speed on large instances and is compared against the optimal solution. On real-world data it achieves 31–230% higher average utility than baselines and the state of the art, completes 100% of tasks across all workloads, and runs on the order of 10⁵ seconds faster than the optimal solver.</p>
+        <p>A secondary thread was reinforcement learning for split inference: deciding where to cut a model's layers between devices (ExpansionNet v2, YOLOv5).</p>
+        <p class="role"><strong>Paper:</strong> Suman Raj, Arindam Khanda, <strong>Gagana M D</strong>, Yogesh Simmhan, Sajal K. Das. <em>Mobility-Aware Cost-Efficient Co-Scheduling of UAV Routes and Analytics across Edge and Fog Computing.</em></p>
+      </div>
+      <div class="entry-side">
+        <span class="status done">Research internship · IISc DREAM Lab</span>
+        <span>Jan – Aug 2025. DREAM Lab, led by Yogesh Simmhan.</span>
+      </div>
+    </article>
+
+    <article class="entry" id="matching-law">
+      <div>
+        <span class="tag">Reinforcement learning · Behaviour</span>
+        <h3>The Matching Law in transformer-based RL agents</h3>
+        <p>Animals split their choices between options in proportion to how rewarding each one is (Herrnstein's Matching Law). Does a transformer-based RL agent do the same? We trained agents on a two-choice task cued by MNIST digits, varying the reward ratio from 1:1 to 16:1, and compared response ratios with reward ratios on log–log axes. The agents' choice proportions closely tracked the reward ratios, with an approximately linear log–log relationship.</p>
+        <p class="role"><strong>My part:</strong> I worked on the experiment design and methodology and ran the experiments, with Yagmur Karakoc, Emad Sharifi and Zahra Sarayloo.</p>
+      </div>
+      <div class="entry-side">
+        <span class="status done">Report · Zenodo 2025</span>
+        <span>Neuromatch Impact Scholars</span>
+        <div class="links"><a href="https://doi.org/10.5281/zenodo.15462678">Report ↗</a><a href="https://github.com/GaganaMD/Investigating-the-Matching-Law-in-Transformer-Based-Reinforcement-Learning-Agents">Code ↗</a></div>
+      </div>
+    </article>
+
     <article class="entry" id="latent-manifold">
       <div>
-        <span class="tag">Representations</span>
-        <h3>Latent manifold reasoning</h3>
-        <p>A toy study of what happens when a smooth latent trajectory is forced through a narrow, discrete interface. It uses PCA embeddings of the scikit-learn digits data. Early versions had no baselines, and almost any perturbation looked like "collapse". Later versions compare structured routing against isotropic noise and shuffled anchors, with bootstrap intervals and permutation tests.</p>
-        <p>The result I find most interesting is a mixed one: routing damaged neighbourhood preservation while <em>shortening</em> one path-length measure. One metric isn't enough to judge it. None of this is evidence about real transformer hidden states.</p>
+        <span class="tag">Representations · Geometry</span>
+        <h3>Latent manifold reasoning: when does a reasoning trajectory collapse?</h3>
+        <p>Think of reasoning as a smooth path through a latent manifold. Forcing that path through a narrow, discrete interface (text, a tool call, a serialised state) can make it <em>collapse</em>: neighbouring states stop being neighbours, and the path takes detours the original never did. I built a sandbox to make that idea measurable. It routes trajectories through PCA embeddings of the scikit-learn digits data under a bottleneck of increasing strength, and tracks path distortion, k-nearest-neighbour preservation and excess path length.</p>
+        <p>Early versions had no baselines, and almost any perturbation looked like collapse. Later versions compare structured routing against isotropic noise and shuffled anchors, with bootstrap intervals and permutation tests. The result that held up: structured routing collapses local neighbourhood structure far more than noise does, <em>while</em> shortening the path. One geometric metric can look better while the trajectory becomes less faithful. This is a toy setting, not evidence about transformer hidden states.</p>
         <p class="role"><strong>My part:</strong> independent project. All eight versions are kept, so the method changes are visible.</p>
       </div>
       <div class="entry-side">
@@ -251,40 +289,17 @@
         <div class="links"><a href="https://github.com/GaganaMD/latent-manifold-reasoning">Code ↗</a></div>
       </div>
     </article>
-    <article class="entry" id="matching-law">
+
+    <article class="entry" id="interp-causal">
       <div>
-        <span class="tag">Reinforcement learning</span>
-        <h3>The Matching Law in transformer-based RL agents</h3>
-        <p>Does a transformer-based agent trained with Q-learning on a two-choice, MNIST-cued task allocate its choices in proportion to reward rates, as the Matching Law from behavioural psychology predicts? Reward ratios ran from 1:1 to 16:1. The report finds choice proportions close to the reward ratios, with a roughly linear log-log relationship.</p>
-        <p class="role"><strong>My part:</strong> third of four authors, in a supporting role across methodology, software, analysis and writing (CRediT). The study was led by Yagmur Karakoc and Zahra Sarayloo.</p>
+        <span class="tag">Interpretability · Causal reasoning</span>
+        <h3>Prompt sensitivity and latent drift in causal reasoning</h3>
+        <p>If you reword a causal-reasoning question but keep its causal structure, does a small model's answer flip, and do the flips line up with movement in its hidden states? I built synthetic vignettes covering confounding, mediation and selection bias, with variants that remove a confounder or rename terms. On Qwen2.5-0.5B-Instruct I ran prompt-stability analysis, layerwise probes and activation contrasts. Early runs showed high answer flip rates across reframings, with the largest drift under "mechanistic" prompts. Probe separability and drift are correlational, and the repository says so.</p>
+        <p class="role"><strong>My part:</strong> independent project, built to experiment with causal interpretation. Every run saves its config and a run manifest.</p>
       </div>
       <div class="entry-side">
-        <span class="status done">Report · Zenodo 2025</span>
-        <div class="links"><a href="https://doi.org/10.5281/zenodo.15462678">Report ↗</a><a href="https://github.com/GaganaMD/Investigating-the-Matching-Law-in-Transformer-Based-Reinforcement-Learning-Agents">Code ↗</a></div>
-      </div>
-    </article>
-    <article class="entry" id="split-inference">
-      <div>
-        <span class="tag">Systems · RL</span>
-        <h3>RL-based split inference at IISc</h3>
-        <p>Research internship work at IISc's DREAM Lab. Reinforcement learning decides where to split a model's layers between devices (ExpansionNet v2 and YOLOv5), with device profiling and multi-device coordination. There was related work on fog-assisted UAV routing.</p>
-        <p class="role"><strong>My part:</strong> research intern. The two repositories are my implementation.</p>
-      </div>
-      <div class="entry-side">
-        <span class="status done">Internship · Jan – Aug 2025</span>
-        <div class="links"><a href="https://github.com/GaganaMD/split-inferencing">RL splitting ↗</a><a href="https://github.com/GaganaMD/Split-inferencing-on-ExpansionNetV2">Multi-device inference ↗</a></div>
-      </div>
-    </article>
-    <article class="entry" id="biornet">
-      <div>
-        <span class="tag">Remote sensing</span>
-        <h3>Hyperspectral BiorNet: wavelets for unmixing</h3>
-        <p>A hyperspectral unmixing framework that combines biorthogonal wavelet features and a wavelet-inspired activation with a CNN–LSTM model. Evaluated with RMSE and spectral angle distance.</p>
-        <p class="role"><strong>My part:</strong> first author.</p>
-      </div>
-      <div class="entry-side">
-        <span class="status done">Published · IEEE InGARSS 2025</span>
-        <div class="links"><a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">Paper ↗</a><a href="https://github.com/GaganaMD/Hyperspectral-Wavenet">Code ↗</a></div>
+        <span class="status ongoing">Exploratory · independent</span>
+        <div class="links"><a href="https://github.com/GaganaMD/Interpretability-for-Scientific-Causal-Reasoning">Code ↗</a><a href="https://github.com/GaganaMD/Interpretability-for-Scientific-Causal-Reasoning/blob/main/docs/limitations.md">Limitations ↗</a></div>
       </div>
     </article>
   </div>
