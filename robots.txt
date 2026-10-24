@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gaganamd.github.io/sitemap.xml
