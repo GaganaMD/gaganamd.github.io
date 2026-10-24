@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gagana M D · AI safety research: agent monitoring and evaluations</title>
-<meta name="description" content="Gagana M D is an early-career AI safety researcher working on monitoring and evaluating AI agents, with public code for each completed project.">
+<meta name="description" content="Gagana M D is an early-career AI safety researcher working on monitoring and evaluating AI agents. Publications, reports and code for each completed project.">
 <meta name="author" content="Gagana M D">
 <meta name="theme-color" content="#f8f7f3">
 <link rel="canonical" href="https://gaganamd.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Gagana M D">
 <meta property="og:title" content="Gagana M D · AI safety research: agent monitoring and evaluations">
-<meta property="og:description" content="Gagana M D is an early-career AI safety researcher working on monitoring and evaluating AI agents, with public code for each completed project.">
+<meta property="og:description" content="Gagana M D is an early-career AI safety researcher working on monitoring and evaluating AI agents. Publications, reports and code for each completed project.">
 <meta property="og:url" content="https://gaganamd.github.io/">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f8f7f3'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' text-anchor='middle' fill='%23202c32'%3EG%3Ctspan fill='%23305d64'%3E.%3C/tspan%3E%3C/text%3E%3C/svg%3E">
@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap">
 <link rel="stylesheet" href="styles.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Gagana M D", "url": "https://gaganamd.github.io/", "email": "mailto:gaganaaa.dev@gmail.com", "jobTitle": "AI safety researcher", "knowsAbout": ["AI safety", "AI control", "Agent monitoring", "AI evaluations", "Reinforcement learning"], "alumniOf": {"@type": "CollegeOrUniversity", "name": "Acharya Institute of Technology"}, "sameAs": ["https://github.com/GaganaMD", "https://www.linkedin.com/in/gaganamd/"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Gagana M D", "url": "https://gaganamd.github.io/", "email": "mailto:gaganaaa.dev@gmail.com", "jobTitle": "AI safety researcher", "knowsAbout": ["AI safety", "AI control", "Agent monitoring", "AI evaluations", "Reinforcement learning"], "alumniOf": {"@type": "CollegeOrUniversity", "name": "Acharya Institute of Technology"}, "sameAs": ["https://github.com/GaganaMD", "https://www.linkedin.com/in/gaganamd/", "https://orcid.org/0009-0003-2594-1026"]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,11 +43,11 @@
 <section class="hero wrap" aria-labelledby="hero-title">
   <p class="eyebrow">Empirical AI safety · Agent monitoring and evaluations</p>
   <h1 id="hero-title">I study how to monitor AI agents when we can't see <em>everything they do.</em></h1>
-  <p class="lede">I'm <strong>Gagana M D</strong>, an early-career AI safety researcher. I run small, controlled experiments on monitoring and evaluating tool-using agents, and I build the evaluation tooling those experiments depend on. I came to safety from reinforcement learning and applied ML, and I have a B.E. in Artificial Intelligence and Machine Learning.</p>
+  <p class="lede">I'm <strong>Gagana M D</strong>, an early-career AI safety researcher. I run small, controlled experiments on monitoring and evaluating AI agents, and I build the evaluation code those experiments depend on, including tests and preserved run artifacts. I came to safety from reinforcement learning and applied ML, and I have a B.E. in Artificial Intelligence and Machine Learning.</p>
   <p class="availability">Open to funded fellowships, research assistant and predoctoral positions, and research engineering roles in empirical AI safety. I'm also glad to hear about collaborations.</p>
   <div class="actions">
     <a class="button primary" href="detection-is-not-containment.html">Read the main case study <span aria-hidden="true">→</span></a>
-    <a class="button" href="research.html">All research</a>
+    <a class="button" href="research.html#publications">Publications</a>
     <a class="button" href="mailto:gaganaaa.dev@gmail.com">Email me</a>
   </div>
   <!-- Portrait intentionally disabled. Do not add placeholder UI; restore only when a final portrait is ready.
@@ -62,7 +62,7 @@
 <section class="section wrap" id="research" aria-labelledby="research-title">
   <div class="section-top">
     <div><p class="eyebrow">Selected research</p><h2 id="research-title">What I've worked on<span class="period">.</span></h2></div>
-    <p class="section-desc">Ordered by how much a reviewer can check. Each item says what stage it is at, and links to the code where it's public.</p>
+    <p class="section-desc">Each item says what stage it's at and what I did. Where there's public code or a report, it's linked.</p>
   </div>
   <div class="entries">
     <article class="entry">
@@ -71,35 +71,25 @@
         <h3><a href="detection-is-not-containment.html">Detection Is Not Containment</a></h3>
         <p>A monitor that flags a harmful action <em>eventually</em> doesn't tell you whether anyone could have stopped it. In a synthetic authorization environment, we measured when evidence became visible, when a local Qwen3-14B monitor crossed a threshold calibrated only on benign runs, and the last step at which revoking the agent's authority would still prevent the harm.</p>
         <p>In the main attack case, detection came one step before the last safe point. Renaming identifiers without changing their meaning broke that: decisions held in 8 of 12 variants. In a replay, one of those false alarms revoked a benign agent's authority and made it fail its task.</p>
+        <p class="role"><strong>My part:</strong> I built and released the monitoring experiment: the environment, frozen oracle, monitor views, timing metrics, invariance tests and closed-loop replay. Kaustubh Gupta built the incident-forensics pipeline.</p>
       </div>
       <div class="entry-side">
-        <span class="status done">Completed · code and data public</span>
-        <span>Apart Research AI Incident Response Sprint, 2026. With Kaustubh Gupta and Maria Ines.</span>
-        <div class="links"><a href="detection-is-not-containment.html">Case study →</a><a href="https://github.com/GaganaMD/detection-is-not-containment">Repository ↗</a></div>
+        <span class="status done">Completed · report and code public</span>
+        <span>Apart Research AI Incident Response Sprint, Sep 2026. With Kaustubh Gupta and María Inés Berdiñas.</span>
+        <div class="links"><a href="detection-is-not-containment.html">Case study →</a><a href="https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs">Report ↗</a><a href="https://github.com/GaganaMD/detection-is-not-containment">Code ↗</a></div>
       </div>
     </article>
     <article class="entry">
       <div>
         <span class="tag">World models · Evaluation</span>
-        <h3><a href="research.html#world-models">Trustworthy LLM-generated world models</a></h3>
-        <p>When an LLM writes the environment that a safety analysis runs inside, does it keep the decision structure we asked for? I worked on evaluation methods for executable world models along three axes: whether they run, whether their structure is faithful, and whether their semantics are consistent. We evaluated five LLMs on 44 scenarios, which produced 410 generated partially observable stochastic games (POSGs).</p>
+        <h3><a href="research.html#world-models">Do LLM-generated world models keep their structure?</a></h3>
+        <p>We asked LLMs to turn natural-language situations into executable partially observable stochastic games, across a 44-scenario benchmark and five models. In the game track, 134 of 135 generated models passed a strict mechanical check. Their structure was another matter: they had a mean permutation-invariant structural F1 of 0.37, and only 28 matched the reference exactly. Code that runs is not evidence that the model is right.</p>
+        <p class="role"><strong>My part:</strong> main contributor to the shared codebase (78 of about 116 commits): experiment runners, preserved run artifacts, graph-analysis library and test suite.</p>
       </div>
       <div class="entry-side">
-        <span class="status ongoing">Fellowship project · write-up not yet public</span>
-        <span>PRISM AI Safety Research Fellowship, May–Oct 2026. Mentored by Jobst Heitzig.</span>
+        <span class="status done">Paper submitted · NeurIPS 2026 workshop</span>
+        <span>PRISM AI Safety Research Fellowship. Mentored by Jobst Heitzig.</span>
         <div class="links"><a href="research.html#world-models">Details →</a></div>
-      </div>
-    </article>
-    <article class="entry">
-      <div>
-        <span class="tag">Evaluation infrastructure</span>
-        <h3><a href="research.html#synth-benchmark">Synth Benchmark</a></h3>
-        <p>An offline-first harness for long-horizon agent tasks in finance and due diligence. It generates task packages from one canonical task file and grades them against rubrics. Destructive or unauthorized actions count as automatic failures, and a leakage guard keeps ground truth out of the agent's workspace.</p>
-      </div>
-      <div class="entry-side">
-        <span class="status ongoing">Engineering · in progress</span>
-        <span>Live side-effect auditing isn't wired up yet. Mock mode only.</span>
-        <div class="links"><a href="https://github.com/GaganaMD/synth-benchmark">Repository ↗</a></div>
       </div>
     </article>
     <article class="entry">
@@ -110,7 +100,7 @@
       </div>
       <div class="entry-side">
         <span class="status private">Ongoing · not yet public</span>
-        <span>Independent and collaborative work.</span>
+        <span>No results are reported here until there's something to link to.</span>
         <div class="links"><a href="research.html#auditing">Details →</a></div>
       </div>
     </article>
@@ -118,15 +108,39 @@
   <p class="section-more"><a href="research.html">All research, including smaller studies →</a></p>
 </section>
 
+<section class="section wrap" aria-labelledby="pubs-title">
+  <div class="section-top">
+    <div><p class="eyebrow">Publications and reports</p><h2 id="pubs-title">In print<span class="period">.</span></h2></div>
+    <p class="section-desc">Also listed on <a class="text-link" href="https://orcid.org/0009-0003-2594-1026">ORCID</a>.</p>
+  </div>
+  <ol class="pubs">
+    <li>
+      <p class="pub-title"><a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">Hyperspectral BiorNet: A Complete Wavelet Framework for Unmixing</a></p>
+      <p class="pub-authors"><strong>Gagana M D</strong>, Ajay Kumar K, Vijayashekhar S S, Jignesh S. Bhatt</p>
+      <p class="pub-venue">2025 IEEE India Geoscience and Remote Sensing Symposium (InGARSS), pp. 15–19 · Peer-reviewed conference paper</p>
+    </li>
+    <li>
+      <p class="pub-title"><a href="https://doi.org/10.5281/zenodo.15462678">Investigating the Matching Law in Transformer-Based Reinforcement Learning Agents</a></p>
+      <p class="pub-authors">Y. Karakoc, E. Sharifi, <strong>M. D. Gagana</strong>, Z. Sarayloo</p>
+      <p class="pub-venue">Zenodo, 2025 · Neuromatch Impact Scholars project report</p>
+    </li>
+    <li>
+      <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs">Detection Is Not Containment: Timely Monitoring Determines Whether AI Agent Failures Can Be Prevented</a></p>
+      <p class="pub-authors"><strong>Gagana M D</strong>, Kaustubh Gupta, María Inés Berdiñas</p>
+      <p class="pub-venue">Apart Research AI Incident Response Sprint, 2026 · Sprint report, not peer-reviewed</p>
+    </li>
+  </ol>
+</section>
+
 <section class="section wrap" aria-labelledby="questions-title">
   <div class="section-top">
     <div><p class="eyebrow">Open questions</p><h2 id="questions-title">What I'd like to work on next<span class="period">.</span></h2></div>
-    <p class="section-desc">Each of these came out of a project above. They are directions I want to pursue, not results.</p>
+    <p class="section-desc">Each of these came out of a finished project. They are directions I want to pursue, not results. <a class="text-link" href="research.html#direction">More detail</a></p>
   </div>
   <ol class="questions">
     <li><div><h3>When does a monitor buy enough time to act?</h3><p>Measuring the gap between detection and the last safe intervention point, across more than one environment and with sampled rather than single deterministic monitor runs.</p></div></li>
     <li><div><h3>How much do our conclusions depend on what the evaluator can see?</h3><p>Native versus reconstructed traces, missing tool events, and hidden objectives. These affect which audit claims hold up.</p></div></li>
-    <li><div><h3>Can we trust environments that a model wrote?</h3><p>Checking whether LLM-generated world models preserve the decision structure that downstream safety reasoning relies on.</p></div></li>
+    <li><div><h3>When can we trust an environment a model wrote?</h3><p>Generated world models usually run. Far fewer of them encode the intended game. What checks would catch the difference before a safety analysis relies on it?</p></div></li>
   </ol>
 </section>
 
@@ -137,7 +151,7 @@
   </div>
   <ul class="roles">
     <li><time>Sep 2026 – present</time><div><strong>Sentient Futures</strong><span>Research Fellow, Post-Control Initiative</span></div></li>
-    <li><time>May – Oct 2026</time><div><strong>PRISM AI Safety Research Fellowship</strong><span>Research Fellow (world-model evaluation). Also supported fellowship teams as program staff.</span></div></li>
+    <li><time>May 2026 – present</time><div><strong>PRISM AI Safety Research Fellowship</strong><span>Research Fellow: evaluating LLM-generated world models. Also supports fellowship teams as program staff.</span></div></li>
     <li><time>Apr 2026 – present</time><div><strong>FlowResearch</strong><span>Research Fellow: reinforcement learning, world models, behavioural evaluation</span></div></li>
     <li><time>May – Jul 2026</time><div><strong>BaseThesis Labs</strong><span>AI research: evaluations and benchmarking for agents</span></div></li>
     <li><time>Jan – Aug 2025</time><div><strong>Indian Institute of Science, DREAM Lab</strong><span>Research Intern: UAV routing and RL-based split inference</span></div></li>
@@ -147,13 +161,13 @@
 <section class="section wrap" aria-labelledby="elsewhere-title">
   <div class="section-top"><div><p class="eyebrow">Also</p><h2 id="elsewhere-title">Beyond research<span class="period">.</span></h2></div></div>
   <div class="elsewhere">
-    <a href="writing.html"><strong>Writing</strong><span>Research write-ups and articles</span></a>
-    <a href="projects.html"><strong>Projects</strong><span>Engineering and earlier ML work</span></a>
+    <a href="projects.html"><strong>Projects</strong><span>Code, sorted by how much it shows</span></a>
+    <a href="writing.html"><strong>Writing</strong><span>Reports, research logs and articles</span></a>
     <a href="speaking.html"><strong>Speaking</strong><span>Talks, workshops and community programs</span></a>
     <a href="consulting.html"><strong>Consulting</strong><span>Agent evaluation reviews</span></a>
   </div>
 </section>
-<section class="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><p class="eyebrow">Contact</p><h2 id="contact-title">Let's talk about <em>the problem you're working on.</em></h2><p>I'm open to funded fellowships, research assistant and predoctoral positions, research engineering roles, and collaborations in empirical AI safety. Email is the best way to reach me.</p><div class="contact-actions"><a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/GaganaMD">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/gaganamd/">LinkedIn <span aria-hidden="true">↗</span></a></div></div></section>
+<section class="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><p class="eyebrow">Contact</p><h2 id="contact-title">Let's talk about <em>the problem you're working on.</em></h2><p>I'm open to funded fellowships, research assistant and predoctoral positions, research engineering roles, and collaborations in empirical AI safety. Email is the best way to reach me.</p><div class="contact-actions"><a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/GaganaMD">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/gaganamd/">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://orcid.org/0009-0003-2594-1026">ORCID <span aria-hidden="true">↗</span></a></div></div></section>
 </main>
 <footer class="footer">
   <div class="wrap">
@@ -161,6 +175,7 @@
     <nav aria-label="Elsewhere">
       <a href="https://github.com/GaganaMD" rel="me noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/gaganamd/" rel="me noopener">LinkedIn</a>
+      <a href="https://orcid.org/0009-0003-2594-1026" rel="me noopener">ORCID</a>
       <a href="#main">Back to top ↑</a>
     </nav>
   </div>

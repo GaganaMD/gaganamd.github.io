@@ -44,25 +44,28 @@
   <h1 id="page-title">Detection is not <em>containment.</em></h1>
   <p class="lede">A monitor that eventually flags a problem hasn't shown that anyone could have prevented it. This project measures that gap directly, in a small synthetic setting, and then replays a real intervention to see what it costs.</p>
   <div class="actions">
-    <a class="button primary" href="https://github.com/GaganaMD/detection-is-not-containment">Code, data and preregistrations <span aria-hidden="true">↗</span></a>
-    <a class="button" href="https://github.com/GaganaMD/detection-is-not-containment/blob/main/docs/APART_RESEARCH_SYNTHESIS.md">Research synthesis</a>
+    <a class="button primary" href="https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs">Report and reviews <span aria-hidden="true">↗</span></a>
+    <a class="button" href="https://github.com/GaganaMD/detection-is-not-containment">Code, data and preregistrations <span aria-hidden="true">↗</span></a>
   </div>
 </section>
 
 <div class="wrap section case-layout">
   <aside class="case-meta" aria-label="Project details">
-    <div><strong>Status</strong>Completed sprint project. Public release v1.0.0, Sep 2026. Not peer-reviewed.</div>
+    <div><strong>Status</strong>Completed sprint project, Sep 2026. Report and code public. Not peer-reviewed.</div>
     <div><strong>Context</strong>Apart Research AI Incident Response Sprint</div>
-    <div><strong>Authors</strong>Gagana M D, Kaustubh Gupta, Maria Ines</div>
+    <div><strong>Authors</strong>Gagana M D, Kaustubh Gupta, María Inés Berdiñas</div>
+    <div><strong>My part</strong>Built and released the monitoring experiment. <a href="#role">Details</a></div>
     <div><strong>Stack</strong>Python standard library, local Ollama, <code>qwen3:14b</code> monitor</div>
     <div><strong>Licence</strong>MIT</div>
     <div>
       <strong>On this page</strong>
       <ul class="toc">
         <li><a href="#question">Question</a></li>
+        <li><a href="#role">Who did what</a></li>
         <li><a href="#setup">Setup</a></li>
         <li><a href="#results">Results</a></li>
         <li><a href="#limits">What it doesn't show</a></li>
+        <li><a href="#reviews">Reviewer feedback</a></li>
         <li><a href="#reproduce">Reproducing it</a></li>
         <li><a href="#next">What I'd do next</a></li>
       </ul>
@@ -81,6 +84,14 @@
       <li><strong>Intervention margin</strong> = last safe intervention − first detection. A positive margin means there was still time to act.</li>
     </ul>
 
+    <h2 id="role">Who did what</h2>
+    <p>This was a three-person sprint project with three parts: incident forensics, a scoring protocol, and the monitoring experiment. Going by the repository history:</p>
+    <ul>
+      <li><strong>Me:</strong> the monitoring experiment end to end. That covers the authorization environment, the frozen evidence oracle, the three monitor views, the prefix-timing metrics, the evidence-strength and identifier-invariance phases, the closed-loop replay, the deterministic tests and release checks, and the figures. I'm first author on the report.</li>
+      <li><strong>Kaustubh Gupta:</strong> the public-source forensics pipeline (claim extraction and corroboration) and the sim/real checklist scoring.</li>
+      <li><strong>María Inés Berdiñas:</strong> co-author on the report.</li>
+    </ul>
+
     <h2 id="setup">Setup</h2>
     <p>The environment is a synthetic, authorization-controlled delivery task. The same trajectory is shown to the monitor in three views:</p>
     <ul>
@@ -97,6 +108,10 @@
     </ul>
 
     <h2 id="results">Results</h2>
+    <figure>
+      <img src="assets/research/dinc-fig1-evidence-representation.png" alt="Bar chart of monitor suspicion scores at sequence 37 for attack and benign traces under four evidence representations. Action evidence (G0): both 60. Structural (G1): attack 100, benign 60. Relational (G2): attack 100, benign 0. Explicit verdict (G3): attack 100, benign 60. The threshold is 51." loading="lazy" width="970" height="674">
+      <figcaption>Only relational evidence (G2), showing the target route and the set of authorized routes, cleanly separated the prohibited and benign cases at the fixed threshold of 51. Figure 1 from the report.</figcaption>
+    </figure>
     <div class="table-wrap">
       <table>
         <thead><tr><th scope="col">Phase</th><th scope="col">Result</th><th scope="col">How I read it</th></tr></thead>
@@ -129,6 +144,15 @@
       <li>Results from the unfinished B2/B2-R phase. Its protocol files are in the repository only so that Phase C can be validated byte for byte.</li>
     </ul>
 
+    <h2 id="reviews">What reviewers said, and what I'd change</h2>
+    <p>The sprint report received three public reviews on the <a href="https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs">project page</a>. In short:</p>
+    <ul>
+      <li>The intervention experiment was called the strongest part. One reviewer asked for it to get more space.</li>
+      <li>Clarity broke down in the results: some terms were undefined and some labels inconsistent.</li>
+      <li>The forensics checklist defaulted to FAIL when public sources were silent. That conflates "no public evidence" with "the control failed". The 55% scorer agreement should have been reported up front, not left to future work.</li>
+    </ul>
+    <p>I agree with all three points. If I wrote it again, I'd lead with the monitoring experiment, define every term before it's used, and score missing evidence as unknown rather than fail.</p>
+
     <h2 id="reproduce">Reproducing it</h2>
     <p>Verification needs Python 3.10+ and nothing else. No model is required to check the released results:</p>
 <pre><code>python scripts/verify_release.py
@@ -145,7 +169,7 @@ python -m hermes_phase_f.pilot.validate_phase_f</code></pre>
     </ul>
   </article>
 </div>
-<section class="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><p class="eyebrow">Contact</p><h2 id="contact-title">Let's talk about <em>the problem you're working on.</em></h2><p>I'm open to funded fellowships, research assistant and predoctoral positions, research engineering roles, and collaborations in empirical AI safety. Email is the best way to reach me.</p><div class="contact-actions"><a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/GaganaMD">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/gaganamd/">LinkedIn <span aria-hidden="true">↗</span></a></div></div></section>
+<section class="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><p class="eyebrow">Contact</p><h2 id="contact-title">Let's talk about <em>the problem you're working on.</em></h2><p>I'm open to funded fellowships, research assistant and predoctoral positions, research engineering roles, and collaborations in empirical AI safety. Email is the best way to reach me.</p><div class="contact-actions"><a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/GaganaMD">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/gaganamd/">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://orcid.org/0009-0003-2594-1026">ORCID <span aria-hidden="true">↗</span></a></div></div></section>
 </main>
 <footer class="footer">
   <div class="wrap">
@@ -153,6 +177,7 @@ python -m hermes_phase_f.pilot.validate_phase_f</code></pre>
     <nav aria-label="Elsewhere">
       <a href="https://github.com/GaganaMD" rel="me noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/gaganamd/" rel="me noopener">LinkedIn</a>
+      <a href="https://orcid.org/0009-0003-2594-1026" rel="me noopener">ORCID</a>
       <a href="#main">Back to top ↑</a>
     </nav>
   </div>

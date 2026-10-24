@@ -349,3 +349,31 @@ figcaption { font-size: 13.5px; color: var(--muted); margin-top: 10px; }
 @media (max-width: 640px) {
   .entry-side { grid-template-columns: 1fr; }
 }
+
+/* ---------- Iteration 2: roles, publications, direction, evidence ---------- */
+.entry .role { font-size: 14.5px; color: var(--text); border-left: 2px solid var(--line); padding-left: 12px; }
+.entry .role strong, .role strong { color: var(--ink); }
+.pubs { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+.pubs li { padding: 18px 0; border-bottom: 1px solid var(--line); }
+.pubs p { margin: 0 0 4px; max-width: 48rem; }
+.pub-title { font-size: 17px; font-weight: 600; line-height: 1.4; }
+.pub-title a:hover { color: var(--accent); }
+.pub-authors { font-size: 14.5px; color: var(--text); }
+.pub-authors strong { color: var(--ink); font-weight: 600; }
+.pub-venue { font-size: 14px; color: var(--muted); }
+.pub-venue a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.pub-note { font-size: 13px; color: var(--muted); font-style: italic; }
+.direction { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 32px; border-top: 1px solid var(--ink); }
+.direction article { padding: 22px 0; }
+.direction h3 { font-family: var(--serif); font-weight: 400; font-size: 1.3rem; line-height: 1.3; margin-bottom: 12px; }
+.direction p { font-size: 14.5px; color: var(--text); margin-bottom: 10px; }
+.direction p strong { color: var(--ink); }
+.direction a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.jump { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px; font-weight: 600; }
+.jump a { color: var(--accent); border-bottom: 1px solid currentColor; }
+.evidence { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 10px !important; }
+.evidence span { font-size: 11.5px; font-weight: 600; padding: 2px 7px; border: 1px solid #c8d3d1; background: #eef3f2; color: var(--ink); }
+.group-title { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 32px 0 10px; }
+.timeline-item h4 { font-size: 18px; margin: 0; }
+.archive-item .meta a { white-space: nowrap; }
+@media (max-width: 960px) { .direction { grid-template-columns: 1fr; } .direction article + article { border-top: 1px solid var(--line); } }
