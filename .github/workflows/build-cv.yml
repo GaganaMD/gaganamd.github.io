@@ -1,0 +1,35 @@
+# Builds cv/main.tex into cv.pdf at the site root whenever the CV source changes.
+# Workflow: edit in Overleaf -> Menu -> Download -> Source (zip) -> upload the files
+# into the cv/ folder on github.com (Add file -> Upload files). The PDF rebuilds and
+# https://gaganamd.github.io/cv.pdf serves the new version.
+name: Build CV
+on:
+  push:
+    branches: [main]
+    paths: ["cv/**.tex", "cv/**.cls", "cv/**.sty", "cv/**.bib", "cv/**.png", "cv/**.jpg"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: build-cv
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: cv
+          # Set to true if your template uses fontspec (XeLaTeX in Overleaf's settings).
+          latexmk_use_xelatex: false
+      - name: Publish cv.pdf
+        run: |
+          cp cv/main.pdf cv.pdf
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cv.pdf
+          git diff --cached --quiet || git commit -m "Rebuild cv.pdf from cv/main.tex [skip ci]"
+          git push
