@@ -14,3 +14,5 @@ Edited versions kept for later decisions. Nothing on the site links to these fil
 | `speaking-workshop-light-edit.jpg` | Same photo | First, lighter edit with a wider crop |
 
 To use one, copy it to `assets/img/` and update the `<img>` in `index.html` or `speaking.html`. Sizes: portraits are 4:5; speaking photos are 1600px wide.
+| `portrait-ingarss-poster-closer.jpg` | InGARSS 2025, alone at the BiorNet poster | Facing the camera, with blazer and badge. Source is WhatsApp-compressed (900×1600) |
+| `portrait-ingarss-poster-title.jpg` | Same photo | Wider crop that includes the poster title |

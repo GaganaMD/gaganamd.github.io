@@ -392,3 +392,6 @@ figcaption { font-size: 13.5px; color: var(--muted); margin-top: 10px; }
   .hero-grid { grid-template-columns: 1fr; gap: 28px; }
   .hero-grid .hero-photo { order: -1; width: 200px; margin-top: 0; }
 }
+.pub-photo { margin: 28px 0 0; max-width: 960px; }
+.pub-photo img { width: 100%; border-radius: 3px; border: 1px solid var(--line); background: var(--soft); }
+.pub-photo figcaption { font-size: 13.5px; color: var(--muted); margin-top: 10px; }
