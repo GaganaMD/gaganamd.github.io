@@ -1,0 +1,132 @@
+% Gagana M D — CV
+% Self-contained: needs only standard LaTeX packages (works on Overleaf free and in GitHub Actions).
+% Compile with pdfLaTeX.
+\documentclass[10pt,a4paper]{article}
+\AtBeginDocument{\fontsize{9.7}{11.6}\selectfont}
+
+\usepackage[left=0.45in,right=0.45in,top=0.36in,bottom=0.36in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+% ---- Public vs. private copy -------------------------------------------
+% The PDF published on the website omits the phone number.
+% For applications, change \publicfalse to \publicfalse.
+\newif\ifpublic
+\publictrue
+
+% ---- Style ---------------------------------------------------------------
+\definecolor{accent}{HTML}{305D64}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{0.96}
+\titleformat{\section}{\large\bfseries\color{accent}}{}{0pt}{}[\vspace{-6pt}\rule{\linewidth}{0.4pt}]
+\titlespacing*{\section}{0pt}{5pt}{3pt}
+\setlist[itemize]{leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,label=\textbullet}
+\newcommand{\role}[4]{\textbf{#1}\hfill #2\\\textit{#3}\ifx&#4&\else\ \textendash\ #4\fi\par}
+\newcommand{\entry}[2]{\textbf{#1}\hfill #2\par}
+\newcommand{\link}[2]{\href{#1}{\color{accent}#2}}
+
+\begin{document}
+
+% ---- Header --------------------------------------------------------------
+\begin{center}
+{\LARGE\bfseries Gagana M D}\\[3pt]
+\small
+\link{mailto:gaganaaa.dev@gmail.com}{gaganaaa.dev@gmail.com}
+\ifpublic\else\ \textbullet\ +91 72599 34249\fi
+\ \textbullet\ Bengaluru, India
+\ \textbullet\ \link{https://gaganamd.github.io}{gaganamd.github.io}
+\ \textbullet\ \link{https://github.com/GaganaMD}{GitHub}
+\ \textbullet\ \link{https://www.linkedin.com/in/gaganamd/}{LinkedIn}
+\ \textbullet\ \link{https://orcid.org/0009-0003-2594-1026}{ORCID}
+\end{center}
+\vspace{-2pt}
+
+AI safety researcher working on monitoring and evaluating AI agents. I build controlled experiments and the evaluation
+code behind them (frozen protocols, tests, preserved run artifacts), and I report what the evidence does and doesn't support.
+
+% ---- Research experience -------------------------------------------------
+\section{Research Experience}
+
+\role{PRISM AI Safety Research Fellowship}{May 2026 -- Present}{Research Fellow and Research Support}{Remote}
+\begin{itemize}
+  \item \textbf{LLM-generated world models} (mentor: Jobst Heitzig). Main code contributor (78 of $\sim$116 commits) to a 44-scenario
+        benchmark of LLM-written executable POSGs across five LLMs. 134/135 games passed mechanical checks, yet mean structural F1 was 0.37.
+        Paper under review at a NeurIPS 2026 workshop.
+  \item Research support for two teams, plus experiment tracking and reviews. \textbf{Causal-reasoning interpretability} (mentor: Manjari Narayan):
+        built the \link{https://github.com/GaganaMD/Interpretability-for-Scientific-Causal-Reasoning}{pipeline} (synthetic causal vignettes,
+        prompt-stability analysis, layerwise probes on Qwen2.5). \textbf{Synchronous monitoring for AI control} (mentor: Preeti Ravindra):
+        extending experiments against established baselines.
+\end{itemize}
+
+\role{BaseThesis Labs}{Apr 2026 -- Present}{AI Safety Researcher, Evaluations and Benchmarking}{Remote}
+\begin{itemize}
+  \item Built an offline-first benchmark harness for long-horizon finance and diligence agent tasks: rubric grading with safety
+        dealbreakers, a leakage guard, trace capture and state-diff auditing; 50 tests, CI. \link{https://github.com/GaganaMD/synth-benchmark-public}{Code}.
+  \item Measured when agent orchestration pays off (coding, reconciliation, a 717-item diligence corpus). It cost $3.5\times$ latency and helped only
+        where coverage and traceability mattered. \link{https://github.com/GaganaMD/benchmark_hermes-fabric-public}{Code}.
+  \item Leading \textbf{Secret Loyalties}: can hidden objectives in language models be recovered from observable evidence? (in progress)
+\end{itemize}
+
+\role{Sentient Futures}{Sep 2026 -- Present}{Research Fellow (mentor: Julia Bossmann)}{Remote}
+\begin{itemize}
+  \item \textbf{Gap Attractor:} behavioural evaluations of whether LLMs show stable, self-directed curiosity across prompting conditions and controls.
+  \item \textbf{Post-Control Initiative:} lead interdisciplinary roundtables (AI safety, governance, game theory) on cooperation when human control can't be assumed.
+\end{itemize}
+
+\role{FlowResearch}{Apr 2026 -- Present}{Research Fellow: behavioural evaluation of RL and world-model-based agents}{Remote}
+
+\role{Indian Institute of Science, DREAM Lab}{Jan 2025 -- Aug 2025}{Research Intern}{Bengaluru}
+\begin{itemize}
+  \item RL policies for splitting inference across edge devices (ExpansionNet v2, YOLOv5); distributed optimisation that improved system utility by 31\%.
+\end{itemize}
+
+\role{Neuromatch}{Oct 2024 -- Mar 2025}{Impact Scholar: co-authored a study of the Matching Law in transformer-based RL agents}{Remote}
+
+% ---- Selected project ----------------------------------------------------
+\section{Selected Project}
+
+\entry{Detection Is Not Containment \textmd{\textendash\ Apart Research AI Incident Response Sprint}}{Sep 2026}
+\begin{itemize}
+  \item First author; built the monitoring experiment. Does a monitor flag a prohibited agent action early enough for revoking authority to
+        prevent it? Hash-frozen oracle and prompt, benign-only threshold calibration, preregistered phases, deterministic tests.
+  \item Detection preceded the last safe point by one step; meaning-preserving renames kept only 8/12 decisions; a replayed false alarm
+        failed a benign task. \link{https://gaganamd.github.io/detection-is-not-containment.html}{Case study},
+        \link{https://github.com/GaganaMD/detection-is-not-containment}{code}.
+\end{itemize}
+
+% ---- Publications --------------------------------------------------------
+\section{Publications and Reports}
+\begin{itemize}[label={}, leftmargin=0pt]
+  \item \textbf{Gagana M D}, Ajay Kumar K, Vijayashekhar S S, Jignesh S.\ Bhatt.
+        \textit{Hyperspectral BiorNet: A Complete Wavelet Framework for Unmixing.}
+        IEEE InGARSS 2025, pp.\ 15--19. \link{https://doi.org/10.1109/InGARSS67683.2025.11584022}{DOI}
+  \item \textbf{Gagana M D}, Kaustubh Gupta, Mar\'ia In\'es Berdi\~nas.
+        \textit{Detection Is Not Containment: Timely Monitoring Determines Whether AI Agent Failures Can Be Prevented.}
+        Apart Research, 2026. \link{https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs}{Report}
+  \item Y.\ Karakoc, E.\ Sharifi, \textbf{M.\ D.\ Gagana}, Z.\ Sarayloo.
+        \textit{Investigating the Matching Law in Transformer-Based Reinforcement Learning Agents.}
+        Zenodo, 2025. \link{https://doi.org/10.5281/zenodo.15462678}{DOI}
+  \item Paper on the structural fidelity of LLM-generated world models. Under review, NeurIPS 2026 workshop.
+\end{itemize}
+
+% ---- Education -----------------------------------------------------------
+\section{Education}
+\entry{B.E., Artificial Intelligence and Machine Learning \textmd{\textendash\ Acharya Institute of Technology, CGPA 8.38/10}}{2021 -- 2025}
+Also: Neuromatch Academy, Computational Neuroscience (2025) and Deep Learning (2024).
+
+% ---- Honours, skills, community ------------------------------------------
+\section{Honours, Skills and Community}
+\textbf{Honours:} 2nd place, AMD AI Sprint Hackathon (AMD, Meta, Hugging Face), adversarial Q\&A agents; 1st place, Federated Learning
+Client Selection Challenge, IISc; 1st place, Srushti 2025 state-level project exhibition.\\
+\textbf{Tools:} Python, PyTorch, Transformers, Stable-Baselines3, Ollama, pytest, GitHub Actions, Docker, FastAPI, Git, Linux.\\
+\textbf{Community:} Women in Big Data India, Shakti Mentorship Program team and workshop facilitator (2026--); WiDS Ambassador (2026--);
+Women Who Code Data, helped run 11+ workshops reaching 350+ people (2022--24).
+
+\end{document}
