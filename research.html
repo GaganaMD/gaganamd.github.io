@@ -127,7 +127,7 @@
         <h3>Agent auditing under limited observability</h3>
         <p>An auditor rarely sees everything an agent did. This line of work asks which conclusions about an agent's objectives survive when traces are incomplete or reconstructed after the fact.</p>
         <dl class="facts">
-          <dt>Secret Loyalties</dt><dd>An evaluation of hidden loyalties in language models: what an evaluator needs, in affordances and evidence, to recover them. I lead it at BaseThesis Labs.</dd>
+          <dt>Secret Loyalties</dt><dd>An evaluation of hidden loyalties in language models: what an evaluator needs, in affordances and evidence, to recover them.</dd>
           <dt>Agent-Trace</dt><dd>Compares native tool events with reconstructed traces, to measure what is lost before a downstream safety evaluation sees the data.</dd>
           <dt>Status</dt><dd>In progress. The code lives in private repositories until the experiments are done, so no results are reported here yet.</dd>
         </dl>
@@ -141,9 +141,9 @@
       <div>
         <span class="tag">Evaluation infrastructure · Industry</span>
         <h3>Benchmark for long-horizon finance agent tasks</h3>
-        <p>An offline-first harness for evaluating agents on multi-step accounting and due-diligence work over messy files. Task packages are generated from one canonical task file. Grading is rubric-based, with contradictions, unsafe actions and prompt-injection compliance as automatic failures. A leakage guard refuses to grade if answer files are visible to the agent.</p>
+        <p>An offline-first harness for evaluating agents on long-horizon and ultra-long-horizon CFO and financial due-diligence work over messy files. Task packages are generated from one canonical task file. Grading is rubric-based, with contradictions, unsafe actions and prompt-injection compliance as automatic failures. A leakage guard refuses to grade if answer files are visible to the agent.</p>
         <dl class="facts">
-          <dt>My part</dt><dd>I designed and built the harness, grading engine and run pipeline at BaseThesis Labs.</dd>
+          <dt>My part</dt><dd>I designed and built the harness, grading engine and run pipeline at BaseThesis Labs (Bengaluru, May–Jul 2026).</dd>
           <dt>Check it</dt><dd>The public release has 50 tests and two synthetic demo tasks: <code>python -m pytest -q</code>.</dd>
           <dt>Status</dt><dd>Industry project, mid 2026. The public release is code only. Task banks, client documents and results stay private.</dd>
         </dl>
@@ -227,7 +227,7 @@
         <h3>Prompt sensitivity and latent drift in a small causal-reasoning model</h3>
         <p>Does a model's answer flip when a causal-reasoning prompt is reworded while the causal structure stays the same, and do those flips line up with hidden-state movement? I built synthetic vignettes covering confounding, mediation and selection bias, plus variants that remove a confounder or rename terms. On Qwen2.5-0.5B-Instruct I ran prompt-stability analysis, layerwise probes and activation contrasts.</p>
         <p>Early runs showed high answer flip rates across reframings, and the largest drift with "mechanistic" prompts. The repository is explicit that probe separability and drift are correlational and don't establish mechanism.</p>
-        <p class="role"><strong>My part:</strong> research support for a PRISM team (mentor: Manjari Narayan). I built this experiment pipeline. Every run saves its config and a run manifest.</p>
+        <p class="role"><strong>My part:</strong> built this pipeline as part of my PRISM research support. Every run saves its config and a run manifest.</p>
       </div>
       <div class="entry-side">
         <span class="status ongoing">Exploratory · PRISM team</span>

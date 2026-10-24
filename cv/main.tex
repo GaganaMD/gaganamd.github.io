@@ -2,7 +2,7 @@
 % Self-contained: needs only standard LaTeX packages (works on Overleaf free and in GitHub Actions).
 % Compile with pdfLaTeX.
 \documentclass[10pt,a4paper]{article}
-\AtBeginDocument{\fontsize{9.7}{11.6}\selectfont}
+\AtBeginDocument{\fontsize{9.9}{11.9}\selectfont}
 
 \usepackage[left=0.45in,right=0.45in,top=0.36in,bottom=0.36in]{geometry}
 \usepackage[T1]{fontenc}
@@ -29,6 +29,7 @@
 \titlespacing*{\section}{0pt}{5pt}{3pt}
 \setlist[itemize]{leftmargin=1.1em,itemsep=0pt,topsep=1pt,parsep=0pt,label=\textbullet}
 \newcommand{\role}[4]{\textbf{#1}\hfill #2\\\textit{#3}\ifx&#4&\else\ \textendash\ #4\fi\par}
+\newcommand{\job}[3]{\textbf{#1}\ \textendash\ \textit{#2}\hfill #3\par}
 \newcommand{\entry}[2]{\textbf{#1}\hfill #2\par}
 \newcommand{\link}[2]{\href{#1}{\color{accent}#2}}
 
@@ -48,46 +49,53 @@
 \end{center}
 \vspace{-2pt}
 
-AI safety researcher working on monitoring and evaluating AI agents. I build controlled experiments and the evaluation
-code behind them (frozen protocols, tests, preserved run artifacts), and I report what the evidence does and doesn't support.
+Early-career AI safety researcher working on monitoring and evaluating AI agents: does a monitor's evidence arrive in time to act on, and does an
+evaluation support the claim made from it? I build controlled experiments and the code behind them.
 
 % ---- Research experience -------------------------------------------------
 \section{Research Experience}
 
-\role{PRISM AI Safety Research Fellowship}{May 2026 -- Present}{Research Fellow and Research Support}{Remote}
+\job{PRISM AI Safety Research Fellowship}{Research Fellow, Remote}{May 2026 -- Present}
 \begin{itemize}
-  \item \textbf{LLM-generated world models} (mentor: Jobst Heitzig). Main code contributor (78 of $\sim$116 commits) to a 44-scenario
-        benchmark of LLM-written executable POSGs across five LLMs. 134/135 games passed mechanical checks, yet mean structural F1 was 0.37.
-        Paper under review at a NeurIPS 2026 workshop.
-  \item Research support for two teams, plus experiment tracking and reviews. \textbf{Causal-reasoning interpretability} (mentor: Manjari Narayan):
-        built the \link{https://github.com/GaganaMD/Interpretability-for-Scientific-Causal-Reasoning}{pipeline} (synthetic causal vignettes,
-        prompt-stability analysis, layerwise probes on Qwen2.5). \textbf{Synchronous monitoring for AI control} (mentor: Preeti Ravindra):
-        extending experiments against established baselines.
+  \item \textbf{LLM-generated world models} (mentor: Jobst Heitzig). Main code contributor (78 of $\sim$116 commits) to a 44-scenario benchmark
+        of five LLMs writing executable multi-agent games (POSGs). 134 of 135 games passed mechanical checks, yet mean structural F1 against
+        reference games was 0.37. Paper under review at a NeurIPS 2026 workshop.
+  \item Research support for two fellowship teams (interpretability; AI control): experiment tracking, reviews, milestones.
 \end{itemize}
 
-\role{BaseThesis Labs}{Apr 2026 -- Present}{AI Safety Researcher, Evaluations and Benchmarking}{Remote}
+\job{Sentient Futures}{Research Fellow, Remote (mentor: Julia Bossmann)}{Sep 2026 -- Present}
 \begin{itemize}
-  \item Built an offline-first benchmark harness for long-horizon finance and diligence agent tasks: rubric grading with safety
-        dealbreakers, a leakage guard, trace capture and state-diff auditing; 50 tests, CI. \link{https://github.com/GaganaMD/synth-benchmark-public}{Code}.
-  \item Measured when agent orchestration pays off (coding, reconciliation, a 717-item diligence corpus). It cost $3.5\times$ latency and helped only
-        where coverage and traceability mattered. \link{https://github.com/GaganaMD/benchmark_hermes-fabric-public}{Code}.
-  \item Leading \textbf{Secret Loyalties}: can hidden objectives in language models be recovered from observable evidence? (in progress)
+  \item \textbf{Gap Attractor Project.} Designing behavioural evaluations of whether language models show stable, self-directed curiosity
+        (unprompted information-seeking and question generation) that persists across prompts and controls.
+  \item \textbf{Post-Control Initiative.} Lead interdisciplinary roundtables (AI safety, governance, game theory) on human--AI cooperation
+        when reliable control can't be assumed, and write the resulting research syntheses.
 \end{itemize}
 
-\role{Sentient Futures}{Sep 2026 -- Present}{Research Fellow (mentor: Julia Bossmann)}{Remote}
+\job{FlowResearch}{Research Fellow, Remote}{Apr 2026 -- Present}
 \begin{itemize}
-  \item \textbf{Gap Attractor:} behavioural evaluations of whether LLMs show stable, self-directed curiosity across prompting conditions and controls.
-  \item \textbf{Post-Control Initiative:} lead interdisciplinary roundtables (AI safety, governance, game theory) on cooperation when human control can't be assumed.
+  \item Behavioural evaluation of RL and world-model-based agents: planning, generalisation and safety-relevant behaviour.
 \end{itemize}
 
-\role{FlowResearch}{Apr 2026 -- Present}{Research Fellow: behavioural evaluation of RL and world-model-based agents}{Remote}
-
-\role{Indian Institute of Science, DREAM Lab}{Jan 2025 -- Aug 2025}{Research Intern}{Bengaluru}
+\job{BaseThesis Labs}{AI Safety Researcher, Evaluations and Benchmarking, Bengaluru}{May 2026 -- Jul 2026}
 \begin{itemize}
-  \item RL policies for splitting inference across edge devices (ExpansionNet v2, YOLOv5); distributed optimisation that improved system utility by 31\%.
+  \item Benchmarked AI agents on long-horizon and ultra-long-horizon CFO and financial due-diligence tasks. Built the offline-first harness:
+        rubric grading with safety dealbreakers, a ground-truth leakage guard, trace capture, state-diff auditing, and 50 tests run in CI, so every
+        score can be traced back to what the agent actually did. \link{https://github.com/GaganaMD/synth-benchmark-public}{Code}.
+  \item Measured when agent orchestration pays off across coding, ledger reconciliation and a 717-item diligence corpus. It cost
+        $3.5\times$ the latency and was worth it only where coverage and traceability mattered.
+        \link{https://github.com/GaganaMD/benchmark_hermes-fabric-public}{Code}.
 \end{itemize}
 
-\role{Neuromatch}{Oct 2024 -- Mar 2025}{Impact Scholar: co-authored a study of the Matching Law in transformer-based RL agents}{Remote}
+\job{Indian Institute of Science, DREAM Lab}{Research Intern, Bengaluru}{Jan 2025 -- Aug 2025}
+\begin{itemize}
+  \item Reinforcement-learning policies that split model inference across edge devices (ExpansionNet v2, YOLOv5), with device profiling and
+        latency-aware scheduling. Distributed optimisation improved system utility by 31\%.
+\end{itemize}
+
+\job{Neuromatch}{Impact Scholar, Remote}{Oct 2024 -- Mar 2025}
+\begin{itemize}
+  \item Co-authored a study of whether transformer-based RL agents follow the Matching Law (reward ratios 1:1 to 16:1).
+\end{itemize}
 
 % ---- Selected project ----------------------------------------------------
 \section{Selected Project}
@@ -95,7 +103,7 @@ code behind them (frozen protocols, tests, preserved run artifacts), and I repor
 \entry{Detection Is Not Containment \textmd{\textendash\ Apart Research AI Incident Response Sprint}}{Sep 2026}
 \begin{itemize}
   \item First author; built the monitoring experiment. Does a monitor flag a prohibited agent action early enough for revoking authority to
-        prevent it? Hash-frozen oracle and prompt, benign-only threshold calibration, preregistered phases, deterministic tests.
+        prevent it? Hash-frozen oracle and prompt, benign-only threshold calibration, preregistered phases.
   \item Detection preceded the last safe point by one step; meaning-preserving renames kept only 8/12 decisions; a replayed false alarm
         failed a benign task. \link{https://gaganamd.github.io/detection-is-not-containment.html}{Case study},
         \link{https://github.com/GaganaMD/detection-is-not-containment}{code}.
