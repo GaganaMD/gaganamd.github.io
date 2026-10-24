@@ -86,7 +86,7 @@
       <div>
         <span class="tag">AI control · Monitoring</span>
         <h3><a href="detection-is-not-containment.html">Detection Is Not Containment</a></h3>
-        <p>Measures whether a monitor flags a prohibited action early enough for an intervention to prevent it, then replays the intervention to measure both prevention and the cost of false alarms.</p>
+        <p>Measures whether a monitor flags a prohibited action early enough for an intervention to prevent it, then replays the intervention to measure both prevention and the cost of false alarms. This project also absorbed my earlier work on intervention-aware monitoring: revoking a capability at the moment of detection.</p>
         <dl class="facts">
           <dt>Method</dt><dd>Synthetic authorization environment. Three monitor views (actions; plus reasoning; plus environment telemetry). Local <code>qwen3:14b</code> monitor with a frozen prompt and oracle. Threshold calibrated on benign controls only. Preregistered follow-up phases.</dd>
           <dt>Result</dt><dd>Grounded detection was timely by one step (margin +1). Decisions held in 8 of 12 meaning-preserving identifier renamings. In a closed-loop replay, a false alarm revoked a benign agent's authority and failed its task.</dd>
@@ -129,7 +129,7 @@
         <dl class="facts">
           <dt>Secret Loyalties</dt><dd>An agent-evaluation setup for hidden loyalties: what an evaluator needs, in affordances and evidence, to recover them.</dd>
           <dt>Agent-Trace</dt><dd>Compares native tool events with reconstructed traces, to measure what is lost before a downstream safety evaluation sees the data.</dd>
-          <dt>Status</dt><dd>In progress. No public code or write-up yet, so I'm not reporting results here.</dd>
+          <dt>Status</dt><dd>In progress. The code lives in private repositories until the experiments are done, so no results are reported here yet.</dd>
         </dl>
       </div>
       <div class="entry-side">
@@ -144,22 +144,40 @@
         <p>An offline-first harness for evaluating agents on multi-step accounting and due-diligence work over messy files. Task packages are generated from one canonical task file. Grading is rubric-based, with contradictions, unsafe actions and prompt-injection compliance as automatic failures. A leakage guard refuses to grade if answer files are visible to the agent.</p>
         <dl class="facts">
           <dt>My part</dt><dd>I designed and built the harness, grading engine and run pipeline.</dd>
-          <dt>Status</dt><dd>Industry project, mid 2026. The code isn't public because it contains client material.</dd>
+          <dt>Check it</dt><dd>The public release has 50 tests and two synthetic demo tasks: <code>python -m pytest -q</code>.</dd>
+          <dt>Status</dt><dd>Industry project, mid 2026. The public release is code only. Task banks, client documents and results stay private.</dd>
         </dl>
       </div>
       <div class="entry-side">
-        <span class="status private">Code not public</span>
+        <span class="status done">Code public · data private</span>
+        <div class="links"><a href="https://github.com/GaganaMD/synth-benchmark-public">Code ↗</a></div>
+      </div>
+    </article>
+
+    <article class="entry" id="gap-attractor">
+      <div>
+        <span class="tag">Behavioural evaluation · Model welfare</span>
+        <h3>The Gap Attractor Project</h3>
+        <p>Do frontier language models show stable, self-directed curiosity, beyond prompted behaviour or what they say about themselves in conversation? I'm developing behavioural evaluations of autonomous information-seeking and question generation. The aim is to test whether a model's preferences persist across prompting conditions and controls, and to separate real behavioural regularities from prompt-induced ones.</p>
+        <dl class="facts">
+          <dt>Why it matters</dt><dd>Claims about model preferences, for AI safety or model welfare, should rest on behaviour that survives controls, not on self-reports.</dd>
+          <dt>Status</dt><dd>Started Oct 2026. No results reported yet.</dd>
+        </dl>
+      </div>
+      <div class="entry-side">
+        <span class="status ongoing">Ongoing</span>
+        <span>Sentient Futures, Research Fellow, Oct 2026 – present. Mentored by Julia Bossmann.</span>
       </div>
     </article>
 
     <article class="entry" id="post-control">
       <div>
-        <span class="tag">Cooperation · Governance</span>
+        <span class="tag">Field building · Governance</span>
         <h3>Post-Control Initiative</h3>
-        <p>An interdisciplinary project on trust, negotiation and credible commitments between humans and advanced AI systems, for situations where capabilities are asymmetric and enforcement may be limited. My part so far is research roundtables and looking into technical and institutional mechanisms. This work is conceptual, not empirical.</p>
+        <p>Pathways for human–AI cooperation in futures where reliable human control of advanced AI can't be assumed. This covers trust, negotiation, verification and credible commitments. I lead interdisciplinary roundtables that bring together people from AI safety, governance and game theory, and I write the discussion frameworks and research syntheses that come out of them. This is field-building and conceptual work, not empirical research.</p>
       </div>
       <div class="entry-side">
-        <span class="status ongoing">Ongoing</span>
+        <span class="status ongoing">Ongoing · output under review</span>
         <span>Sentient Futures, Research Fellow, Sep 2026 – present. Mentored by Julia Bossmann.</span>
       </div>
     </article>
