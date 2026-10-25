@@ -16,3 +16,9 @@ Edited versions kept for later decisions. Nothing on the site links to these fil
 To use one, copy it to `assets/img/` and update the `<img>` in `index.html` or `speaking.html`. Sizes: portraits are 4:5; speaking photos are 1600px wide.
 | `portrait-ingarss-poster-closer.jpg` | InGARSS 2025, alone at the BiorNet poster | Facing the camera, with blazer and badge. Source is WhatsApp-compressed (900×1600) |
 | `portrait-ingarss-poster-title.jpg` | Same photo | Wider crop that includes the poster title |
+
+## Research page poster photo (Oct 2026)
+
+- `ingarss-poster-presenting-original.jpg`: unedited source.
+- `ingarss-poster-presenting-edited.jpg`: now used on the research page. Cropped closer, bags and chairs on the floor removed, light white-balance and contrast correction.
+- `ingarss-poster-previous-research.jpg`: the photo it replaced.

@@ -109,14 +109,15 @@
         <p>If an LLM writes the environment an agent is tested in, and the environment quietly changes which states are reachable or which actions exist, any safety conclusion drawn inside it inherits that error. We tested whether LLMs can build multi-agent situations as executable partially observable stochastic games (POSGs).</p>
         <dl class="facts">
           <dt>Method</dt><dd>A 44-scenario benchmark across toy, situational, game and cultural settings. Five LLMs, three generations per model and scenario. Three evaluation lanes: mechanical validity, permutation-invariant structural matching against reference games, and qualitative coverage. Every run keeps its prompts, raw replies, generated code and validation reports.</dd>
-          <dt>Result</dt><dd>354 first-pass outputs. In the game track, 134 of 135 passed a strict mechanical check, but the mean structural F1 was 0.37 (median 0.18), with 28 of 134 exact matches. Repeated generations varied (within-pair SD 0.17). In the cultural track, naming the country in a norm-conflict prompt changed the generated structure for four of five models.</dd>
+          <dt>Result</dt><dd>410 first-pass generations across three tracks. In the game track, 134 of 135 passed a strict mechanical check, but the mean permutation-invariant structural F1 was 0.366 (median 0.18), with 28 of 134 exact matches. Repeated generations varied (within-pair SD 0.17). In the cultural track, naming the country in a norm-conflict prompt changed the generated structure for four of five models, while automated semantic scores barely moved. Executability is necessary but not sufficient: a model that runs can still hand downstream planning and neuro-symbolic reasoning the wrong structure.</dd>
           <dt>Limits</dt><dd>Reference structures exist only for the nine games. The link between a game's stochasticity and lower agreement (ρ = −0.68) is exploratory, from nine games.</dd>
           <dt>My part</dt><dd>Main contributor to the shared codebase (78 of about 116 non-merge commits): experiment runners and preserved run artifacts, the graph-analysis library, the test suite, and parts of the paper source. Teammates contributed scenario data, reports, JSON generation and prompts.</dd>
         </dl>
       </div>
       <div class="entry-side">
-        <span class="status done">Paper submitted · NeurIPS 2026 workshop</span>
+        <span class="status done">Accepted · NeurIPS 2026 NEmo workshop</span>
         <span>PRISM AI Safety Research Fellowship, May 2026 – present. Mentored by Jobst Heitzig.</span>
+        <span>Paper: <em>Evaluating LLM-Generated World Models for Neuro-Symbolic Reasoning</em>.</span>
         <span>Code release with tests planned shortly.</span>
       </div>
     </article>
@@ -193,6 +194,12 @@
   </div>
   <ol class="pubs">
     <li>
+      <p class="pub-title">Evaluating LLM-Generated World Models for Neuro-Symbolic Reasoning</p>
+      <p class="pub-authors">PRISM AI Safety Research Fellowship team, mentored by Jobst Heitzig</p>
+      <p class="pub-venue">NEmo: Neuro-Symbolic Embodied Intelligence workshop, NeurIPS 2026 · Accepted workshop paper</p>
+      <p class="pub-note">A 44-scenario benchmark and 410 generations from five LLMs: 134 of 135 generated games run, but mean structural F1 against the reference is 0.366. <a href="#world-models">More</a></p>
+    </li>
+    <li>
       <p class="pub-title"><a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">Hyperspectral BiorNet: A Complete Wavelet Framework for Unmixing</a></p>
       <p class="pub-authors"><strong>Gagana M D</strong>, Ajay Kumar K, Vijayashekhar S S, Jignesh S. Bhatt</p>
       <p class="pub-venue">2025 IEEE India Geoscience and Remote Sensing Symposium (InGARSS), Bhubaneswar, pp. 15–19. DOI <a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">10.1109/InGARSS67683.2025.11584022</a> · <a href="https://github.com/GaganaMD/Hyperspectral-Wavenet">Code</a></p>
@@ -216,13 +223,9 @@
       <p class="pub-venue">Apart Research AI Incident Response Sprint, Sep 2026 · <a href="https://github.com/GaganaMD/detection-is-not-containment">Code</a></p>
       <p class="pub-note">Sprint report with public reviewer feedback, not peer-reviewed.</p>
     </li>
-    <li>
-      <p class="pub-title">Paper on structural fidelity of LLM-generated world models</p>
-      <p class="pub-venue">Submitted to a NeurIPS 2026 workshop. Details will be added after review.</p>
-    </li>
   </ol>
   <figure class="pub-photo">
-    <img src="assets/img/ingarss-2025-poster-960.jpg" srcset="assets/img/ingarss-2025-poster-960.jpg 960w, assets/img/ingarss-2025-poster.jpg 1580w" sizes="(max-width: 1100px) 100vw, 960px" width="960" height="546" loading="lazy" alt="Gagana explaining her Hyperspectral BiorNet poster to two visitors at a conference poster session.">
+    <img src="assets/img/ingarss-2025-poster-960.jpg" srcset="assets/img/ingarss-2025-poster-960.jpg 960w, assets/img/ingarss-2025-poster.jpg 1310w" sizes="(max-width: 1100px) 100vw, 960px" width="960" height="546" loading="lazy" alt="Gagana explaining her Hyperspectral BiorNet poster to two visitors at a conference poster session.">
     <figcaption>Presenting the Hyperspectral BiorNet poster at IEEE InGARSS 2025.</figcaption>
   </figure>
 </section>
@@ -311,6 +314,7 @@
   <div class="section-top"><div><p class="eyebrow">How to read this page</p><h2 id="statuses-title">Status labels<span class="period">.</span></h2></div></div>
   <ul class="list-plain">
     <li><strong>Published / Report / Completed</strong>Finished, with a paper, report or code you can inspect. Peer review is stated explicitly.</li>
+    <li><strong>Accepted</strong>Accepted at a peer-reviewed workshop or conference; the venue is named.</li>
     <li><strong>Paper submitted</strong>Under review. The entry will be updated after a decision.</li>
     <li><strong>Ongoing · not yet public</strong>Real work in progress. Results stay off this site until there's something to link to.</li>
     <li><strong>Exploratory</strong>Small independent studies, mostly useful for showing method and judgment.</li>
