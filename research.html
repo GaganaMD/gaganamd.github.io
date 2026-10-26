@@ -149,6 +149,25 @@
       </div>
     </article>
 
+    <article class="entry" id="collusion">
+      <div>
+        <span class="tag">Multi-agent safety · Collusion</span>
+        <h3>What can we infer about colluding agents from their behaviour?</h3>
+        <p>Two projects from Apart Research's AI Collusion Research Sprint (October 2026). One asks whether colluding agents notice when a partner is swapped out; the other asks whether high prices set by an LLM pricing agent are actually evidence of a collusive strategy. Both come back to the same caution: what an agent does is easier to observe than why it does it.</p>
+        <dl class="facts">
+          <dt>Peer swaps</dt><dd><a href="https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r">Noticing the Move, Missing the Player</a>. In a Diner's Dilemma, a Public Goods Game and a RepeatedJira collusion setup, agents tracked behaviour, not identity. In the Public Goods Game, 0 of 468 probes named a silent swap, while free riding was clearly detected (AUC 0.915–0.984). A monitor that covertly took over a colluder's seat disrupted the collusion, but the remaining agent never suspected a replacement. With Siva Kumar Lakkoju and Kaustubh Gupta.</dd>
+          <dt>Tacit pricing</dt><dd><a href="https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb">Tacit Collusion in Pricing Agents</a>. One fixed, competitive agent broke a collusive pricing habit more cheaply than adding competitors, for Q-learning agents and for Qwen2.5-7B. Inside the model, the rival's price is linearly decodable, activation patching locates where it acts, and a steering vector moves the model's price far more than norm-matched random directions. But a pre-registered study (1,656 runs) found no punishment of undercutting: the model reacts to any change in the rival's price. With Chewon Cho and Sriram Bharadwaj.</dd>
+          <dt>My part</dt><dd>On the pricing project, I co-led the project direction and experimental setup with Sriram Bharadwaj and ran the mechanistic interpretability and steering experiments (probes, activation patching, steering against random-direction controls). On the peer-swap project, I'm a co-author, and the experiment code is in my CollusionTrace repository.</dd>
+          <dt>Limits</dt><dd>48-hour sprint reports, not peer-reviewed. Small open models; the authors flag that more capable and reasoning models may behave differently.</dd>
+        </dl>
+      </div>
+      <div class="entry-side">
+        <span class="status done">Completed · reports and code public</span>
+        <span>Apart Research AI Collusion Research Sprint, Oct 23–25, 2026.</span>
+        <div class="links"><a href="https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r">Peer-swap report ↗</a><a href="https://github.com/GaganaMD/CollusionTrace">Code ↗</a><a href="https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb">Pricing report ↗</a><a href="https://github.com/Peddinti-Sriram-Bharadwaj/Collusion/tree/gagana/latent-manifold-steering">Code ↗</a></div>
+      </div>
+    </article>
+
     <article class="entry" id="agent-benchmark">
       <div>
         <span class="tag">Evaluation infrastructure · Industry</span>
@@ -209,6 +228,18 @@
       <p class="pub-authors">PRISM AI Safety Research Fellowship team, mentored by Jobst Heitzig</p>
       <p class="pub-venue">NEmo: Neuro-Symbolic Embodied Intelligence workshop, NeurIPS 2026 · Accepted workshop paper</p>
       <p class="pub-note">A 44-scenario benchmark and 410 generations from five LLMs: 134 of 135 generated games run, but mean structural F1 against the reference is 0.366. <a href="#world-models">More</a></p>
+    </li>
+    <li>
+      <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb">Tacit Collusion in Pricing Agents: Robustness, Detection, and a Mechanistic Probe of a Pricing LLM</a></p>
+      <p class="pub-authors">Chewon Cho, <strong>Gagana M D</strong>, Sriram Bharadwaj</p>
+      <p class="pub-venue">Apart Research AI Collusion Research Sprint, Oct 2026 · <a href="https://github.com/Peddinti-Sriram-Bharadwaj/Collusion/tree/gagana/latent-manifold-steering">Code</a></p>
+      <p class="pub-note">Sprint report, not peer-reviewed. I co-led the setup and ran the mechanistic interpretability and steering experiments. <a href="#collusion">More</a></p>
+    </li>
+    <li>
+      <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r">Noticing the Move, Missing the Player: LLM Agents Detect Behavioral Shifts but Not Peer Swaps</a></p>
+      <p class="pub-authors">Siva Kumar Lakkoju, Kaustubh Gupta, <strong>Gagana M D</strong></p>
+      <p class="pub-venue">Apart Research AI Collusion Research Sprint, Oct 2026 · <a href="https://github.com/GaganaMD/CollusionTrace">Code</a></p>
+      <p class="pub-note">Sprint report, not peer-reviewed. <a href="#collusion">More</a></p>
     </li>
     <li>
       <p class="pub-title"><a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">Hyperspectral BiorNet: A Complete Wavelet Framework for Unmixing</a></p>
