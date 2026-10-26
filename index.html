@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap">
 <link rel="stylesheet" href="styles.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Gagana M D", "url": "https://gaganamd.github.io/", "image": "https://gaganamd.github.io/assets/img/gagana-md.jpg", "email": "mailto:gaganaaa.dev@gmail.com", "jobTitle": "AI safety researcher", "knowsAbout": ["AI safety", "AI control", "Agent monitoring", "AI evaluations", "Reinforcement learning", "Post-AGI governance"], "alumniOf": {"@type": "CollegeOrUniversity", "name": "Acharya Institute of Technology"}, "sameAs": ["https://github.com/GaganaMD", "https://www.linkedin.com/in/gaganamd/", "https://orcid.org/0009-0003-2594-1026"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Gagana M D", "url": "https://gaganamd.github.io/", "image": "https://gaganamd.github.io/assets/img/gagana-md.jpg", "email": "mailto:gaganaaa.dev@gmail.com", "jobTitle": "AI safety researcher", "knowsAbout": ["AI safety", "AI control", "Agent monitoring", "AI evaluations", "Reinforcement learning", "Post-AGI governance", "Multi-agent safety", "Mechanistic interpretability"], "alumniOf": {"@type": "CollegeOrUniversity", "name": "Acharya Institute of Technology"}, "sameAs": ["https://github.com/GaganaMD", "https://www.linkedin.com/in/gaganamd/", "https://orcid.org/0009-0003-2594-1026"]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -104,6 +104,19 @@
     </article>
     <article class="entry">
       <div>
+        <span class="tag">Multi-agent safety · Collusion</span>
+        <h3><a href="research.html#collusion">What can we infer about colluding agents from their behaviour?</a></h3>
+        <p>Two October 2026 sprint studies. When a colluding agent was silently swapped out, the others noticed changes in behaviour but never the replacement: 0 of 468 probes named a silent swap, while free riding was detected with AUCs of 0.915–0.984. And a pricing LLM that settled on high prices had a real, steerable internal trace of its rival's price, but a pre-registered study (1,656 runs) found no punishment of undercutting. High prices alone weren't evidence of a collusive strategy.</p>
+        <p class="role"><strong>My part:</strong> on the pricing study, I co-led the setup and ran the mechanistic interpretability and steering experiments. Co-author on the peer-swap study, whose code is in my CollusionTrace repository.</p>
+      </div>
+      <div class="entry-side">
+        <span class="status done">Completed · reports and code public</span>
+        <span>Apart Research AI Collusion Research Sprint, Oct 2026. With Chewon Cho and Sriram Bharadwaj; Siva Kumar Lakkoju and Kaustubh Gupta.</span>
+        <div class="links"><a href="https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb">Pricing report ↗</a><a href="https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r">Peer-swap report ↗</a><a href="research.html#collusion">Details →</a></div>
+      </div>
+    </article>
+    <article class="entry">
+      <div>
         <span class="tag">Auditing · Hidden objectives</span>
         <h3><a href="research.html#auditing">Agent auditing under limited observability</a></h3>
         <p>What can an auditor justifiably conclude about an agent's objectives from the evidence it can actually see? This includes Secret Loyalties, a hidden-loyalty evaluation, and Agent-Trace, which compares native tool events with reconstructed traces to measure what gets lost.</p>
@@ -135,14 +148,24 @@
       <p class="pub-venue">2025 IEEE India Geoscience and Remote Sensing Symposium (InGARSS), pp. 15–19 · Peer-reviewed conference paper</p>
     </li>
     <li>
-      <p class="pub-title"><a href="https://doi.org/10.5281/zenodo.15462678">Investigating the Matching Law in Transformer-Based Reinforcement Learning Agents</a></p>
-      <p class="pub-authors">Y. Karakoc, E. Sharifi, <strong>M. D. Gagana</strong>, Z. Sarayloo</p>
-      <p class="pub-venue">Zenodo, 2025 · Neuromatch Impact Scholars project report</p>
+      <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb">Tacit Collusion in Pricing Agents: Robustness, Detection, and a Mechanistic Probe of a Pricing LLM</a></p>
+      <p class="pub-authors">Chewon Cho, <strong>Gagana M D</strong>, Sriram Bharadwaj</p>
+      <p class="pub-venue">Apart Research AI Collusion Research Sprint, 2026 · Sprint report, not peer-reviewed</p>
+    </li>
+    <li>
+      <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r">Noticing the Move, Missing the Player: LLM Agents Detect Behavioral Shifts but Not Peer Swaps</a></p>
+      <p class="pub-authors">Siva Kumar Lakkoju, Kaustubh Gupta, <strong>Gagana M D</strong></p>
+      <p class="pub-venue">Apart Research AI Collusion Research Sprint, 2026 · Sprint report, not peer-reviewed</p>
     </li>
     <li>
       <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs">Detection Is Not Containment: Timely Monitoring Determines Whether AI Agent Failures Can Be Prevented</a></p>
       <p class="pub-authors"><strong>Gagana M D</strong>, Kaustubh Gupta, María Inés Berdiñas</p>
       <p class="pub-venue">Apart Research AI Incident Response Sprint, 2026 · Sprint report, not peer-reviewed</p>
+    </li>
+    <li>
+      <p class="pub-title"><a href="https://doi.org/10.5281/zenodo.15462678">Investigating the Matching Law in Transformer-Based Reinforcement Learning Agents</a></p>
+      <p class="pub-authors">Y. Karakoc, E. Sharifi, <strong>M. D. Gagana</strong>, Z. Sarayloo</p>
+      <p class="pub-venue">Zenodo, 2025 · Neuromatch Impact Scholars project report</p>
     </li>
   </ol>
 </section>

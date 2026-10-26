@@ -77,13 +77,13 @@
     <article>
       <h3>2. How much do audit conclusions depend on what the auditor can see?</h3>
       <p><strong>Why.</strong> Auditors usually work from logs that were reconstructed, summarized or partly lost. Claims about an agent's objectives inherit those gaps.</p>
-      <p><strong>So far.</strong> Ongoing work on hidden loyalties and on comparing native with reconstructed traces. No public results yet.</p>
+      <p><strong>So far.</strong> In two <a href="#collusion">collusion studies</a>, behaviour overstated what we could conclude about intent: agents tracked a colluding peer's behaviour but never noticed it had been swapped out (0 of 468 probes), and a pricing LLM's high prices had a steerable internal trace but no punishment logic. Work on hidden loyalties and on native versus reconstructed traces is ongoing.</p>
       <p><strong>Next.</strong> Hold the agent fixed, degrade the evidence in controlled ways (drop tool events, summarize, reorder), and measure which audit conclusions survive.</p>
     </article>
     <article>
       <h3>3. When can we trust an environment a model wrote?</h3>
       <p><strong>Why.</strong> LLMs increasingly write the simulations that agents are trained and tested in. Safety reasoning about reachability or reversibility is only as good as that environment.</p>
-      <p><strong>So far.</strong> Generated games almost always <em>run</em> (134 of 135), but most don't encode the intended structure (mean structural F1 0.37). Naming a country in the prompt changed the structure produced by four of five models.</p>
+      <p><strong>So far.</strong> Generated games almost always <em>run</em> (134 of 135), but most don't encode the intended structure (mean structural F1 0.366). Naming a country in the prompt changed the structure produced by four of five models.</p>
       <p><strong>Next.</strong> Cheap structural checks that could flag a wrong environment before it's used, validated against the reference games we already have.</p>
     </article>
   </div>
