@@ -40,12 +40,9 @@
     <button class="menu" id="menu" type="button" aria-controls="nav-links" aria-expanded="false">Menu</button>
     <nav class="nav-links" id="nav-links" aria-label="Main">
       <a href="research.html">Research</a>
-      <a href="projects.html">Projects</a>
       <a href="writing.html">Writing</a>
       <a href="about.html">About</a>
-      <span class="nav-sep" aria-hidden="true"></span>
-      <a href="speaking.html">Speaking</a>
-      <a href="consulting.html">Consulting</a>
+      <a href="cv.pdf">CV</a>
       <a class="nav-contact" href="mailto:gaganaaa.dev@gmail.com">Email me</a>
     </nav>
   </div>
@@ -55,8 +52,8 @@
   <div class="hero-copy">
     <p class="eyebrow">Empirical AI safety · Agent monitoring and evaluations</p>
     <h1 id="hero-title">I study how to monitor AI agents when we can't see <em>everything they do.</em></h1>
-    <p class="lede">I'm <strong>Gagana M D</strong>. I study how AI agents are monitored and evaluated, through small, controlled experiments and the tested code behind them. Before this I worked on the mathematical side of ML: a wavelet framework for hyperspectral unmixing (IEEE InGARSS 2025), drone and edge–fog co-scheduling at IISc, and the Matching Law in transformer RL agents. My PRISM fellowship paper on LLM-generated world models was accepted at the NeurIPS 2026 NEmo workshop. I'm now a research fellow at Sentient Futures, where I also work on post-AGI governance, and at FlowResearch.</p>
-    <p class="availability">Open to funded fellowships, research assistant and predoctoral positions, and research engineering roles in empirical AI safety. I'm also glad to hear about collaborations.</p>
+    <p class="lede">I'm <strong>Gagana M D</strong>, an early-career AI safety researcher. In my first-author project, a monitor flagged an attack one step before the last point where it could still be stopped, and renaming variables without changing their meaning was enough to break that. My PRISM fellowship paper on LLM-generated world models was accepted at a NeurIPS 2026 workshop. I'm now a research fellow at Sentient Futures and FlowResearch.</p>
+    <p class="availability">Looking for a funded research fellowship or research engineering role in empirical AI safety.</p>
     <div class="actions">
       <a class="button primary" href="detection-is-not-containment.html">Read the main case study <span aria-hidden="true">→</span></a>
       <a class="button" href="research.html#publications">Publications</a>
@@ -65,14 +62,14 @@
     </div>
   </div>
   <figure class="hero-photo">
-    <img src="assets/img/gagana-md-640.jpg" srcset="assets/img/gagana-md-440.jpg 440w, assets/img/gagana-md-640.jpg 640w, assets/img/gagana-md.jpg 800w" sizes="(max-width: 760px) 200px, 300px" width="640" height="800" alt="Gagana M D presenting at a Women in Big Data India workshop.">
+    <img src="assets/img/gagana-md-640.jpg" srcset="assets/img/gagana-md-440.jpg 440w, assets/img/gagana-md-640.jpg 640w, assets/img/gagana-md.jpg 800w" sizes="(max-width: 760px) 160px, 300px" width="640" height="800" alt="Gagana M D presenting at a Women in Big Data India workshop.">
   </figure>
 </section>
 
 <section class="section wrap" id="research" aria-labelledby="research-title">
   <div class="section-top">
     <div><p class="eyebrow">Selected research</p><h2 id="research-title">What I've worked on<span class="period">.</span></h2></div>
-    <p class="section-desc">Each item says what stage it's at and what I did. Where there's public code or a report, it's linked.</p>
+
   </div>
   <div class="entries">
     <article class="entry">
@@ -91,6 +88,19 @@
     </article>
     <article class="entry">
       <div>
+        <span class="tag">Multi-agent safety · Collusion</span>
+        <h3><a href="research.html#collusion">What can we infer about colluding agents from their behaviour?</a></h3>
+        <p>Two October 2026 sprint studies. When a colluding agent was silently swapped out, the others noticed changes in behaviour but never the replacement: 0 of 468 probes named a silent swap, while free riding was detected with AUCs of 0.915–0.984. And a pricing LLM that settled on high prices had a real, steerable internal trace of its rival's price, but a pre-registered study (1,656 runs) found no punishment of undercutting. High prices alone weren't evidence of a collusive strategy.</p>
+        <p class="role"><strong>My part:</strong> on the pricing study, I co-led the setup and ran the mechanistic interpretability and steering experiments. On the peer-swap study, I led the experiment where a monitor covertly takes over a colluder's seat; the code is in my CollusionTrace repository.</p>
+      </div>
+      <div class="entry-side">
+        <span class="status done">Completed · reports and code public</span>
+        <span>Apart Research AI Collusion Research Sprint, Oct 2026. With Chewon Cho and Sriram Bharadwaj; Siva Kumar Lakkoju and Kaustubh Gupta.</span>
+        <div class="links"><a href="https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb">Pricing report ↗</a><a href="https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r">Peer-swap report ↗</a><a href="research.html#collusion">Details →</a></div>
+      </div>
+    </article>
+    <article class="entry">
+      <div>
         <span class="tag">World models · Evaluation</span>
         <h3><a href="research.html#world-models">Do LLM-generated world models keep their structure?</a></h3>
         <p>We asked LLMs to turn natural-language situations into executable partially observable stochastic games, across a 44-scenario benchmark and five models. In the game track, 134 of 135 generated models passed a strict mechanical check. Their structure was another matter: they had a mean permutation-invariant structural F1 of 0.366, and only 28 matched the reference exactly. Code that runs is not evidence that the model is right.</p>
@@ -102,44 +112,20 @@
         <div class="links"><a href="research.html#world-models">Details →</a></div>
       </div>
     </article>
-    <article class="entry">
-      <div>
-        <span class="tag">Multi-agent safety · Collusion</span>
-        <h3><a href="research.html#collusion">What can we infer about colluding agents from their behaviour?</a></h3>
-        <p>Two October 2026 sprint studies. When a colluding agent was silently swapped out, the others noticed changes in behaviour but never the replacement: 0 of 468 probes named a silent swap, while free riding was detected with AUCs of 0.915–0.984. And a pricing LLM that settled on high prices had a real, steerable internal trace of its rival's price, but a pre-registered study (1,656 runs) found no punishment of undercutting. High prices alone weren't evidence of a collusive strategy.</p>
-        <p class="role"><strong>My part:</strong> on the pricing study, I co-led the setup and ran the mechanistic interpretability and steering experiments. Co-author on the peer-swap study, whose code is in my CollusionTrace repository.</p>
-      </div>
-      <div class="entry-side">
-        <span class="status done">Completed · reports and code public</span>
-        <span>Apart Research AI Collusion Research Sprint, Oct 2026. With Chewon Cho and Sriram Bharadwaj; Siva Kumar Lakkoju and Kaustubh Gupta.</span>
-        <div class="links"><a href="https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb">Pricing report ↗</a><a href="https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r">Peer-swap report ↗</a><a href="research.html#collusion">Details →</a></div>
-      </div>
-    </article>
-    <article class="entry">
-      <div>
-        <span class="tag">Auditing · Hidden objectives</span>
-        <h3><a href="research.html#auditing">Agent auditing under limited observability</a></h3>
-        <p>What can an auditor justifiably conclude about an agent's objectives from the evidence it can actually see? This includes Secret Loyalties, a hidden-loyalty evaluation, and Agent-Trace, which compares native tool events with reconstructed traces to measure what gets lost.</p>
-      </div>
-      <div class="entry-side">
-        <span class="status private">Ongoing · not yet public</span>
-        <span>No results are reported here until there's something to link to.</span>
-        <div class="links"><a href="research.html#auditing">Details →</a></div>
-      </div>
-    </article>
   </div>
   <p class="section-more"><a href="research.html">All research, including smaller studies →</a></p>
 </section>
 
 <section class="section wrap" aria-labelledby="pubs-title">
   <div class="section-top">
-    <div><p class="eyebrow">Publications and reports</p><h2 id="pubs-title">In print<span class="period">.</span></h2></div>
+    <div><p class="eyebrow">Publications</p><h2 id="pubs-title">Papers and reports<span class="period">.</span></h2></div>
     <p class="section-desc">Also listed on <a class="text-link" href="https://orcid.org/0009-0003-2594-1026">ORCID</a>.</p>
   </div>
+  <h3 class="group-title">Peer-reviewed</h3>
   <ol class="pubs">
     <li>
       <p class="pub-title"><a href="research.html#world-models">Evaluating LLM-Generated World Models for Neuro-Symbolic Reasoning</a></p>
-      <p class="pub-authors">PRISM AI Safety Research Fellowship team, mentored by Jobst Heitzig</p>
+      <p class="pub-authors">PRISM AI Safety Research Fellowship team, mentored by Jobst Heitzig · camera-ready forthcoming</p>
       <p class="pub-venue">NEmo: Neuro-Symbolic Embodied Intelligence workshop, NeurIPS 2026 · Accepted workshop paper</p>
     </li>
     <li>
@@ -147,6 +133,9 @@
       <p class="pub-authors"><strong>Gagana M D</strong>, Ajay Kumar K, Vijayashekhar S S, Jignesh S. Bhatt</p>
       <p class="pub-venue">2025 IEEE India Geoscience and Remote Sensing Symposium (InGARSS), pp. 15–19 · Peer-reviewed conference paper</p>
     </li>
+  </ol>
+  <h3 class="group-title">Reports</h3>
+  <ol class="pubs">
     <li>
       <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb">Tacit Collusion in Pricing Agents: Robustness, Detection, and a Mechanistic Probe of a Pricing LLM</a></p>
       <p class="pub-authors">Chewon Cho, <strong>Gagana M D</strong>, Sriram Bharadwaj</p>
@@ -170,42 +159,7 @@
   </ol>
 </section>
 
-<section class="section wrap" aria-labelledby="questions-title">
-  <div class="section-top">
-    <div><p class="eyebrow">Open questions</p><h2 id="questions-title">What I'd like to work on next<span class="period">.</span></h2></div>
-    <p class="section-desc">Each of these came out of a finished project. They are directions I want to pursue, not results. <a class="text-link" href="research.html#direction">More detail</a></p>
-  </div>
-  <ol class="questions">
-    <li><div><h3>When does a monitor buy enough time to act?</h3><p>Measuring the gap between detection and the last safe intervention point, across more than one environment and with sampled rather than single deterministic monitor runs.</p></div></li>
-    <li><div><h3>How much do our conclusions depend on what the evaluator can see?</h3><p>Native versus reconstructed traces, missing tool events, and hidden objectives. These affect which audit claims hold up.</p></div></li>
-    <li><div><h3>When can we trust an environment a model wrote?</h3><p>Generated world models usually run. Far fewer of them encode the intended game. What checks would catch the difference before a safety analysis relies on it?</p></div></li>
-  </ol>
-</section>
-
-<section class="section wrap" aria-labelledby="experience-title">
-  <div class="section-top">
-    <div><p class="eyebrow">Experience</p><h2 id="experience-title">Recent roles<span class="period">.</span></h2></div>
-    <p class="section-desc"><a class="text-link" href="about.html#experience">Full experience, education and community work</a></p>
-  </div>
-  <ul class="roles">
-    <li><time>Sep 2026 – present</time><div><strong>Sentient Futures</strong><span>Research Fellow on two projects: Gap Attractor (behavioural evaluation of curiosity in LLMs) and the Post-Control Initiative (post-AGI governance and field building)</span></div></li>
-    <li><time>Apr 2026 – present</time><div><strong>FlowResearch</strong><span>Research Fellow: reinforcement learning, world models, behavioural evaluation</span></div></li>
-    <li><time>May – Oct 2026</time><div><strong>PRISM AI Safety Research Fellowship</strong><span>Research Fellow: evaluating LLM-generated world models (completed; paper accepted at a NeurIPS 2026 workshop)</span></div></li>
-    <li><time>May – Jul 2026</time><div><strong>BaseThesis Labs, Bengaluru</strong><span>AI Safety Researcher: benchmarking agents on long-horizon CFO and due-diligence tasks</span></div></li>
-    <li><time>Jan – Aug 2025</time><div><strong>Indian Institute of Science, DREAM Lab</strong><span>Research Intern: UAV routing and RL-based split inference</span></div></li>
-  </ul>
-</section>
-
-<section class="section wrap" aria-labelledby="elsewhere-title">
-  <div class="section-top"><div><p class="eyebrow">Also</p><h2 id="elsewhere-title">Beyond research<span class="period">.</span></h2></div></div>
-  <div class="elsewhere">
-    <a href="projects.html"><strong>Projects</strong><span>Code, sorted by how much it shows</span></a>
-    <a href="writing.html"><strong>Writing</strong><span>Reports, research logs and articles</span></a>
-    <a href="speaking.html"><strong>Speaking</strong><span>Talks, workshops and community programs</span></a>
-    <a href="consulting.html"><strong>Consulting</strong><span>Agent evaluation reviews</span></a>
-  </div>
-</section>
-<section class="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><p class="eyebrow">Contact</p><h2 id="contact-title">Let's talk about <em>the problem you're working on.</em></h2><p>I'm open to funded fellowships, research assistant and predoctoral positions, research engineering roles, and collaborations in empirical AI safety. Email is the best way to reach me.</p><div class="contact-actions"><a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/GaganaMD">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/gaganamd/">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://orcid.org/0009-0003-2594-1026">ORCID <span aria-hidden="true">↗</span></a></div></div></section>
+<section class="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><p class="eyebrow">Contact</p><h2 id="contact-title">Get in touch</h2><p>I'm looking for a funded research fellowship or research engineering role in empirical AI safety. If you work on agent monitoring, control evaluations or multi-agent safety, I'd like to hear what you're testing. A short note on the problem and where it's stuck is the best first email.</p><div class="contact-actions"><a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/GaganaMD">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/gaganamd/">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://orcid.org/0009-0003-2594-1026">ORCID <span aria-hidden="true">↗</span></a></div></div></section>
 </main>
 <footer class="footer">
   <div class="wrap">
@@ -214,6 +168,8 @@
       <a href="https://github.com/GaganaMD" rel="me noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/gaganamd/" rel="me noopener">LinkedIn</a>
       <a href="https://orcid.org/0009-0003-2594-1026" rel="me noopener">ORCID</a>
+      <a href="speaking.html">Speaking</a>
+      <a href="consulting.html">Consulting</a>
       <a href="#main">Back to top ↑</a>
     </nav>
   </div>

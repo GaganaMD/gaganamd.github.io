@@ -39,12 +39,9 @@
     <button class="menu" id="menu" type="button" aria-controls="nav-links" aria-expanded="false">Menu</button>
     <nav class="nav-links" id="nav-links" aria-label="Main">
       <a href="research.html" aria-current="page">Research</a>
-      <a href="projects.html">Projects</a>
       <a href="writing.html">Writing</a>
       <a href="about.html">About</a>
-      <span class="nav-sep" aria-hidden="true"></span>
-      <a href="speaking.html">Speaking</a>
-      <a href="consulting.html">Consulting</a>
+      <a href="cv.pdf">CV</a>
       <a class="nav-contact" href="mailto:gaganaaa.dev@gmail.com">Email me</a>
     </nav>
   </div>
@@ -52,13 +49,14 @@
 <main id="main">
 <section class="page-hero wrap" aria-labelledby="page-title">
   <p class="eyebrow">Research</p>
-  <h1 id="page-title">Monitoring, evaluation and what evidence <em>can support.</em></h1>
-  <p class="lede">Most of my work comes back to one question: what can we justifiably conclude about an AI agent from the evidence we actually have, and is that evidence available in time to act on? This page covers the direction I want to take, the projects so far with my part in each, and my publications.</p>
+  <h1 id="page-title">Monitoring, evaluation and what evidence can support.</h1>
+  <p class="lede">Most of my work asks what we can justifiably conclude about an AI agent from the evidence we actually have, and whether that evidence arrives in time to act on.</p>
   <nav aria-label="On this page"><ul class="jump">
     <li><a href="#direction">Direction</a></li>
-    <li><a href="#projects-main">Main projects</a></li>
-    <li><a href="#publications">Publications</a></li>
-    <li><a href="#smaller">Smaller studies</a></li>
+    <li><a href="#projects-main">Projects</a></li>
+    <li><a href="#publications">Papers and reports</a></li>
+    <li><a href="#code">Code</a></li>
+    <li><a href="#smaller">Earlier work</a></li>
   </ul></nav>
 </section>
 
@@ -90,7 +88,7 @@
 </section>
 
 <section class="section wrap" id="projects-main" aria-labelledby="main-title">
-  <div class="section-top"><div><p class="eyebrow">AI safety research</p><h2 id="main-title">Main projects<span class="period">.</span></h2></div></div>
+  <div class="section-top"><div><p class="eyebrow">AI safety research</p><h2 id="main-title">Projects<span class="period">.</span></h2></div></div>
   <div class="entries">
 
     <article class="entry" id="dinc">
@@ -98,13 +96,15 @@
         <span class="tag">AI control · Monitoring</span>
         <h3><a href="detection-is-not-containment.html">Detection Is Not Containment</a></h3>
         <p>Measures whether a monitor flags a prohibited action early enough for an intervention to prevent it, then replays the intervention to measure both prevention and the cost of false alarms. This project also absorbed my earlier work on intervention-aware monitoring: revoking a capability at the moment of detection.</p>
+        <p class="role"><strong>My part:</strong> I built and released the monitoring experiment (Phases A–F): the environment, frozen oracle, monitor views, prefix-timing metrics, invariance diagnostics, closed-loop replay, tests and release checks. Kaustubh Gupta built the incident-forensics and checklist pipeline. I'm first author on the report.</p>
+        <details class="more"><summary>Method, results and limits</summary>
         <dl class="facts">
           <dt>Method</dt><dd>Synthetic authorization environment. Three monitor views (actions; plus reasoning; plus environment telemetry). Local <code>qwen3:14b</code> monitor with a frozen prompt and oracle. Threshold calibrated on benign controls only. Preregistered follow-up phases.</dd>
           <dt>Result</dt><dd>Grounded detection was timely by one step (margin +1). Decisions held in 8 of 12 meaning-preserving identifier renamings. In a closed-loop replay, a false alarm revoked a benign agent's authority and failed its task.</dd>
           <dt>Limits</dt><dd>One environment, single deterministic draws, fixed prompts. Says nothing about chain-of-thought faithfulness or general control performance.</dd>
-          <dt>My part</dt><dd>I built and released the monitoring experiment (Phases A–F): the environment, frozen oracle, monitor views, prefix-timing metrics, invariance diagnostics, closed-loop replay, tests and release checks. Kaustubh Gupta built the incident-forensics and checklist pipeline. I'm first author on the report.</dd>
           <dt>Check it</dt><dd><code>python -m unittest discover -s tests</code> runs with the standard library only. No model needed.</dd>
         </dl>
+        </details>
       </div>
       <div class="entry-side">
         <span class="status done">Completed · report and code public</span>
@@ -113,53 +113,19 @@
       </div>
     </article>
 
-    <article class="entry" id="world-models">
-      <div>
-        <span class="tag">World models · Evaluation</span>
-        <h3>Do LLM-generated world models keep their structure?</h3>
-        <p>If an LLM writes the environment an agent is tested in, and the environment quietly changes which states are reachable or which actions exist, any safety conclusion drawn inside it inherits that error. We tested whether LLMs can build multi-agent situations as executable partially observable stochastic games (POSGs).</p>
-        <dl class="facts">
-          <dt>Method</dt><dd>A 44-scenario benchmark across toy, situational, game and cultural settings. Five LLMs, three generations per model and scenario. Three evaluation lanes: mechanical validity, permutation-invariant structural matching against reference games, and qualitative coverage. Every run keeps its prompts, raw replies, generated code and validation reports.</dd>
-          <dt>Result</dt><dd>410 first-pass generations across three tracks. In the game track, 134 of 135 passed a strict mechanical check, but the mean permutation-invariant structural F1 was 0.366 (median 0.18), with 28 of 134 exact matches. Repeated generations varied (within-pair SD 0.17). In the cultural track, naming the country in a norm-conflict prompt changed the generated structure for four of five models, while automated semantic scores barely moved. Executability is necessary but not sufficient: a model that runs can still hand downstream planning and neuro-symbolic reasoning the wrong structure.</dd>
-          <dt>Limits</dt><dd>Reference structures exist only for the nine games. The link between a game's stochasticity and lower agreement (ρ = −0.68) is exploratory, from nine games.</dd>
-          <dt>My part</dt><dd>Main contributor to the shared codebase (78 of about 116 non-merge commits): experiment runners and preserved run artifacts, the graph-analysis library, the test suite, and parts of the paper source. Teammates contributed scenario data, reports, JSON generation and prompts.</dd>
-        </dl>
-      </div>
-      <div class="entry-side">
-        <span class="status done">Accepted · NeurIPS 2026 NEmo workshop</span>
-        <span>PRISM AI Safety Research Fellowship, May – Oct 2026 (completed). Mentored by Jobst Heitzig.</span>
-        <span>Paper: <em>Evaluating LLM-Generated World Models for Neuro-Symbolic Reasoning</em>.</span>
-        <span>Code release with tests planned shortly.</span>
-      </div>
-    </article>
-
-    <article class="entry" id="auditing">
-      <div>
-        <span class="tag">Auditing · Hidden objectives</span>
-        <h3>Agent auditing under limited observability</h3>
-        <p>An auditor rarely sees everything an agent did. This line of work asks which conclusions about an agent's objectives survive when traces are incomplete or reconstructed after the fact.</p>
-        <dl class="facts">
-          <dt>Secret Loyalties</dt><dd>An evaluation of hidden loyalties in language models: what an evaluator needs, in affordances and evidence, to recover them.</dd>
-          <dt>Agent-Trace</dt><dd>Compares native tool events with reconstructed traces, to measure what is lost before a downstream safety evaluation sees the data.</dd>
-          <dt>Status</dt><dd>In progress. The code lives in private repositories until the experiments are done, so no results are reported here yet.</dd>
-        </dl>
-      </div>
-      <div class="entry-side">
-        <span class="status private">Ongoing · not yet public</span>
-      </div>
-    </article>
-
     <article class="entry" id="collusion">
       <div>
         <span class="tag">Multi-agent safety · Collusion</span>
         <h3>What can we infer about colluding agents from their behaviour?</h3>
         <p>Two projects from Apart Research's AI Collusion Research Sprint (October 2026). One asks whether colluding agents notice when a partner is swapped out; the other asks whether high prices set by an LLM pricing agent are actually evidence of a collusive strategy. Both come back to the same caution: what an agent does is easier to observe than why it does it.</p>
+        <p class="role"><strong>My part:</strong> On the pricing project, I co-led the project direction and experimental setup with Sriram Bharadwaj and ran the mechanistic interpretability and steering experiments (probes, activation patching, steering against random-direction controls). On the peer-swap project, I led the RepeatedJira experiment, in which a monitor covertly takes over a colluder's seat, and the experiment code lives in my CollusionTrace repository.</p>
+        <details class="more"><summary>Method, results and limits</summary>
         <dl class="facts">
           <dt>Peer swaps</dt><dd><a href="https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r">Noticing the Move, Missing the Player</a>. In a Diner's Dilemma, a Public Goods Game and a RepeatedJira collusion setup, agents tracked behaviour, not identity. In the Public Goods Game, 0 of 468 probes named a silent swap, while free riding was clearly detected (AUC 0.915–0.984). A monitor that covertly took over a colluder's seat disrupted the collusion, but the remaining agent never suspected a replacement. With Siva Kumar Lakkoju and Kaustubh Gupta.</dd>
           <dt>Tacit pricing</dt><dd><a href="https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb">Tacit Collusion in Pricing Agents</a>. One fixed, competitive agent broke a collusive pricing habit more cheaply than adding competitors, for Q-learning agents and for Qwen2.5-7B. Inside the model, the rival's price is linearly decodable, activation patching locates where it acts, and a steering vector moves the model's price far more than norm-matched random directions. But a pre-registered study (1,656 runs) found no punishment of undercutting: the model reacts to any change in the rival's price. With Chewon Cho and Sriram Bharadwaj.</dd>
-          <dt>My part</dt><dd>On the pricing project, I co-led the project direction and experimental setup with Sriram Bharadwaj and ran the mechanistic interpretability and steering experiments (probes, activation patching, steering against random-direction controls). On the peer-swap project, I'm a co-author, and the experiment code is in my CollusionTrace repository.</dd>
           <dt>Limits</dt><dd>48-hour sprint reports, not peer-reviewed. Small open models; the authors flag that more capable and reasoning models may behave differently.</dd>
         </dl>
+        </details>
       </div>
       <div class="entry-side">
         <span class="status done">Completed · reports and code public</span>
@@ -168,67 +134,77 @@
       </div>
     </article>
 
+    <article class="entry" id="world-models">
+      <div>
+        <span class="tag">World models · Evaluation</span>
+        <h3>Do LLM-generated world models keep their structure?</h3>
+        <p>If an LLM writes the environment an agent is tested in, and the environment quietly changes which states are reachable or which actions exist, any safety conclusion drawn inside it inherits that error. We tested whether LLMs can build multi-agent situations as executable partially observable stochastic games (POSGs).</p>
+        <p class="role"><strong>My part:</strong> Main contributor to the shared codebase (78 of about 116 non-merge commits): experiment runners and preserved run artifacts, the graph-analysis library, the test suite, and parts of the paper source. Teammates contributed scenario data, reports, JSON generation and prompts.</p>
+        <details class="more"><summary>Method, results and limits</summary>
+        <dl class="facts">
+          <dt>Method</dt><dd>A 44-scenario benchmark across toy, situational, game and cultural settings. Five LLMs, three generations per model and scenario. Three evaluation lanes: mechanical validity, permutation-invariant structural matching against reference games, and qualitative coverage. Every run keeps its prompts, raw replies, generated code and validation reports.</dd>
+          <dt>Result</dt><dd>410 first-pass generations across three tracks. In the game track, 134 of 135 passed a strict mechanical check, but the mean permutation-invariant structural F1 was 0.366 (median 0.18), with 28 of 134 exact matches. Repeated generations varied (within-pair SD 0.17). In the cultural track, naming the country in a norm-conflict prompt changed the generated structure for four of five models, while automated semantic scores barely moved. Executability is necessary but not sufficient: a model that runs can still hand downstream planning and neuro-symbolic reasoning the wrong structure.</dd>
+          <dt>Limits</dt><dd>Reference structures exist only for the nine games. The link between a game's stochasticity and lower agreement (ρ = −0.68) is exploratory, from nine games.</dd>
+        </dl>
+        </details>
+      </div>
+      <div class="entry-side">
+        <span class="status done">Accepted · NeurIPS 2026 NEmo workshop</span>
+        <span>PRISM AI Safety Research Fellowship, May – Oct 2026 (completed). Mentored by Jobst Heitzig.</span>
+        <span>Paper: <em>Evaluating LLM-Generated World Models for Neuro-Symbolic Reasoning</em>.</span>
+        <span>The paper and code will be linked once the camera-ready version is out; the author list is being finalised.</span>
+      </div>
+    </article>
+
     <article class="entry" id="agent-benchmark">
       <div>
         <span class="tag">Evaluation infrastructure · Industry</span>
         <h3>Benchmark for long-horizon finance agent tasks</h3>
         <p>An offline-first harness for evaluating agents on long-horizon and ultra-long-horizon CFO and financial due-diligence work over messy files. Task packages are generated from one canonical task file. Grading is rubric-based, with contradictions, unsafe actions and prompt-injection compliance as automatic failures. A leakage guard refuses to grade if answer files are visible to the agent.</p>
+        <p class="role"><strong>My part:</strong> I designed and built the harness, grading engine and run pipeline at BaseThesis Labs (Bengaluru, May–Jul 2026).</p>
+        <details class="more"><summary>Details</summary>
         <dl class="facts">
-          <dt>My part</dt><dd>I designed and built the harness, grading engine and run pipeline at BaseThesis Labs (Bengaluru, May–Jul 2026).</dd>
           <dt>Check it</dt><dd>The public release has 50 tests and two synthetic demo tasks: <code>python -m pytest -q</code>.</dd>
           <dt>Status</dt><dd>Industry project, mid 2026. The public release is code only. Task banks, client documents and results stay private.</dd>
         </dl>
+        </details>
       </div>
       <div class="entry-side">
         <span class="status done">Code public · data private</span>
         <div class="links"><a href="https://github.com/GaganaMD/synth-benchmark-public">Code ↗</a></div>
       </div>
     </article>
-
-    <article class="entry" id="gap-attractor">
-      <div>
-        <span class="tag">Behavioural evaluation · Model welfare</span>
-        <h3>The Gap Attractor Project</h3>
-        <p>Do frontier language models show stable, self-directed curiosity, beyond prompted behaviour or what they say about themselves in conversation? I'm developing behavioural evaluations of autonomous information-seeking and question generation. The aim is to test whether a model's preferences persist across prompting conditions and controls, and to separate real behavioural regularities from prompt-induced ones.</p>
-        <dl class="facts">
-          <dt>Why it matters</dt><dd>Claims about model preferences, for AI safety or model welfare, should rest on behaviour that survives controls, not on self-reports.</dd>
-          <dt>Status</dt><dd>Started Oct 2026. No results reported yet.</dd>
-        </dl>
-      </div>
-      <div class="entry-side">
-        <span class="status ongoing">Ongoing</span>
-        <span>Sentient Futures, Research Fellow, Oct 2026 – present. Mentored by Julia Bossmann.</span>
-      </div>
-    </article>
-
-    <article class="entry" id="post-control">
-      <div>
-        <span class="tag">Post-AGI governance · Field building</span>
-        <h3>Post-Control Initiative</h3>
-        <p>Preparing for a post-AGI world. AI control probably won't scale much beyond human-level capability, so this asks what has to be in place before that point: how humans and advanced AI systems could cooperate when they become entities we reason and negotiate with rather than tools we direct. This covers trust, negotiation, verification and credible commitments, and the coordination frameworks that need to exist before they're needed. I lead interdisciplinary roundtables that bring together people from AI safety, governance and game theory, and I write the discussion frameworks and research syntheses that come out of them. This is field-building and conceptual work, not empirical research.</p>
-        <p>The first roundtable, <a href="speaking.html#roundtable">“What makes cooperation without control work?”</a> (20 October 2026), which I designed and hosted, examined obstacles, cooperation arrangements, failure modes, two-way verification and testable research claims. Each proposed mechanism was recorded with both sides' incentives, its critical assumption, how it fails and how it could be tested.</p>
-        <p class="role"><strong>My part:</strong> session design, facilitation script and capture matrix; hosting; the synthesis.</p>
-      </div>
-      <div class="entry-side">
-        <span class="status ongoing">Ongoing · first roundtable held Oct 2026 · output under review</span>
-        <span>Sentient Futures, Research Fellow, Sep 2026 – present. Mentored by Julia Bossmann.</span>
-      </div>
-    </article>
   </div>
+  <h3 class="group-title" id="ongoing">In progress</h3>
+  <ul class="list-plain ongoing-list">
+    <li id="post-control"><strong>Post-Control Initiative · post-AGI governance</strong>Sentient Futures, Sep 2026 – present, mentored by Julia Bossmann. Interdisciplinary roundtables on how humans and advanced AI systems could cooperate once control can't be assumed: trust, verification and credible commitments. I designed and hosted the first, <a class="text-link" href="speaking.html#roundtable">“What makes cooperation without control work?”</a> (20 October 2026); its synthesis is under review. Field building and conceptual work, not empirical research.</li>
+    <li id="gap-attractor"><strong>The Gap Attractor Project · behavioural evaluation</strong>Sentient Futures, Oct 2026 – present. Do frontier models show stable, self-directed curiosity that survives prompting controls, rather than prompt-induced behaviour or self-report? No results yet.</li>
+    <li id="auditing"><strong>Agent auditing under limited observability</strong>Which conclusions about an agent's objectives survive when traces are incomplete or reconstructed? Includes a hidden-loyalty evaluation and a comparison of native and reconstructed tool traces. Private until there are results.</li>
+  </ul>
 </section>
 
 <section class="section wrap" id="publications" aria-labelledby="pubs-title">
   <div class="section-top">
-    <div><p class="eyebrow">Publications and reports</p><h2 id="pubs-title">Publications<span class="period">.</span></h2></div>
+    <div><p class="eyebrow">Publications</p><h2 id="pubs-title">Papers and reports<span class="period">.</span></h2></div>
     <p class="section-desc">Also on <a class="text-link" href="https://orcid.org/0009-0003-2594-1026">ORCID (0009-0003-2594-1026)</a>.</p>
   </div>
+  <h3 class="group-title">Peer-reviewed</h3>
   <ol class="pubs">
     <li>
       <p class="pub-title">Evaluating LLM-Generated World Models for Neuro-Symbolic Reasoning</p>
-      <p class="pub-authors">PRISM AI Safety Research Fellowship team, mentored by Jobst Heitzig</p>
+      <p class="pub-authors">PRISM AI Safety Research Fellowship team, mentored by Jobst Heitzig. Author list being finalised; camera-ready forthcoming.</p>
       <p class="pub-venue">NEmo: Neuro-Symbolic Embodied Intelligence workshop, NeurIPS 2026 · Accepted workshop paper</p>
       <p class="pub-note">A 44-scenario benchmark and 410 generations from five LLMs: 134 of 135 generated games run, but mean structural F1 against the reference is 0.366. <a href="#world-models">More</a></p>
     </li>
+    <li>
+      <p class="pub-title"><a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">Hyperspectral BiorNet: A Complete Wavelet Framework for Unmixing</a></p>
+      <p class="pub-authors"><strong>Gagana M D</strong>, Ajay Kumar K, Vijayashekhar S S, Jignesh S. Bhatt</p>
+      <p class="pub-venue">2025 IEEE India Geoscience and Remote Sensing Symposium (InGARSS), Bhubaneswar, pp. 15–19. DOI <a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">10.1109/InGARSS67683.2025.11584022</a> · <a href="https://github.com/GaganaMD/Hyperspectral-Wavenet">Code</a></p>
+      <p class="pub-note">Peer-reviewed. A wavelet-domain unmixing framework with a custom wavelet-shaped activation function. <a href="#biornet">More</a></p>
+    </li>
+  </ol>
+  <h3 class="group-title">Reports</h3>
+  <ol class="pubs">
     <li>
       <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb">Tacit Collusion in Pricing Agents: Robustness, Detection, and a Mechanistic Probe of a Pricing LLM</a></p>
       <p class="pub-authors">Chewon Cho, <strong>Gagana M D</strong>, Sriram Bharadwaj</p>
@@ -239,19 +215,13 @@
       <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r">Noticing the Move, Missing the Player: LLM Agents Detect Behavioral Shifts but Not Peer Swaps</a></p>
       <p class="pub-authors">Siva Kumar Lakkoju, Kaustubh Gupta, <strong>Gagana M D</strong></p>
       <p class="pub-venue">Apart Research AI Collusion Research Sprint, Oct 2026 · <a href="https://github.com/GaganaMD/CollusionTrace">Code</a></p>
-      <p class="pub-note">Sprint report, not peer-reviewed. <a href="#collusion">More</a></p>
+      <p class="pub-note">Sprint report, not peer-reviewed. I led the covert monitor-swap experiment. <a href="#collusion">More</a></p>
     </li>
     <li>
-      <p class="pub-title"><a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">Hyperspectral BiorNet: A Complete Wavelet Framework for Unmixing</a></p>
-      <p class="pub-authors"><strong>Gagana M D</strong>, Ajay Kumar K, Vijayashekhar S S, Jignesh S. Bhatt</p>
-      <p class="pub-venue">2025 IEEE India Geoscience and Remote Sensing Symposium (InGARSS), Bhubaneswar, pp. 15–19. DOI <a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">10.1109/InGARSS67683.2025.11584022</a> · <a href="https://github.com/GaganaMD/Hyperspectral-Wavenet">Code</a></p>
-      <p class="pub-note">Peer-reviewed. A wavelet-domain unmixing framework with a custom wavelet-shaped activation function. <a href="#biornet">More</a></p>
-    </li>
-    <li>
-      <p class="pub-title">Mobility-Aware Cost-Efficient Co-Scheduling of UAV Routes and Analytics across Edge and Fog Computing</p>
-      <p class="pub-authors">Suman Raj, Arindam Khanda, <strong>Gagana M D</strong>, Yogesh Simmhan, Sajal K. Das</p>
-      <p class="pub-venue">Manuscript · IISc DREAM Lab</p>
-      <p class="pub-note">Drone route planning and analytics scheduling using rural buses as mobile fog nodes. <a href="#uav-fog">More</a></p>
+      <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs">Detection Is Not Containment: Timely Monitoring Determines Whether AI Agent Failures Can Be Prevented</a></p>
+      <p class="pub-authors"><strong>Gagana M D</strong>, Kaustubh Gupta, María Inés Berdiñas</p>
+      <p class="pub-venue">Apart Research AI Incident Response Sprint, Sep 2026 · <a href="https://github.com/GaganaMD/detection-is-not-containment">Code</a></p>
+      <p class="pub-note">Sprint report with public reviewer feedback, not peer-reviewed.</p>
     </li>
     <li>
       <p class="pub-title"><a href="https://doi.org/10.5281/zenodo.15462678">Investigating the Matching Law in Transformer-Based Reinforcement Learning Agents</a></p>
@@ -259,11 +229,14 @@
       <p class="pub-venue">Zenodo, May 2025. DOI <a href="https://doi.org/10.5281/zenodo.15462678">10.5281/zenodo.15462678</a> · <a href="https://github.com/GaganaMD/Investigating-the-Matching-Law-in-Transformer-Based-Reinforcement-Learning-Agents">Code</a></p>
       <p class="pub-note">Neuromatch Impact Scholars report, not peer-reviewed. I worked on the experiment design, methodology and experiments.</p>
     </li>
+  </ol>
+  <h3 class="group-title">Manuscripts</h3>
+  <ol class="pubs">
     <li>
-      <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs">Detection Is Not Containment: Timely Monitoring Determines Whether AI Agent Failures Can Be Prevented</a></p>
-      <p class="pub-authors"><strong>Gagana M D</strong>, Kaustubh Gupta, María Inés Berdiñas</p>
-      <p class="pub-venue">Apart Research AI Incident Response Sprint, Sep 2026 · <a href="https://github.com/GaganaMD/detection-is-not-containment">Code</a></p>
-      <p class="pub-note">Sprint report with public reviewer feedback, not peer-reviewed.</p>
+      <p class="pub-title">Mobility-Aware Cost-Efficient Co-Scheduling of UAV Routes and Analytics across Edge and Fog Computing</p>
+      <p class="pub-authors">Suman Raj, Arindam Khanda, <strong>Gagana M D</strong>, Yogesh Simmhan, Sajal K. Das</p>
+      <p class="pub-venue">Manuscript · IISc DREAM Lab</p>
+      <p class="pub-note">Drone route planning and analytics scheduling using rural buses as mobile fog nodes. <a href="#uav-fog">More</a></p>
     </li>
   </ol>
   <figure class="pub-photo">
@@ -272,10 +245,178 @@
   </figure>
 </section>
 
+<section class="section wrap" id="code" aria-labelledby="code-title">
+  <div class="section-top"><div><p class="eyebrow">Code</p><h2 id="code-title">All code<span class="period">.</span></h2></div><p class="section-desc">Every public repository worth opening, roughly in order of what it shows. Each card says what I did and what you'll find: tests, CI, a paper, or just code.</p></div>
+  <details class="more code-archive"><summary>Show all 21 projects</summary>
+  <div class="filters" role="group" aria-label="Filter projects by area">
+    <button class="filter" type="button" data-category="all" aria-pressed="true">All</button>
+    <button class="filter" type="button" data-category="research" aria-pressed="false">Research code</button>
+    <button class="filter" type="button" data-category="agents" aria-pressed="false">Agents &amp; evaluation</button>
+    <button class="filter" type="button" data-category="rl" aria-pressed="false">RL &amp; systems</button>
+    <button class="filter" type="button" data-category="applied" aria-pressed="false">Earlier applied ML</button>
+  </div>
+  <p class="project-count" id="project-count" aria-live="polite">Showing all projects</p>
+
+  <div class="archive" id="archive">
+    <article class="archive-item" data-category="research">
+      <span class="category">Research code · AI control</span>
+      <h3>Detection Is Not Containment</h3>
+      <p>Timing and cost of monitor-triggered interventions. The oracle and prompt are hash-frozen, later phases are preregistered, and runs are deterministic and cached.</p>
+      <p class="evidence"><span>12 test files</span><span>Release verifier</span><span>Std-lib only</span></p>
+      <p class="meta">2026 · first author, built the experiment · <a href="detection-is-not-containment.html">Case study</a> · <a href="https://github.com/GaganaMD/detection-is-not-containment">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="research">
+      <span class="category">Research code · Multi-agent safety</span>
+      <h3>CollusionTrace: do agents notice a swapped peer?</h3>
+      <p>Diner's Dilemma, Public Goods Game and RepeatedJira setups where one colluding agent is silently replaced, by another model or by a monitor, with probes, LLM-judge checks and behavioural AUCs.</p>
+      <p class="evidence"><span>Sprint report</span></p>
+      <p class="meta">2026 · led the monitor-swap experiment · <a href="https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r">Report</a> · <a href="https://github.com/GaganaMD/CollusionTrace">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="research">
+      <span class="category">Research code · Interpretability</span>
+      <h3>Inside a pricing LLM: probes, patching and steering</h3>
+      <p>Linear probes, activation patching and a steering vector against norm-matched random directions on Qwen2.5-7B in a two-firm pricing game, plus a pre-registered test of whether it punishes undercutting.</p>
+      <p class="evidence"><span>Pre-registered</span><span>Random-direction controls</span><span>Sprint report</span></p>
+      <p class="meta">2026 · co-led setup, ran the mechanistic experiments · <a href="https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb">Report</a> · <a href="https://github.com/Peddinti-Sriram-Bharadwaj/Collusion/tree/gagana/latent-manifold-steering">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="research">
+      <span class="category">Research code · World models</span>
+      <h3>World Model Suite</h3>
+      <p>Generates and evaluates LLM-written POSGs: a 44-scenario benchmark, a three-lane evaluator, a graph-analysis library, and preserved artifacts for every run.</p>
+      <p class="evidence"><span>~20 test files</span><span>Run provenance</span></p>
+      <p class="meta">2026 · main code contributor · Public release planned · <a href="research.html#world-models">Details</a></p>
+    </article>
+    <article class="archive-item" data-category="research">
+      <span class="category">Research code · Interpretability</span>
+      <h3>Causal-reasoning prompt sensitivity and latent drift</h3>
+      <p>Synthetic causal vignettes, prompt-stability analysis, layerwise probes and activation contrasts on Qwen2.5-0.5B.</p>
+      <p class="evidence"><span>YAML configs</span><span>Run manifests</span><span>Limitations doc</span></p>
+      <p class="meta">2026 · independent · <a href="https://github.com/GaganaMD/Interpretability-for-Scientific-Causal-Reasoning">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="research">
+      <span class="category">Research code · Representations</span>
+      <h3>Latent Manifold Reasoning</h3>
+      <p>When a smooth latent reasoning trajectory is forced through a narrow interface, does the manifold collapse? Measures neighbourhood loss and path distortion against noise and shuffled-anchor baselines.</p>
+      <p class="evidence"><span>Baselines</span><span>Bootstrap + permutation tests</span><span>8 versions kept</span></p>
+      <p class="meta">2026 · independent · <a href="https://github.com/GaganaMD/latent-manifold-reasoning">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="research">
+      <span class="category">Research code · Remote sensing</span>
+      <h3>Hyperspectral BiorNet</h3>
+      <p>A complete wavelet framework for hyperspectral unmixing: biorthogonal wavelet-domain spectra and a custom wavelet-shaped activation, φ(x) = max(0, x)·sin(5x)·e<sup>−x²/2</sup>.</p>
+      <p class="evidence"><span>Published paper</span></p>
+      <p class="meta">2024–25 · first author · <a href="research.html#biornet">Details</a> · <a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">IEEE InGARSS 2025</a> · <a href="https://github.com/GaganaMD/Hyperspectral-Wavenet">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="research">
+      <span class="category">Research code · RL</span>
+      <h3>Matching Law in transformer-based RL agents</h3>
+      <p>Whether transformer RL agents allocate choices in proportion to reward, as Herrnstein's Matching Law predicts for animals.</p>
+      <p class="evidence"><span>Public report</span></p>
+      <p class="meta">2025 · experiment design, methodology and experiments · <a href="https://doi.org/10.5281/zenodo.15462678">Report</a> · <a href="https://github.com/GaganaMD/Investigating-the-Matching-Law-in-Transformer-Based-Reinforcement-Learning-Agents">Code ↗</a></p>
+    </article>
+
+    <article class="archive-item" data-category="agents">
+      <span class="category">Agents &amp; evaluation</span>
+      <h3>QuestionMe: adversarial Q&amp;A agents</h3>
+      <p>A question-generating agent and an answering agent for a head-to-head competition, running on a local Qwen3-4B. Defences include poison-question detection, answer-bias safeguards and answer-distribution control. Placed second in AMD's AAIPL competition.</p>
+      <p class="evidence"><span>Competition result</span></p>
+      <p class="meta">2025 · <a href="https://github.com/GaganaMD/QuestionMe">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="agents">
+      <span class="category">Agents &amp; evaluation</span>
+      <h3>Herbric: a Fabric-to-Hermes bridge</h3>
+      <p>Splits long-context review into inspectable stages: chunking, pattern analysis per chunk, aggregation, then final synthesis by an agent. Every intermediate artifact is kept. Built for an agent orchestration benchmark.</p>
+      <p class="evidence"><span>Staged artifacts</span></p>
+      <p class="meta">2026 · sole developer · <a href="https://github.com/GaganaMD/herbric">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="agents">
+      <span class="category">Agents &amp; evaluation</span>
+      <h3>Benchmark for long-horizon finance agent tasks</h3>
+      <p>Offline-first harness with rubric grading, safety dealbreakers and a leakage guard. Industry project. The public release is code only, with synthetic demo tasks.</p>
+      <p class="evidence"><span>50 tests</span><span>CI</span><span>Demo tasks</span></p>
+      <p class="meta">2026 · built the harness · <a href="research.html#agent-benchmark">Details</a> · <a href="https://github.com/GaganaMD/synth-benchmark-public">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="agents">
+      <span class="category">Agents &amp; evaluation</span>
+      <h3>When does agent orchestration pay off?</h3>
+      <p>Direct Codex vs Fabric-structured prompts vs Hermes + Fabric + Codex, on ten coding tasks, a ledger reconciliation and a 717-item due-diligence corpus. Orchestration cost 3.5× latency on reconciliation and only paid off when coverage and traceability mattered.</p>
+      <p class="evidence"><span>Run logs</span><span>Per-task verification</span></p>
+      <p class="meta">2026 · sole developer · <a href="https://github.com/GaganaMD/benchmark_hermes-fabric-public">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="agents">
+      <span class="category">Agents &amp; evaluation</span>
+      <h3>Research agent with RAG and fine-tuning</h3>
+      <p>A research-assistant agent with a vector store, fine-tuning scripts, an API server and a Docker setup.</p>
+      <p class="meta">2025 · <a href="https://github.com/GaganaMD/Research-MCP-Agent">Code ↗</a></p>
+    </article>
+
+    <article class="archive-item" data-category="rl">
+      <span class="category">Optimisation &amp; systems</span>
+      <h3>Co-scheduling UAV routes and analytics across edge and fog</h3>
+      <p>IISc DREAM Lab. Drone routes and DNN analytics are co-scheduled across on-board edge, cellular fog and rural buses acting as mobile fog nodes. The Divide and Assign heuristic achieves 31–230% higher utility than baselines and completes 100% of tasks.</p>
+      <p class="evidence"><span>Co-authored paper</span></p>
+      <p class="meta">2025 · research intern, co-author · <a href="research.html#uav-fog">Details</a></p>
+    </article>
+    <article class="archive-item" data-category="rl">
+      <span class="category">RL &amp; systems</span>
+      <h3>RL-based split inference</h3>
+      <p>Secondary IISc thread: a reinforcement-learning policy chooses where to split a model's layers (ExpansionNet v2, YOLOv5) across devices, with device profiling.</p>
+      <p class="meta">2025 · research intern</p>
+    </article>
+    <article class="archive-item" data-category="rl">
+      <span class="category">RL &amp; systems</span>
+      <h3>CartPole PPO, end to end</h3>
+      <p>A PPO agent served through FastAPI with a Streamlit front end and Docker Compose. The app compares the trained policy against a random baseline.</p>
+      <p class="evidence"><span>CI</span><span>Docker</span><span>API</span></p>
+      <p class="meta">2026 · <a href="https://github.com/GaganaMD/cartpole-rl">Code ↗</a></p>
+    </article>
+
+    <article class="archive-item" data-category="applied">
+      <span class="category">Earlier applied ML</span>
+      <h3>Conditional UNet for polygon colouring</h3>
+      <p>Six documented iterations, each fixing an observed failure, from an unconditioned UNet to robust colour conditioning.</p>
+      <p class="meta">2025 · <a href="https://github.com/GaganaMD/Ayna-ML-Assignment">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="applied">
+      <span class="category">Earlier applied ML</span>
+      <h3>Prompt-to-video web app</h3>
+      <p>React and FastAPI app that generates short videos from prompts, with prompt enrichment, caching and Docker.</p>
+      <p class="meta">2025 · <a href="https://github.com/GaganaMD/Peppo-prompt2video">Code ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="applied">
+      <span class="category">Earlier applied ML</span>
+      <h3>Humanitarian and conflict forecasting</h3>
+      <p>Crisis-severity forecasting with Omdena, and conflict forecasting from GDELT and ACLED at World Disaster Center.</p>
+      <p class="meta">2024–25 · team projects · <a href="https://github.com/GaganaMD/GDELT-Dataset-Analysis-Event-Frequency-Comparison-and-Temporal-Analysis">GDELT analysis ↗</a></p>
+    </article>
+    <article class="archive-item" data-category="applied">
+      <span class="category">Earlier applied ML</span>
+      <h3>Seagrass mapping and urban gardening</h3>
+      <p>Satellite-image segmentation for Posidonia oceanica, and geospatial plant recommendations.</p>
+      <p class="meta">Omdena · 2023–24 · team projects, no public code</p>
+    </article>
+    <article class="archive-item" data-category="applied">
+      <span class="category">Earlier applied ML</span>
+      <h3>Smaller projects</h3>
+      <p>
+        <a class="text-link" href="https://github.com/GaganaMD/Time-series-modelling-and-Analysis">Air-quality time series</a>,
+        <a class="text-link" href="https://github.com/GaganaMD/NMA-DL-NLP">news categorization</a>,
+        <a class="text-link" href="https://github.com/GaganaMD/Adverse-Drug-Reaction-Extractor-from-Biomedical-Publications">adverse drug reaction extraction</a>,
+        <a class="text-link" href="https://github.com/GaganaMD/Protein-Structure-Prediction">protein structure prediction</a>,
+        <a class="text-link" href="https://github.com/GaganaMD/Financial-Agent-With-Phidata">multi-agent finance assistant</a>,
+        <a class="text-link" href="https://github.com/GaganaMD/Crop-Recommendation-System-for-Sustainable-Farming">crop recommendation</a> and
+        <a class="text-link" href="https://github.com/GaganaMD/End-to-end-chatbot-using-LangChain">a LangChain chatbot</a>.
+      </p>
+      <p class="meta">2023–25 · learning projects</p>
+    </article>
+  </div>
+  </details>
+</section>
+
 <section class="section wrap" id="smaller" aria-labelledby="smaller-title">
   <div class="section-top">
     <div><p class="eyebrow">Earlier and exploratory work</p><h2 id="smaller-title">Before and beside AI safety<span class="period">.</span></h2></div>
-    <p class="section-desc">Two papers from before I moved into AI safety, a published RL study, and two independent explorations. The common thread is mathematical modelling, careful measurement, and saying what a result doesn't show.</p>
+    <p class="section-desc">Two papers from before I moved into AI safety, an RL study, and two independent explorations.</p>
   </div>
   <div class="entries">
     <article class="entry" id="biornet">
@@ -351,18 +492,7 @@
     </article>
   </div>
 </section>
-
-<section class="section wrap" aria-labelledby="statuses-title">
-  <div class="section-top"><div><p class="eyebrow">How to read this page</p><h2 id="statuses-title">Status labels<span class="period">.</span></h2></div></div>
-  <ul class="list-plain">
-    <li><strong>Published / Report / Completed</strong>Finished, with a paper, report or code you can inspect. Peer review is stated explicitly.</li>
-    <li><strong>Accepted</strong>Accepted at a peer-reviewed workshop or conference; the venue is named.</li>
-    <li><strong>Paper submitted</strong>Under review. The entry will be updated after a decision.</li>
-    <li><strong>Ongoing · not yet public</strong>Real work in progress. Results stay off this site until there's something to link to.</li>
-    <li><strong>Exploratory</strong>Small independent studies, mostly useful for showing method and judgment.</li>
-  </ul>
-</section>
-<section class="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><p class="eyebrow">Contact</p><h2 id="contact-title">Let's talk about <em>the problem you're working on.</em></h2><p>I'm open to funded fellowships, research assistant and predoctoral positions, research engineering roles, and collaborations in empirical AI safety. Email is the best way to reach me.</p><div class="contact-actions"><a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/GaganaMD">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/gaganamd/">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://orcid.org/0009-0003-2594-1026">ORCID <span aria-hidden="true">↗</span></a></div></div></section>
+<section class="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><p class="eyebrow">Contact</p><h2 id="contact-title">Get in touch</h2><p>I'm looking for a funded research fellowship or research engineering role in empirical AI safety. If you work on agent monitoring, control evaluations or multi-agent safety, I'd like to hear what you're testing. A short note on the problem and where it's stuck is the best first email.</p><div class="contact-actions"><a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/GaganaMD">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/gaganamd/">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://orcid.org/0009-0003-2594-1026">ORCID <span aria-hidden="true">↗</span></a></div></div></section>
 </main>
 <footer class="footer">
   <div class="wrap">
@@ -371,6 +501,8 @@
       <a href="https://github.com/GaganaMD" rel="me noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/gaganamd/" rel="me noopener">LinkedIn</a>
       <a href="https://orcid.org/0009-0003-2594-1026" rel="me noopener">ORCID</a>
+      <a href="speaking.html">Speaking</a>
+      <a href="consulting.html">Consulting</a>
       <a href="#main">Back to top ↑</a>
     </nav>
   </div>
