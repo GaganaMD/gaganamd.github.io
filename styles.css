@@ -412,3 +412,8 @@ details.more > summary:focus-visible { outline: 2px solid var(--accent); outline
 .ongoing-list li { line-height: 1.6; }
 .ongoing-list strong { margin-bottom: 2px; }
 .pubs + .group-title { margin-top: 40px; }
+.roles.overview strong a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+.roles.overview strong a:hover { text-decoration-color: var(--accent); }
+.roles.overview span { line-height: 1.6; }
+.roles.overview span a { color: var(--accent); }
+.roles.overview + .group-title { margin-top: 36px; }
