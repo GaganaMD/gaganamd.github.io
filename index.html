@@ -43,6 +43,9 @@
       <a href="writing.html">Writing</a>
       <a href="about.html">About</a>
       <a href="cv.pdf">CV</a>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <a href="speaking.html">Speaking</a>
+      <a href="consulting.html">Consulting</a>
       <a class="nav-contact" href="mailto:gaganaaa.dev@gmail.com">Email me</a>
     </nav>
   </div>
@@ -52,11 +55,10 @@
   <div class="hero-copy">
     <p class="eyebrow">Empirical AI safety · Agent monitoring and evaluations</p>
     <h1 id="hero-title">I study how to monitor AI agents when we can't see <em>everything they do.</em></h1>
-    <p class="lede">I'm <strong>Gagana M D</strong>, an early-career AI safety researcher. In my first-author project, a monitor flagged an attack one step before the last point where it could still be stopped, and renaming variables without changing their meaning was enough to break that. My PRISM fellowship paper on LLM-generated world models was accepted at a NeurIPS 2026 workshop. I'm now a research fellow at Sentient Futures and FlowResearch.</p>
+    <p class="lede">I'm <strong>Gagana M D</strong>, an early-career AI safety researcher. I run small, controlled experiments on whether we can catch and stop AI agents in time, and I do most of that work in teams. This page is a short overview; each item links to the detail.</p>
     <p class="availability">Looking for a funded research fellowship or research engineering role in empirical AI safety.</p>
     <div class="actions">
-      <a class="button primary" href="detection-is-not-containment.html">Read the main case study <span aria-hidden="true">→</span></a>
-      <a class="button" href="research.html#publications">Publications</a>
+      <a class="button primary" href="research.html">See my research <span aria-hidden="true">→</span></a>
       <a class="button" href="cv.pdf">CV (PDF)</a>
       <a class="button" href="mailto:gaganaaa.dev@gmail.com">Email me</a>
     </div>
@@ -66,99 +68,40 @@
   </figure>
 </section>
 
-<section class="section wrap" id="research" aria-labelledby="research-title">
+<section class="section wrap" id="overview" aria-labelledby="overview-title">
   <div class="section-top">
-    <div><p class="eyebrow">Selected research</p><h2 id="research-title">What I've worked on<span class="period">.</span></h2></div>
+    <div><p class="eyebrow">Overview</p><h2 id="overview-title">What I've done so far<span class="period">.</span></h2></div>
+    <p class="section-desc">For mentors and supervisors: the short version. Each line links to the full write-up, my part and the limits.</p>
+  </div>
 
-  </div>
-  <div class="entries">
-    <article class="entry">
-      <div>
-        <span class="tag">AI control · Monitoring</span>
-        <h3><a href="detection-is-not-containment.html">Detection Is Not Containment</a></h3>
-        <p>A monitor that flags a harmful action <em>eventually</em> doesn't tell you whether anyone could have stopped it. In a synthetic authorization environment, we measured when evidence became visible, when a local Qwen3-14B monitor crossed a threshold calibrated only on benign runs, and the last step at which revoking the agent's authority would still prevent the harm.</p>
-        <p>In the main attack case, detection came one step before the last safe point. Renaming identifiers without changing their meaning broke that: decisions held in 8 of 12 variants. In a replay, one of those false alarms revoked a benign agent's authority and made it fail its task.</p>
-        <p class="role"><strong>My part:</strong> I built and released the monitoring experiment: the environment, frozen oracle, monitor views, timing metrics, invariance tests and closed-loop replay. Kaustubh Gupta built the incident-forensics pipeline.</p>
-      </div>
-      <div class="entry-side">
-        <span class="status done">Completed · report and code public</span>
-        <span>Apart Research AI Incident Response Sprint, Sep 2026. With Kaustubh Gupta and María Inés Berdiñas.</span>
-        <div class="links"><a href="detection-is-not-containment.html">Case study →</a><a href="https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs">Report ↗</a><a href="https://github.com/GaganaMD/detection-is-not-containment">Code ↗</a></div>
-      </div>
-    </article>
-    <article class="entry">
-      <div>
-        <span class="tag">Multi-agent safety · Collusion</span>
-        <h3><a href="research.html#collusion">What can we infer about colluding agents from their behaviour?</a></h3>
-        <p>Two October 2026 sprint studies. When a colluding agent was silently swapped out, the others noticed changes in behaviour but never the replacement: 0 of 468 probes named a silent swap, while free riding was detected with AUCs of 0.915–0.984. And a pricing LLM that settled on high prices had a real, steerable internal trace of its rival's price, but a pre-registered study (1,656 runs) found no punishment of undercutting. High prices alone weren't evidence of a collusive strategy.</p>
-        <p class="role"><strong>My part:</strong> on the pricing study, I co-led the setup and ran the mechanistic interpretability and steering experiments. On the peer-swap study, I led the experiment where a monitor covertly takes over a colluder's seat; the code is in my CollusionTrace repository.</p>
-      </div>
-      <div class="entry-side">
-        <span class="status done">Completed · reports and code public</span>
-        <span>Apart Research AI Collusion Research Sprint, Oct 2026. With Chewon Cho and Sriram Bharadwaj; Siva Kumar Lakkoju and Kaustubh Gupta.</span>
-        <div class="links"><a href="https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb">Pricing report ↗</a><a href="https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r">Peer-swap report ↗</a><a href="research.html#collusion">Details →</a></div>
-      </div>
-    </article>
-    <article class="entry">
-      <div>
-        <span class="tag">World models · Evaluation</span>
-        <h3><a href="research.html#world-models">Do LLM-generated world models keep their structure?</a></h3>
-        <p>We asked LLMs to turn natural-language situations into executable partially observable stochastic games, across a 44-scenario benchmark and five models. In the game track, 134 of 135 generated models passed a strict mechanical check. Their structure was another matter: they had a mean permutation-invariant structural F1 of 0.366, and only 28 matched the reference exactly. Code that runs is not evidence that the model is right.</p>
-        <p class="role"><strong>My part:</strong> main contributor to the shared codebase (78 of about 116 commits): experiment runners, preserved run artifacts, graph-analysis library and test suite.</p>
-      </div>
-      <div class="entry-side">
-        <span class="status done">Accepted · NeurIPS 2026 NEmo workshop</span>
-        <span>PRISM AI Safety Research Fellowship, May – Oct 2026. Mentored by Jobst Heitzig.</span>
-        <div class="links"><a href="research.html#world-models">Details →</a></div>
-      </div>
-    </article>
-  </div>
-  <p class="section-more"><a href="research.html">All research, including smaller studies →</a></p>
+  <h3 class="group-title">Research</h3>
+  <ul class="roles overview">
+    <li><time>Sep 2026</time><div><strong><a href="detection-is-not-containment.html">Detection Is Not Containment</a> · first author</strong><span>A monitor caught a harmful agent action one step before the last point where it could still be stopped, and meaning-preserving renames broke 4 of 12 decisions. Preregistered, with public code. <a class="text-link" href="detection-is-not-containment.html">Case study</a> · <a class="text-link" href="https://github.com/GaganaMD/detection-is-not-containment">Code</a></span></div></li>
+    <li><time>Oct 2026</time><div><strong><a href="research.html#collusion">Collusion among LLM agents</a> · two team reports</strong><span>Led a covert monitor-swap study (colluding agents never noticed the swap), and ran probing and steering on a pricing LLM that showed no punishment of undercutting.</span></div></li>
+    <li><time>May – Oct 2026</time><div><strong><a href="research.html#world-models">LLM-generated world models</a> · PRISM fellowship</strong><span>Main code contributor. 134 of 135 generated games ran, but most didn't encode the intended structure. Accepted at the NeurIPS 2026 NEmo workshop.</span></div></li>
+    <li><time>2025</time><div><strong><a href="research.html#biornet">Hyperspectral BiorNet</a> · first author</strong><span>A wavelet framework for hyperspectral unmixing, from before I moved into AI safety. Peer-reviewed, IEEE InGARSS 2025.</span></div></li>
+  </ul>
+
+  <h3 class="group-title">Field building and speaking</h3>
+  <ul class="roles overview">
+    <li><time>Oct 2026</time><div><strong><a href="speaking.html#roundtable">Roundtable: What makes cooperation without control work?</a></strong><span>Designed and hosted for the Post-Control Initiative (post-AGI governance) at Sentient Futures, with about ten participants from AI governance, technical safety and foresight.</span></div></li>
+    <li><time>2022 – present</time><div><strong><a href="speaking.html">Workshops and mentoring</a></strong><span>Workshop facilitator for Women in Big Data India's Shakti Mentorship Program; helped run 11+ Women Who Code workshops reaching 350+ people.</span></div></li>
+  </ul>
+
+  <h3 class="group-title">Working with others</h3>
+  <ul class="roles overview">
+    <li><time>How I work</time><div><strong>Most of my research is team research</strong><span>I co-led a three-person sprint team, led one experiment inside a larger project, supported two other fellowship teams, and wrote a response to the three public reviews of my sprint report. <a class="text-link" href="detection-is-not-containment.html#reviews">See the reviews</a></span></div></li>
+  </ul>
+
+  <h3 class="group-title">Experience</h3>
+  <ul class="roles overview">
+    <li><time>Sep 2026 – present</time><div><strong>Sentient Futures</strong><span>Research Fellow: post-AGI governance (Post-Control Initiative) and behavioural evaluation</span></div></li>
+    <li><time>May – Oct 2026</time><div><strong>PRISM AI Safety Research Fellowship</strong><span>Research Fellow, completed</span></div></li>
+    <li><time>May – Jul 2026</time><div><strong>BaseThesis Labs, Bengaluru</strong><span>AI Safety Researcher: agent evaluation and benchmarking</span></div></li>
+    <li><time>Jan – Aug 2025</time><div><strong>Indian Institute of Science, DREAM Lab</strong><span>Research Intern: drone and edge–fog co-scheduling</span></div></li>
+  </ul>
+  <p class="section-more"><a href="research.html#publications">All papers and reports</a> · <a href="about.html#experience">Full experience</a> · <a href="consulting.html">Evaluation reviews</a></p>
 </section>
-
-<section class="section wrap" aria-labelledby="pubs-title">
-  <div class="section-top">
-    <div><p class="eyebrow">Publications</p><h2 id="pubs-title">Papers and reports<span class="period">.</span></h2></div>
-    <p class="section-desc">Also listed on <a class="text-link" href="https://orcid.org/0009-0003-2594-1026">ORCID</a>.</p>
-  </div>
-  <h3 class="group-title">Peer-reviewed</h3>
-  <ol class="pubs">
-    <li>
-      <p class="pub-title"><a href="research.html#world-models">Evaluating LLM-Generated World Models for Neuro-Symbolic Reasoning</a></p>
-      <p class="pub-authors">PRISM AI Safety Research Fellowship team, mentored by Jobst Heitzig · camera-ready forthcoming</p>
-      <p class="pub-venue">NEmo: Neuro-Symbolic Embodied Intelligence workshop, NeurIPS 2026 · Accepted workshop paper</p>
-    </li>
-    <li>
-      <p class="pub-title"><a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">Hyperspectral BiorNet: A Complete Wavelet Framework for Unmixing</a></p>
-      <p class="pub-authors"><strong>Gagana M D</strong>, Ajay Kumar K, Vijayashekhar S S, Jignesh S. Bhatt</p>
-      <p class="pub-venue">2025 IEEE India Geoscience and Remote Sensing Symposium (InGARSS), pp. 15–19 · Peer-reviewed conference paper</p>
-    </li>
-  </ol>
-  <h3 class="group-title">Reports</h3>
-  <ol class="pubs">
-    <li>
-      <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb">Tacit Collusion in Pricing Agents: Robustness, Detection, and a Mechanistic Probe of a Pricing LLM</a></p>
-      <p class="pub-authors">Chewon Cho, <strong>Gagana M D</strong>, Sriram Bharadwaj</p>
-      <p class="pub-venue">Apart Research AI Collusion Research Sprint, 2026 · Sprint report, not peer-reviewed</p>
-    </li>
-    <li>
-      <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r">Noticing the Move, Missing the Player: LLM Agents Detect Behavioral Shifts but Not Peer Swaps</a></p>
-      <p class="pub-authors">Siva Kumar Lakkoju, Kaustubh Gupta, <strong>Gagana M D</strong></p>
-      <p class="pub-venue">Apart Research AI Collusion Research Sprint, 2026 · Sprint report, not peer-reviewed</p>
-    </li>
-    <li>
-      <p class="pub-title"><a href="https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs">Detection Is Not Containment: Timely Monitoring Determines Whether AI Agent Failures Can Be Prevented</a></p>
-      <p class="pub-authors"><strong>Gagana M D</strong>, Kaustubh Gupta, María Inés Berdiñas</p>
-      <p class="pub-venue">Apart Research AI Incident Response Sprint, 2026 · Sprint report, not peer-reviewed</p>
-    </li>
-    <li>
-      <p class="pub-title"><a href="https://doi.org/10.5281/zenodo.15462678">Investigating the Matching Law in Transformer-Based Reinforcement Learning Agents</a></p>
-      <p class="pub-authors">Y. Karakoc, E. Sharifi, <strong>M. D. Gagana</strong>, Z. Sarayloo</p>
-      <p class="pub-venue">Zenodo, 2025 · Neuromatch Impact Scholars project report</p>
-    </li>
-  </ol>
-</section>
-
 <section class="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><p class="eyebrow">Contact</p><h2 id="contact-title">Get in touch</h2><p>I'm looking for a funded research fellowship or research engineering role in empirical AI safety. If you work on agent monitoring, control evaluations or multi-agent safety, I'd like to hear what you're testing. A short note on the problem and where it's stuck is the best first email.</p><div class="contact-actions"><a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/GaganaMD">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/gaganamd/">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://orcid.org/0009-0003-2594-1026">ORCID <span aria-hidden="true">↗</span></a></div></div></section>
 </main>
 <footer class="footer">
@@ -168,8 +111,6 @@
       <a href="https://github.com/GaganaMD" rel="me noopener">GitHub</a>
       <a href="https://www.linkedin.com/in/gaganamd/" rel="me noopener">LinkedIn</a>
       <a href="https://orcid.org/0009-0003-2594-1026" rel="me noopener">ORCID</a>
-      <a href="speaking.html">Speaking</a>
-      <a href="consulting.html">Consulting</a>
       <a href="#main">Back to top ↑</a>
     </nav>
   </div>

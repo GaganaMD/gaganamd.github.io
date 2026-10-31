@@ -49,64 +49,54 @@
 \end{center}
 \vspace{-2pt}
 
-Early-career AI safety researcher working on monitoring and evaluating AI agents: does a monitor's evidence arrive in time to act on, and does an
-evaluation support the claim made from it? I build controlled experiments and the code behind them.
+Early-career AI safety researcher working on monitoring and evaluating AI agents. I run controlled, preregistered experiments,
+build the tested code behind them, and work in small teams across time zones.
 
 % ---- Research experience -------------------------------------------------
 \section{Research Experience}
 
-\job{PRISM AI Safety Research Fellowship}{Research Fellow, Remote}{May 2026 -- Oct 2026}
+\job{PRISM AI Safety Research Fellowship}{Research Fellow, Remote (mentor: Jobst Heitzig)}{May 2026 -- Oct 2026}
 \begin{itemize}
-  \item \textbf{LLM-generated world models} (mentor: Jobst Heitzig). Main code contributor (78 of $\sim$116 commits) to a 44-scenario benchmark
-        of five LLMs writing executable multi-agent games (POSGs). 134 of 135 games passed mechanical checks, yet mean structural F1 against
-        reference games was 0.366. Accepted at the NeurIPS 2026 NEmo workshop.
-  \item Research support for two fellowship teams (interpretability; AI control): experiment tracking, reviews, milestones.
+  \item Evaluated 410 LLM-generated world models: 134/135 games ran, yet structural F1 was only 0.366 (NeurIPS 2026 NEmo).
+  \item Main code contributor: 78 of $\sim$116 commits to the shared codebase (experiment runners, graph-analysis library, tests).
+  \item Supported two other fellowship teams (interpretability, AI control) with experiment tracking, reviews and milestones.
 \end{itemize}
 
 \job{Sentient Futures}{Research Fellow, Remote (mentor: Julia Bossmann)}{Sep 2026 -- Present}
 \begin{itemize}
-  \item \textbf{Gap Attractor Project.} Designing behavioural evaluations of whether language models show stable, self-directed curiosity
-        (unprompted information-seeking and question generation) that persists across prompts and controls.
-  \item \textbf{Post-Control Initiative (post-AGI governance).} Designed and hosted the roundtable ``What makes cooperation without control work?'' (Oct 2026;
-        $\sim$10 participants across AI governance, technical safety and foresight; Chatham House Rule): two-way verification, failure modes, testable claims.
+  \item Designed and hosted a 90-min roundtable on post-AGI cooperation for $\sim$10 governance, safety and foresight experts.
+  \item Building behavioural evaluations of self-directed curiosity in LLMs that hold across prompts and controls.
 \end{itemize}
 
-\job{FlowResearch}{Research Fellow, Remote}{Apr 2026 -- Present}
+\job{BaseThesis Labs}{AI Safety Researcher, Evaluations, Bengaluru}{May 2026 -- Jul 2026}
 \begin{itemize}
-  \item Behavioural evaluation of RL and world-model-based agents: planning, generalisation and safety-relevant behaviour.
-\end{itemize}
-
-\job{BaseThesis Labs}{AI Safety Researcher, Evaluations and Benchmarking, Bengaluru}{May 2026 -- Jul 2026}
-\begin{itemize}
-  \item Benchmarked AI agents on long-horizon and ultra-long-horizon CFO and financial due-diligence tasks. Built the offline-first harness:
-        rubric grading with safety dealbreakers, a ground-truth leakage guard, trace capture, state-diff auditing, and 50 tests run in CI, so every
-        score can be traced back to what the agent actually did. \link{https://github.com/GaganaMD/synth-benchmark-public}{Code}.
-  \item Measured when agent orchestration pays off across coding, ledger reconciliation and a 717-item diligence corpus. It cost
-        $3.5\times$ the latency and was worth it only where coverage and traceability mattered.
-        \link{https://github.com/GaganaMD/benchmark_hermes-fabric-public}{Code}.
+  \item Built an offline agent benchmark for CFO and due-diligence tasks with 50 CI tests and a leakage guard. \link{https://github.com/GaganaMD/synth-benchmark-public}{Code}
+  \item Compared 3 agent set-ups on 12 tasks: orchestration cost 3.5$\times$ latency and paid off only for coverage. \link{https://github.com/GaganaMD/benchmark_hermes-fabric-public}{Code}
 \end{itemize}
 
 \job{Indian Institute of Science, DREAM Lab}{Research Intern, Bengaluru}{Jan 2025 -- Aug 2025}
 \begin{itemize}
-  \item Co-authored work on co-scheduling drone routes and DNN analytics across edge, fog and rural buses used as mobile fog nodes. Our
-        Divide and Assign heuristic achieved 31--230\% higher utility than baselines with 100\% task completion.
+  \item Co-authored a drone--fog co-scheduling paper: the heuristic gave 31--230\% higher utility and 100\% task completion.
 \end{itemize}
 
 \job{Neuromatch}{Impact Scholar, Remote}{Oct 2024 -- Mar 2025}
 \begin{itemize}
-  \item Designed the experiments and methodology for, and ran, a Matching Law study of transformer RL agents.
+  \item Designed and ran a Matching Law study of transformer RL agents across reward ratios from 1:1 to 16:1.
 \end{itemize}
 
-% ---- Selected project ----------------------------------------------------
-\section{Selected Project}
+% ---- Selected projects ---------------------------------------------------
+\section{Selected Projects}
 
-\entry{Detection Is Not Containment \textmd{\textendash\ Apart Research AI Incident Response Sprint}}{Sep 2026}
+\entry{Detection Is Not Containment \textmd{\textendash\ first author, Apart Research AI Incident Response Sprint}}{Sep 2026}
 \begin{itemize}
-  \item First author; built the monitoring experiment. Does a monitor flag a prohibited agent action early enough for revoking authority to
-        prevent it? Hash-frozen oracle and prompt, benign-only threshold calibration, preregistered phases.
-  \item Detection preceded the last safe point by one step; meaning-preserving renames kept only 8/12 decisions; a replayed false alarm
-        failed a benign task. \link{https://gaganamd.github.io/detection-is-not-containment.html}{Case study},
-        \link{https://github.com/GaganaMD/detection-is-not-containment}{code}.
+  \item Built a preregistered monitoring experiment: detection beat the last safe intervention point by 1 step. \link{https://github.com/GaganaMD/detection-is-not-containment}{Code}
+  \item Showed fragility: only 8 of 12 meaning-preserving renames kept the decision; a false alarm made a benign agent fail.
+\end{itemize}
+
+\entry{Collusion among LLM agents \textmd{\textendash\ two team reports, Apart Research AI Collusion Research Sprint}}{Oct 2026}
+\begin{itemize}
+  \item Ran probes, patching and steering on Qwen2.5-7B; a 1,656-run preregistered test found no punishment of undercutting.
+  \item Led a covert monitor-swap study: bonus grabs fell to 0/40 (36/40 in controls), and 0/15 episodes spotted the swap.
 \end{itemize}
 
 % ---- Publications --------------------------------------------------------
@@ -132,12 +122,11 @@ evaluation support the claim made from it? I build controlled experiments and th
 \entry{B.E., Artificial Intelligence and Machine Learning \textmd{\textendash\ Acharya Institute of Technology, CGPA 8.38/10}}{2021 -- 2025}
 Also: Neuromatch Academy, Computational Neuroscience (2025) and Deep Learning (2024). Courses: AI Risk Fundamentals, Professional tier (Lens Academy, 2026); Future of AI (BlueDot Impact, 2026); ML Summer School (Cohere Labs, 2026); Red Teaming LLM Applications (DeepLearning.AI, 2026).
 
-% ---- Honours, skills, community ------------------------------------------
-\section{Honours, Skills and Community}
-\textbf{Honours:} 2nd place, AMD AI Sprint Hackathon (AMD, Meta, Hugging Face), adversarial Q\&A agents; 1st place, Federated Learning
-Client Selection Challenge, IISc; 1st place, Srushti 2025 state-level project exhibition.\\
-\textbf{Tools:} Python, PyTorch, Transformers, Stable-Baselines3, Ollama, pytest, GitHub Actions, Docker, FastAPI, Git, Linux.\\
-\textbf{Community:} Women in Big Data India, Shakti Mentorship Program team and workshop facilitator (2026--); WiDS Ambassador (2026--);
-Women Who Code Data, helped run 11+ workshops reaching 350+ people (2022--24).
+% ---- Collaboration, honours, skills ------------------------------------
+\section{Collaboration, Honours and Skills}
+\textbf{Collaboration:} co-led a 3-person sprint team; hosted a cross-disciplinary roundtable; Shakti Mentorship programs team and workshop
+facilitator (Women in Big Data India, 2026--); WiDS Ambassador; helped run 11+ Women Who Code workshops reaching 350+ people.\\
+\textbf{Honours:} 2nd place, AMD AI Sprint Hackathon (AMD, Meta, Hugging Face); 1st place, Federated Learning Client Selection Challenge, IISc.\\
+\textbf{Tools:} Python, PyTorch, Transformers, Stable-Baselines3, Ollama, pytest, GitHub Actions, Docker, FastAPI, Git, Linux.
 
 \end{document}
