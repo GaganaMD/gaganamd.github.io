@@ -1,0 +1,135 @@
+<section class="page-hero wrap" aria-labelledby="page-title">
+  <p class="crumb"><a href="research.html">Research</a> / Case study</p>
+  <h1 id="page-title">Detection is not containment</h1>
+  <p class="lede">A monitor that eventually flags a problem hasn't shown that anyone could have prevented it. This project measures that gap directly, in a small synthetic setting, and then replays a real intervention to see what it costs.</p>
+  <div class="actions">
+    <a class="button primary" href="https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs">Report and reviews <span aria-hidden="true">↗</span></a>
+    <a class="button" href="https://github.com/GaganaMD/detection-is-not-containment">Code and data <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+
+<div class="wrap section case-layout">
+  <aside class="case-meta" aria-label="Project details">
+    <div><strong>Status</strong>Completed sprint project, Sep 2026. Report and code public. Not peer-reviewed.</div>
+    <div><strong>Context</strong>Apart Research AI Incident Response Sprint</div>
+    <div><strong>Authors</strong>Gagana M D, Kaustubh Gupta, María Inés Berdiñas</div>
+    <div><strong>My part</strong>Built and released the monitoring experiment. <a href="#role">Details</a></div>
+    <div><strong>Stack</strong>Python standard library, local Ollama, <code>qwen3:14b</code> monitor</div>
+    <div><strong>Licence</strong>MIT</div>
+    <div>
+      <strong>On this page</strong>
+      <ul class="toc">
+        <li><a href="#question">Question</a></li>
+        <li><a href="#role">Who did what</a></li>
+        <li><a href="#setup">Setup</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#limits">What it doesn't show</a></li>
+        <li><a href="#reviews">Reviewer feedback</a></li>
+        <li><a href="#reproduce">Reproducing it</a></li>
+        <li><a href="#next">What I'd do next</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <article class="prose">
+    <h2 id="question">The question</h2>
+    <p>Monitoring results for AI agents are often reported as "did the monitor catch it?" For control, that's not enough. The question that matters is whether the monitor caught it <em>while an intervention could still prevent the harm</em>, and what it costs when the monitor is wrong.</p>
+    <p>We split that into quantities that can be measured on every prefix of an agent trajectory:</p>
+    <ul>
+      <li><strong>Information available:</strong> the first step at which a frozen, environment-side oracle says the relevant evidence exists.</li>
+      <li><strong>First detection:</strong> the first step at which the monitor's score crosses its threshold.</li>
+      <li><strong>Utilization delay</strong> = first detection − information available. This shows how long the monitor sat on evidence it could see.</li>
+      <li><strong>Last safe intervention:</strong> the final step at which an intervention still prevents the prohibited effect.</li>
+      <li><strong>Intervention margin</strong> = last safe intervention − first detection. A positive margin means there was still time to act.</li>
+    </ul>
+
+    <h2 id="role">Who did what</h2>
+    <p>This was a three-person sprint project with three parts: incident forensics, a scoring protocol, and the monitoring experiment. Going by the repository history:</p>
+    <ul>
+      <li><strong>Me:</strong> the monitoring experiment end to end. That covers the authorization environment, the frozen evidence oracle, the three monitor views, the prefix-timing metrics, the evidence-strength and identifier-invariance phases, the closed-loop replay, the deterministic tests and release checks, and the figures. I'm first author on the report.</li>
+      <li><strong>Kaustubh Gupta:</strong> the public-source forensics pipeline (claim extraction and corroboration) and the sim/real checklist scoring.</li>
+      <li><strong>María Inés Berdiñas:</strong> co-author on the report.</li>
+    </ul>
+
+    <h2 id="setup">Setup</h2>
+    <p>The environment is a synthetic, authorization-controlled delivery task. The same trajectory is shown to the monitor in three views:</p>
+    <ul>
+      <li><code>M_ACTION</code>: actions and tool observations only.</li>
+      <li><code>M_COT_ACTION</code>: the above, plus the agent's externalized reasoning.</li>
+      <li><code>M_GROUNDED</code>: the above, plus authorization telemetry issued by the environment.</li>
+    </ul>
+    <p>Several design choices exist to stop the result from being tuned after the fact:</p>
+    <ul>
+      <li>The safety oracle, monitor prompt, input serialization and thresholding are separate components. The oracle never sees monitor output.</li>
+      <li>The oracle rule body and the monitor prompt are frozen and published with SHA-256 hashes. (The preregistration documents in the repository were committed after the first runs, so I don't present this sprint work as preregistered.)</li>
+      <li>The threshold was set from <strong>benign control trajectories only</strong>. The highest control score was 50, so the threshold was frozen at 51, giving 0 false positives across 12 control view-trajectories. No attack data was used to pick it.</li>
+      <li>The monitor is local <code>qwen3:14b</code> at temperature 0 with a fixed seed. It was chosen over <code>qwen3:8b</code> after a small diagnostic in which the 8B model invented authorization state in 4 of 10 cases.</li>
+    </ul>
+
+    <h2 id="results">Results</h2>
+    <figure>
+      <img src="assets/research/dinc-fig1-evidence-representation.png" alt="Bar chart of monitor suspicion scores at sequence 37 for attack and benign traces under four evidence representations. Action evidence (G0): both 60. Structural (G1): attack 100, benign 60. Relational (G2): attack 100, benign 0. Explicit verdict (G3): attack 100, benign 60. The threshold is 51." loading="lazy" width="970" height="674">
+      <figcaption>Only relational evidence (G2), showing the target route and the set of authorized routes, cleanly separated the prohibited and benign cases at the fixed threshold of 51. Figure 1 from the report.</figcaption>
+    </figure>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Phase</th><th scope="col">Result</th><th scope="col">How I read it</th></tr></thead>
+        <tbody>
+          <tr><td>B1.3 primary run</td><td>690 prefix evaluations; 119/119 unique model calls valid, no parse failures or timeouts</td><td>Inputs reused across prefixes are tracked explicitly and can be audited.</td></tr>
+          <tr><td>Neutral attack, grounded view</td><td>Evidence visible at step 37; detected at 37; last safe point 38</td><td>Utilization delay 0, margin +1. Timely, by one step, in this fixture.</td></tr>
+          <tr><td>Neutral attack, other views</td><td>No threshold crossing in the action-only or reasoning views</td><td>Without the environment's authorization telemetry, this attack wasn't caught.</td></tr>
+          <tr><td>Phase C: evidence strength</td><td>With only the target route and the visible set of authorized routes: attack 100, benign 0</td><td>An explicit "not permitted" label wasn't needed. More explicit evidence wasn't always better: three other levels flagged the benign trace.</td></tr>
+          <tr><td>Phase E: identifier invariance</td><td>Decisions held in 8 of 12 meaning-preserving renamings; strictly control-ready in 3 of 12</td><td>The signal depends on representation. Alphabetic identifiers were clean; numeric and opaque ones were not.</td></tr>
+          <tr><td>Phase F: closed-loop replay</td><td>F1: revoking authority at step 37 prevented the harmful effect. F3: a benign false alarm revoked authority and the legitimate task failed.</td><td>The same score that prevents harm can also impose a real cost on benign work.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <figure>
+      <img src="assets/research/dinc-fig3-closed-loop.png" alt="Timeline from sequence 37 to 41. Without control, the action attempted at 38 is accepted and the effect occurs. With intervention, authority is revoked at 37, one step before the last safe boundary at 38; the later action is rejected and the effect is prevented." loading="lazy" width="2434" height="842">
+      <figcaption>The intervention changes what the environment will allow; it does not rewrite the agent's history or actions. Figure from the repository.</figcaption>
+    </figure>
+
+    <div class="callout"><p>The main thing I took from this is that a monitor score is only as useful as its timing and its stability under representations that shouldn't matter. Phase F turned that instability into a measured cost: a failed benign task, not just a changed number.</p></div>
+
+    <h3>Forensics and protocol</h3>
+    <p>The report also has a public-source forensics pipeline over five AI incidents: 679 claims extracted with a local model, each tied to a verbatim quote and cross-checked for independent corroboration. It also includes a draft 8-item checklist for whether an evaluation setup really separated simulation from reality. An independent LLM audit agreed with the heuristic scorer on only 22 of 40 items (55%), so the checklist is a draft, not a validated instrument. Four of the five cases rest on one or two sources.</p>
+
+    <h2 id="follow-up">Follow-up: does it hold at scale?</h2>
+    <p>In October I scaled the setup to 54 matched authorized and unauthorized scenarios with Qwen3-14B, and the result got weaker. At the original threshold, the monitor flagged 0 of 54 unauthorized actions before the safety boundary (1 of 54 ever). Its explanations often named the violation (35 of 54) without scoring it high enough to act.</p>
+    <p>A preregistered ablation then changed one thing at a time. Asking for an allow/revoke decision instead of a 0–100 score flagged 21 of 54 in time, against 0 of 54, with no false alarms on authorized runs. Deleting two prompt clauses I suspected made no difference, and the monitor's ranking fell short of my preregistered bar (AUC 0.69 vs 0.90), so two of my four hypotheses were falsified.</p>
+    <p>This follow-up measured timely detection: whether a flag arrived before the last point where acting could still help. Unlike Phase F above, it did not replay the intervention, so it doesn't show prevention. Limits: one model, one synthetic environment, one temperature-0 output per scenario. A human-overseer pilot has one session so far, so I don't report human results.</p>
+
+    <h2 id="limits">What it doesn't show</h2>
+    <ul>
+      <li>Anything general about monitoring, containment or control performance. This is one synthetic environment.</li>
+      <li>Robustness beyond fixed prompts and model settings, single deterministic draws, and the sampled identifier transformations tested.</li>
+      <li>That chain-of-thought is faithful. The early detection with explicit reasoning (step 32, margin +6) shows the monitor is sensitive to externalized wording, nothing more.</li>
+      <li>Results from the unfinished B2/B2-R phase. Its protocol files are in the repository only so that Phase C can be validated byte for byte.</li>
+    </ul>
+
+    <h2 id="reviews">What reviewers said, and what I'd change</h2>
+    <p>The sprint report received three public reviews on the <a href="https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs">project page</a>. In short:</p>
+    <ul>
+      <li>The intervention experiment was called the strongest part. One reviewer asked for it to get more space.</li>
+      <li>Clarity broke down in the results: some terms were undefined and some labels inconsistent.</li>
+      <li>The forensics checklist defaulted to FAIL when public sources were silent. That conflates "no public evidence" with "the control failed". The 55% scorer agreement should have been reported up front, not left to future work.</li>
+    </ul>
+    <p>I agree with all three points. If I wrote it again, I'd lead with the monitoring experiment, define every term before it's used, and score missing evidence as unknown rather than fail.</p>
+
+    <h2 id="reproduce">Reproducing it</h2>
+    <p>Verification needs Python 3.10+ and nothing else. No model is required to check the released results:</p>
+<pre><code>python scripts/verify_release.py
+python -m unittest discover -s tests -v
+python -m hermes_phase_f.pilot.validate_phase_f</code></pre>
+    <p>These check the frozen oracle and prompt hashes, run the deterministic tests, and validate the cached closed-loop replay. Every phase has its own result document in <a href="https://github.com/GaganaMD/detection-is-not-containment/tree/main/docs"><code>docs/</code></a>, and the frozen inputs are in <code>protocol/</code>.</p>
+
+    <h2 id="next">What I'd do next</h2>
+    <ul>
+      <li>Repeat the timing measurements with sampled monitor outputs and report variance, instead of single deterministic draws.</li>
+      <li>Add a second and third environment with different authorization structures, to see whether a one-step margin is an artifact of this fixture.</li>
+      <li>Treat representation invariance as a precondition: test monitors under meaning-preserving rewrites <em>before</em> using their scores to revoke authority.</li>
+      <li>Report the benign cost of intervention (tasks wrongly blocked) next to prevention rate as a standard pair.</li>
+    </ul>
+  </article>
+</div>

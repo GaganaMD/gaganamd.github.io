@@ -55,7 +55,7 @@
   <p class="lede">A monitor that eventually flags a problem hasn't shown that anyone could have prevented it. This project measures that gap directly, in a small synthetic setting, and then replays a real intervention to see what it costs.</p>
   <div class="actions">
     <a class="button primary" href="https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs">Report and reviews <span aria-hidden="true">↗</span></a>
-    <a class="button" href="https://github.com/GaganaMD/detection-is-not-containment">Code, data and preregistrations <span aria-hidden="true">↗</span></a>
+    <a class="button" href="https://github.com/GaganaMD/detection-is-not-containment">Code and data <span aria-hidden="true">↗</span></a>
   </div>
 </section>
 
@@ -112,7 +112,7 @@
     <p>Several design choices exist to stop the result from being tuned after the fact:</p>
     <ul>
       <li>The safety oracle, monitor prompt, input serialization and thresholding are separate components. The oracle never sees monitor output.</li>
-      <li>The oracle rule body and the monitor prompt are frozen and published with SHA-256 hashes. Later phases have written preregistrations.</li>
+      <li>The oracle rule body and the monitor prompt are frozen and published with SHA-256 hashes. (The preregistration documents in the repository were committed after the first runs, so I don't present this sprint work as preregistered.)</li>
       <li>The threshold was set from <strong>benign control trajectories only</strong>. The highest control score was 50, so the threshold was frozen at 51, giving 0 false positives across 12 control view-trajectories. No attack data was used to pick it.</li>
       <li>The monitor is local <code>qwen3:14b</code> at temperature 0 with a fixed seed. It was chosen over <code>qwen3:8b</code> after a small diagnostic in which the 8B model invented authorization state in 4 of 10 cases.</li>
     </ul>
@@ -145,6 +145,11 @@
 
     <h3>Forensics and protocol</h3>
     <p>The report also has a public-source forensics pipeline over five AI incidents: 679 claims extracted with a local model, each tied to a verbatim quote and cross-checked for independent corroboration. It also includes a draft 8-item checklist for whether an evaluation setup really separated simulation from reality. An independent LLM audit agreed with the heuristic scorer on only 22 of 40 items (55%), so the checklist is a draft, not a validated instrument. Four of the five cases rest on one or two sources.</p>
+
+    <h2 id="follow-up">Follow-up: does it hold at scale?</h2>
+    <p>In October I scaled the setup to 54 matched authorized and unauthorized scenarios with Qwen3-14B, and the result got weaker. At the original threshold, the monitor flagged 0 of 54 unauthorized actions before the safety boundary (1 of 54 ever). Its explanations often named the violation (35 of 54) without scoring it high enough to act.</p>
+    <p>A preregistered ablation then changed one thing at a time. Asking for an allow/revoke decision instead of a 0–100 score flagged 21 of 54 in time, against 0 of 54, with no false alarms on authorized runs. Deleting two prompt clauses I suspected made no difference, and the monitor's ranking fell short of my preregistered bar (AUC 0.69 vs 0.90), so two of my four hypotheses were falsified.</p>
+    <p>This follow-up measured timely detection: whether a flag arrived before the last point where acting could still help. Unlike Phase F above, it did not replay the intervention, so it doesn't show prevention. Limits: one model, one synthetic environment, one temperature-0 output per scenario. A human-overseer pilot has one session so far, so I don't report human results.</p>
 
     <h2 id="limits">What it doesn't show</h2>
     <ul>

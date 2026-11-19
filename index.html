@@ -52,10 +52,10 @@
 <main id="main">
 <section class="hero hero-grid wrap" aria-labelledby="hero-title">
   <div class="hero-copy">
-    <p class="eyebrow">Empirical AI safety · Agent monitoring and evaluations</p>
+    <p class="eyebrow">Empirical AI safety · Agent monitoring, evaluations and AI control</p>
     <h1 id="hero-title">I study how to monitor AI agents when we can't see <em>everything they do.</em></h1>
-    <p class="lede">I'm <strong>Gagana M D</strong>, an early-career AI safety researcher. I run small, controlled experiments on whether we can catch and stop AI agents in time, and I do most of that work in teams. This page is a short overview; each item links to the detail.</p>
-    <p class="availability">Looking for a funded research fellowship or research engineering role in empirical AI safety.</p>
+    <p class="lede">Hi, I'm <strong>Gagana M D</strong>. I run small, controlled experiments on one question: when a monitor notices an AI agent doing something wrong, is there still time to stop it? Most of my work is done in teams, so each project below says what my part was, and where a result didn't hold up.</p>
+    <p class="availability">I'm looking for a funded research fellowship or research engineering role in empirical AI safety. If you work on monitoring, evaluations or AI control, I'd be glad to talk.</p>
     <div class="actions">
       <a class="button primary" href="research.html">See my research <span aria-hidden="true">→</span></a>
       <a class="button" href="cv.pdf">CV (PDF)</a>
@@ -69,27 +69,22 @@
 
 <section class="section wrap" id="overview" aria-labelledby="overview-title">
   <div class="section-top">
-    <div><p class="eyebrow">Overview</p><h2 id="overview-title">What I've done so far<span class="period">.</span></h2></div>
-    <p class="section-desc">For mentors and supervisors: the short version. Each line links to the full write-up, my part and the limits.</p>
+    <div><p class="eyebrow">Overview</p><h2 id="overview-title">Start here<span class="period">.</span></h2></div>
+    <p class="section-desc">The short version: what I asked, what I did and what happened. The numbers, methods and limits are on the Research page.</p>
   </div>
 
   <h3 class="group-title">Research</h3>
   <ul class="roles overview">
-    <li><time>Sep 2026</time><div><strong><a href="detection-is-not-containment.html">Detection Is Not Containment</a> · first author</strong><span>A monitor caught a harmful agent action one step before the last point where it could still be stopped, and meaning-preserving renames broke 4 of 12 decisions. Preregistered, with public code.</span></div></li>
-    <li><time>Oct 2026</time><div><strong><a href="research.html#collusion">Collusion among LLM agents</a> · two team reports</strong><span>Led a covert monitor-swap study (colluding agents never noticed the swap), and ran probing and steering on a pricing LLM that showed no punishment of undercutting.</span></div></li>
-    <li><time>May – Oct 2026</time><div><strong><a href="research.html#world-models">LLM-generated world models</a> · PRISM fellowship</strong><span>Main code contributor. 134 of 135 generated games ran, but most didn't encode the intended structure. Accepted at the NeurIPS 2026 NEmo workshop.</span></div></li>
-    <li><time>2025</time><div><strong><a href="research.html#biornet">Hyperspectral BiorNet</a> · first author</strong><span>A wavelet framework for hyperspectral unmixing, from before I moved into AI safety. Peer-reviewed, IEEE InGARSS 2025.</span></div></li>
+    <li><time>Sep – Oct 2026</time><div><strong><a href="detection-is-not-containment.html">Detection Is Not Containment</a> · first author, Apart sprint report, plus a solo follow-up</strong><span>I asked whether a monitor's alarm can come early enough to act on. In a small test environment it arrived just in time, and acting on it stopped the harmful action. When I scaled the setup up, the monitor mostly flagged problems too late. A follow-up showed that a simple change to the monitor's prompt helped, and that two of my own predictions were wrong.</span></div></li>
+    <li><time>Oct 2026</time><div><strong><a href="research.html#collusion">Collusion among LLM agents</a> · two team sprint reports</strong><span>Can AI agents tell when a partner has been secretly replaced? In the study I led, a monitor quietly took over one colluding agent's seat. The collusion stopped, and the other agent never noticed. On a separate team project, I ran the probing and steering experiments on a pricing model.</span></div></li>
+    <li><time>May – Oct 2026</time><div><strong><a href="research.html#world-models">LLM-generated world models</a> · PRISM fellowship, five-author paper</strong><span>Can language models write world models that planning systems can use? Almost all the generated programs ran, but most got the underlying structure wrong. I built the evaluation pipeline and the test suite. Our paper was accepted as a poster at a NeurIPS 2026 workshop.</span></div></li>
+    <li><time>2025</time><div><strong><a href="research.html#biornet">Hyperspectral BiorNet</a> · first author</strong><span>My first research paper, from before I moved into AI safety: a wavelet framework for hyperspectral unmixing, published at IEEE InGARSS 2025.</span></div></li>
   </ul>
 
   <h3 class="group-title">Field building and speaking</h3>
   <ul class="roles overview">
     <li><time>Oct 2026</time><div><strong><a href="speaking.html#roundtable">Roundtable: What makes cooperation without control work?</a></strong><span>Designed and hosted for the Post-Control Initiative (post-AGI governance) at Sentient Futures, with about ten participants from AI governance, technical safety and foresight.</span></div></li>
     <li><time>2022 – present</time><div><strong><a href="speaking.html">Workshops and mentoring</a></strong><span>Workshop facilitator for Women in Big Data India's Shakti Mentorship Program; helped run 11+ Women Who Code workshops reaching 350+ people.</span></div></li>
-  </ul>
-
-  <h3 class="group-title">Working with others</h3>
-  <ul class="roles overview">
-    <li><time>How I work</time><div><strong>Most of my research is team research</strong><span>I co-led a three-person sprint team, led one experiment inside a larger project, supported two other fellowship teams, and wrote a response to the three public reviews of my sprint report.</span></div></li>
   </ul>
 
   <h3 class="group-title">Experience</h3>
@@ -99,6 +94,7 @@
     <li><time>May – Jul 2026</time><div><strong>BaseThesis Labs, Bengaluru</strong><span>AI Safety Researcher: agent evaluation and benchmarking</span></div></li>
     <li><time>Jan – Aug 2025</time><div><strong>Indian Institute of Science, DREAM Lab</strong><span>Research Intern: drone and edge–fog co-scheduling</span></div></li>
   </ul>
+  <p class="section-more">The easiest way to reach me is email: <a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com</a>. I'm happy to talk about research roles, mentoring or speaking.</p>
   <p class="section-more"><a href="research.html">See all research, papers and code →</a></p>
 </section>
 <section class="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><p class="eyebrow">Contact</p><h2 id="contact-title">Get in touch</h2><p>I'm looking for a funded research fellowship or research engineering role in empirical AI safety. If you work on agent monitoring, control evaluations or multi-agent safety, I'd like to hear what you're testing. A short note on the problem and where it's stuck is the best first email.</p><div class="contact-actions"><a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/GaganaMD">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/gaganamd/">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://orcid.org/0009-0003-2594-1026">ORCID <span aria-hidden="true">↗</span></a></div></div></section>

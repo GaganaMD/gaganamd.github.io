@@ -1,0 +1,2 @@
+# No third-party packages. The generator uses only the Python standard library.
+# Tested with Python 3.10 and 3.13.
