@@ -14,10 +14,10 @@
 \usepackage[hidelinks]{hyperref}
 
 % ---- Public vs. private copy -------------------------------------------
-% The PDF published on the website omits the phone number.
-% For applications, change \publicfalse to \publicfalse.
-\newif\ifpublic
-\publictrue
+% This file never contains a phone number, so the public CV (cv.pdf, built by
+% GitHub Actions) cannot show one. The private application copy is built locally
+% with  py _build\site.py cv --private , which defines \cvphone from the
+% gitignored file _private/contact.tex. See cv/README.md.
 
 % ---- Style ---------------------------------------------------------------
 \definecolor{accent}{HTML}{305D64}
@@ -40,7 +40,7 @@
 {\LARGE\bfseries Gagana M D}\\[3pt]
 \small
 \link{mailto:gaganaaa.dev@gmail.com}{gaganaaa.dev@gmail.com}
-\ifpublic\else\ \textbullet\ [phone removed]\fi
+\ifdefined\cvphone\ \textbullet\ \cvphone\fi
 \ \textbullet\ Bengaluru, India
 \ \textbullet\ \link{https://gaganamd.github.io}{gaganamd.github.io}
 \ \textbullet\ \link{https://github.com/GaganaMD}{GitHub}

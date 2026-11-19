@@ -2,13 +2,15 @@
 
 Run from anywhere:  python _build/check.py
 Fails (exit 1) if any page links a stylesheet or script whose ?v= fingerprint doesn't match the
-file on disk, or if rebuilding from _build/ would change any generated page. Run it before every
+file on disk, or if rebuilding from _build/ would change any generated page,
+or if a tracked file contains phone-number-like text or a private file (see _build/privacy.py). Run it before every
 commit so new HTML is never published with an old stylesheet, or the reverse."""
 import hashlib, pathlib, re, subprocess, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 PAGES = ["index.html", "research.html", "detection-is-not-containment.html", "projects.html",
          "writing.html", "about.html", "speaking.html", "consulting.html", "404.html"]
+sys.dont_write_bytecode = True  # keep _build/ free of __pycache__
 problems = []
 for page in PAGES:
     html = (ROOT / page).read_text()
@@ -24,6 +26,13 @@ for p in PAGES:
     if (ROOT / p).read_bytes() != before[p]:
         problems.append(f"{p}: out of date; rebuilding changes it (run python _build/build.py and commit the result)")
         (ROOT / p).write_bytes(before[p])
+sys.path.insert(0, str(ROOT / "_build"))
+import privacy  # noqa: E402  (phone numbers and private files must never be committed)
+priv = privacy.problems()
+if priv is None:
+    print("WARNING: git not found, so the privacy check was skipped.")
+else:
+    problems += ["PRIVACY " + x for x in priv]
 if problems:
     print("NOT READY TO PUSH:\n  " + "\n  ".join(problems)); sys.exit(1)
-print(f"OK: {len(PAGES)} pages are up to date and every stylesheet/script fingerprint matches the file on disk.")
+print(f"OK: {len(PAGES)} pages are up to date and every stylesheet/script fingerprint matches the file on disk; no private data is tracked.")

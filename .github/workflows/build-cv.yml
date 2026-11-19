@@ -1,4 +1,5 @@
 # Builds cv/main.tex into cv.pdf at the site root whenever the CV source changes.
+# The phone number is never in cv/: the private application CV is built locally (see cv/README.md).
 # Workflow: edit in Overleaf -> Menu -> Download -> Source (zip) -> upload the files
 # into the cv/ folder on github.com (Add file -> Upload files). The PDF rebuilds and
 # https://gaganamd.github.io/cv.pdf serves the new version.
@@ -25,6 +26,18 @@ jobs:
           working_directory: cv
           # Set to true if your template uses fontspec (XeLaTeX in Overleaf's settings).
           latexmk_use_xelatex: false
+      - name: Privacy check (the public CV must not contain a phone number)
+        # Matched text is never printed. Keep the number only in the gitignored _private/contact.tex.
+        run: |
+          command -v pdftotext >/dev/null || { sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils >/dev/null; }
+          PAT='(^|[^0-9A-Za-z_.])(\+[0-9]{1,3}[ -]?[0-9]{3,5}[ -]?[0-9]{3,5}|[0-9]{5}[ -][0-9]{5}|[0-9]{10,12})([^0-9A-Za-z_.]|$)'
+          if git ls-files | grep -qE '(^|/)(_private/|contact\.tex$|cv-private)'; then
+            echo "::error::A private file is tracked in the repository. Not publishing the CV."; exit 1; fi
+          if grep -rqE "$PAT" cv --include='*.tex' --include='*.bib' --include='*.cls' --include='*.sty'; then
+            echo "::error::Phone-number-like text found in cv/ source files (not shown). Not publishing."; exit 1; fi
+          if pdftotext cv/main.pdf - | grep -qE "$PAT"; then
+            echo "::error::Phone-number-like text found in the built CV (not shown). Not publishing."; exit 1; fi
+          echo "Privacy check passed."
       - name: Publish cv.pdf
         run: |
           cp cv/main.pdf cv.pdf

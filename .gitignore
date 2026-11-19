@@ -2,3 +2,17 @@ CONTENT_GAPS.md
 .DS_Store
 TODO.md
 Claude outputs/
+
+# ---- Private: never committed (see cv/README.md) ----
+_private/
+*.private.*
+cv-private*.pdf
+.env
+# LaTeX build by-products if the CV is compiled inside cv/
+cv/*.aux
+cv/*.log
+cv/*.out
+cv/*.fls
+cv/*.fdb_latexmk
+cv/*.synctex.gz
+cv/main.pdf
