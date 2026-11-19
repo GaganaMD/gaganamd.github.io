@@ -17,7 +17,7 @@ PAGES = [
     dict(fname="index.html",
          title="Gagana M D · AI safety research: agent monitoring and evaluations",
          desc="Gagana M D is an early-career AI safety researcher working on monitoring and evaluating AI agents. Publications, reports and code for each completed project.",
-         body=r("index.html") + contact(), jsonld=PERSON),
+         body=r("index.html") + contact(body="Email is the easiest way to reach me. A short note on the problem you're working on is a great start."), jsonld=PERSON),
     dict(fname="research.html", title="Research · Gagana M D",
          desc="AI safety research by Gagana M D on agent monitoring, AI control, world-model evaluation and auditing under limited observability, with the status of each project.",
          body=r("research.html") + contact()),

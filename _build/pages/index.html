@@ -1,47 +1,60 @@
-<section class="hero hero-grid wrap" aria-labelledby="hero-title">
-  <div class="hero-copy">
-    <p class="eyebrow">Empirical AI safety · Agent monitoring, evaluations and AI control</p>
+<section class="home home-hero" aria-labelledby="hero-title">
+  <div>
+    <p class="eyebrow home-eyebrow">Empirical AI safety</p>
     <h1 id="hero-title">I study how to monitor AI agents when we can't see <em>everything they do.</em></h1>
-    <p class="lede">Hi, I'm <strong>Gagana M D</strong>. I run small, controlled experiments on one question: when a monitor notices an AI agent doing something wrong, is there still time to stop it? Most of my work is done in teams, so each project below says what my part was, and where a result didn't hold up.</p>
-    <p class="availability">I'm looking for a funded research fellowship or research engineering role in empirical AI safety. If you work on monitoring, evaluations or AI control, I'd be glad to talk.</p>
-    <div class="actions">
-      <a class="button primary" href="research.html">See my research <span aria-hidden="true">→</span></a>
-      <a class="button" href="cv.pdf">CV (PDF)</a>
-      <a class="button" href="mailto:gaganaaa.dev@gmail.com">Email me</a>
-    </div>
+    <p>Hi, I'm <strong>Gagana</strong>. I work on empirical AI safety: AI control and monitoring, how agents behave around each other, and how we evaluate agents and the world models they're tested in. I mostly run small, controlled experiments, often in teams, and I like following a result up until I know where it holds.</p>
+    <p>I'm a Research Fellow at Sentient Futures, working on behavioural evaluation and post-AGI governance. From May to October I was also a PRISM AI Safety Research Fellow; the rest is on my <a href="about.html">About page</a>.</p>
+    <p class="home-ask">I'm looking for a funded research fellowship or research engineering role.</p>
+    <div class="home-links"><a href="mailto:gaganaaa.dev@gmail.com">Email</a><a href="cv.pdf">CV</a><a href="https://github.com/GaganaMD">GitHub</a><a href="https://orcid.org/0009-0003-2594-1026">ORCID</a><a href="https://www.linkedin.com/in/gaganamd/">LinkedIn</a></div>
   </div>
-  <figure class="hero-photo">
-    <img src="assets/img/gagana-md-640.jpg" srcset="assets/img/gagana-md-440.jpg 440w, assets/img/gagana-md-640.jpg 640w, assets/img/gagana-md.jpg 800w" sizes="(max-width: 760px) 160px, 300px" width="640" height="800" alt="Gagana M D presenting at a Women in Big Data India workshop.">
+  <figure class="home-photo">
+    <img src="assets/img/gagana-md-640.jpg" srcset="assets/img/gagana-md-440.jpg 440w, assets/img/gagana-md-640.jpg 640w, assets/img/gagana-md.jpg 800w" sizes="(max-width: 760px) 170px, 270px" width="640" height="800" alt="Gagana M D presenting at a Women in Big Data India workshop.">
+    <figcaption>Presenting at a Women in Big Data India workshop.</figcaption>
   </figure>
 </section>
 
-<section class="section wrap" id="overview" aria-labelledby="overview-title">
-  <div class="section-top">
-    <div><p class="eyebrow">Overview</p><h2 id="overview-title">Start here<span class="period">.</span></h2></div>
-    <p class="section-desc">The short version: what I asked, what I did and what happened. The numbers, methods and limits are on the Research page.</p>
+<section class="home home-sec" aria-labelledby="recent-title">
+  <h2 id="recent-title">Recently</h2>
+  <ul class="home-recent">
+    <li><time datetime="2026-11">Nov 2026</time> Our world-models paper is <a href="https://arxiv.org/abs/2611.14419">on arXiv</a>. We'll present it as a poster at the NeurIPS 2026 NEmo workshop in December.</li>
+    <li><time datetime="2026-10">Oct 2026</time> I re-ran Detection Is Not Containment at a larger scale. The original result mostly didn't hold, and a preregistered follow-up showed what helped. <a href="detection-is-not-containment.html#follow-up">What I found</a></li>
+    <li><time datetime="2026-10">Oct 2026</time> Two team reports from Apart Research's AI Collusion Sprint: on swapped-in partners, and on what a pricing model's high prices do and don't show.</li>
+    <li><time datetime="2026-09">Sep 2026</time> Joined Sentient Futures as a Research Fellow.</li>
+  </ul>
+</section>
+
+<section class="home home-sec" aria-labelledby="research-title">
+  <h2 id="research-title">Questions I'm working on</h2>
+  <div class="home-research">
+    <div><p class="home-tag">AI control · monitoring</p><h3>Can a monitor's alarm arrive early enough to act on?</h3><p>I built the experiment in a small agent environment, then scaled it up on my own. At scale, the monitor almost never flagged problems in time. <a href="detection-is-not-containment.html">Case study</a></p></div>
+    <div><p class="home-tag">Multi-agent behaviour</p><h3>What can we tell about colluding agents from their behaviour?</h3><p>I led a study in which a monitor secretly took over a colluding agent's seat, and implemented the interpretability and steering experiments on a pricing model. <a href="research.html#collusion">Details</a></p></div>
+    <div><p class="home-tag">World-model evaluation</p><h3>Can language models write environments that planners can trust?</h3><p>On a PRISM team project, I implemented the evaluation pipeline, analysis library and tests. Most generated models ran; most got the structure wrong. <a href="research.html#world-models">Details</a></p></div>
+    <div><p class="home-tag">Agent evaluations</p><h3>What makes an agent evaluation worth trusting?</h3><p>I built an evaluation harness that records where every result came from, and tested when multi-step agent orchestration is worth its cost. <a href="research.html#agent-benchmark">Details</a></p></div>
   </div>
+  <p class="home-more"><a href="research.html">All projects, methods and limits →</a></p>
+</section>
 
-  <h3 class="group-title">Research</h3>
-  <ul class="roles overview">
-    <li><time>Sep – Oct 2026</time><div><strong><a href="detection-is-not-containment.html">Detection Is Not Containment</a> · first author, Apart sprint report, plus a solo follow-up</strong><span>I asked whether a monitor's alarm can come early enough to act on. In a small test environment it arrived just in time, and acting on it stopped the harmful action. When I scaled the setup up, the monitor mostly flagged problems too late. A follow-up showed that a simple change to the monitor's prompt helped, and that two of my own predictions were wrong.</span></div></li>
-    <li><time>Oct 2026</time><div><strong><a href="research.html#collusion">Collusion among LLM agents</a> · two team sprint reports</strong><span>Can AI agents tell when a partner has been secretly replaced? In the study I led, a monitor quietly took over one colluding agent's seat. The collusion stopped, and the other agent never noticed. On a separate team project, I ran the probing and steering experiments on a pricing model.</span></div></li>
-    <li><time>May – Oct 2026</time><div><strong><a href="research.html#world-models">LLM-generated world models</a> · PRISM fellowship, five-author paper</strong><span>Can language models write world models that planning systems can use? Almost all the generated programs ran, but most got the underlying structure wrong. I built the evaluation pipeline and the test suite. Our paper was accepted as a poster at a NeurIPS 2026 workshop.</span></div></li>
-    <li><time>2025</time><div><strong><a href="research.html#biornet">Hyperspectral BiorNet</a> · first author</strong><span>My first research paper, from before I moved into AI safety: a wavelet framework for hyperspectral unmixing, published at IEEE InGARSS 2025.</span></div></li>
+<section class="home home-sec" aria-labelledby="pubs-title">
+  <h2 id="pubs-title">Papers and reports</h2>
+  <p class="home-note">Grouped by how they were reviewed. More on the <a href="research.html#publications">Research page</a>.</p>
+  <h3 class="home-pubgroup">Peer-reviewed</h3>
+  <ul class="home-pubs">
+    <li><span class="cite-authors"><strong>Gagana M D</strong>, Ajay Kumar K, Vijayashekhar S S, Jignesh S. Bhatt.</span> <span class="cite-title">Hyperspectral BiorNet: A Complete Wavelet Framework for Unmixing.</span> <span class="cite-venue">IEEE India Geoscience and Remote Sensing Symposium (InGARSS), 2025.</span> <span class="cite-links"><a href="https://doi.org/10.1109/InGARSS67683.2025.11584022">DOI</a></span></li>
   </ul>
+  <h3 class="home-pubgroup">Workshop paper (non-archival)</h3>
+  <ul class="home-pubs">
+    <li><span class="cite-authors">Souhaila Djaffal, Amna Jamal, <strong>Gagana Madhugiri Devaraja</strong>, Anidipta Pal, Jobst Heitzig.</span> <span class="cite-title">Evaluating LLM-Generated World Models for Neuro-Symbolic Reasoning.</span> <span class="cite-venue">NeurIPS 2026 Workshop on Neuro-Symbolic Embodied Intelligence (NEmo), poster.</span> <span class="cite-links"><a href="https://arxiv.org/abs/2611.14419">arXiv</a> <a href="https://nemo.semantic.review/#accepted-papers">Workshop</a></span></li>
+  </ul>
+  <h3 class="home-pubgroup">Reports (not peer-reviewed)</h3>
+  <ul class="home-pubs">
+    <li><span class="cite-authors"><strong>Gagana M D</strong>, Kaustubh Gupta, María Inés Berdiñas.</span> <span class="cite-title">Detection Is Not Containment: Timely Monitoring Determines Whether AI Agent Failures Can Be Prevented.</span> <span class="cite-venue">Apart Research sprint report, Sep 2026.</span> <span class="cite-links"><a href="https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs">Report</a> <a href="detection-is-not-containment.html">Case study</a></span></li>
+    <li><span class="cite-authors">Siva Kumar Lakkoju, Kaustubh Gupta, <strong>Gagana M D</strong>.</span> <span class="cite-title">Noticing the Move, Missing the Player: LLM Agents Detect Behavioral Shifts but Not Peer Swaps.</span> <span class="cite-venue">Apart Research sprint report, Oct 2026.</span> <span class="cite-links"><a href="https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r">Report</a></span></li>
+    <li><span class="cite-authors">Chewon Cho, <strong>Gagana M D</strong>, Sriram Bharadwaj.</span> <span class="cite-title">Tacit Collusion in Pricing Agents: Robustness, Detection, and a Mechanistic Probe of a Pricing LLM.</span> <span class="cite-venue">Apart Research sprint report, Oct 2026.</span> <span class="cite-links"><a href="https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb">Report</a></span></li>
+  </ul>
+</section>
 
-  <h3 class="group-title">Field building and speaking</h3>
-  <ul class="roles overview">
-    <li><time>Oct 2026</time><div><strong><a href="speaking.html#roundtable">Roundtable: What makes cooperation without control work?</a></strong><span>Designed and hosted for the Post-Control Initiative (post-AGI governance) at Sentient Futures, with about ten participants from AI governance, technical safety and foresight.</span></div></li>
-    <li><time>2022 – present</time><div><strong><a href="speaking.html">Workshops and mentoring</a></strong><span>Workshop facilitator for Women in Big Data India's Shakti Mentorship Program; helped run 11+ Women Who Code workshops reaching 350+ people.</span></div></li>
-  </ul>
-
-  <h3 class="group-title">Experience</h3>
-  <ul class="roles overview">
-    <li><time>Sep 2026 – present</time><div><strong>Sentient Futures</strong><span>Research Fellow: post-AGI governance (Post-Control Initiative) and behavioural evaluation</span></div></li>
-    <li><time>May – Oct 2026</time><div><strong>PRISM AI Safety Research Fellowship</strong><span>Research Fellow, completed</span></div></li>
-    <li><time>May – Jul 2026</time><div><strong>BaseThesis Labs, Bengaluru</strong><span>AI Safety Researcher: agent evaluation and benchmarking</span></div></li>
-    <li><time>Jan – Aug 2025</time><div><strong>Indian Institute of Science, DREAM Lab</strong><span>Research Intern: drone and edge–fog co-scheduling</span></div></li>
-  </ul>
-  <p class="section-more">The easiest way to reach me is email: <a href="mailto:gaganaaa.dev@gmail.com">gaganaaa.dev@gmail.com</a>. I'm happy to talk about research roles, mentoring or speaking.</p>
-  <p class="section-more"><a href="research.html">See all research, papers and code →</a></p>
+<section class="home home-sec home-beyond" aria-labelledby="beyond-title">
+  <h2 id="beyond-title">Beyond research</h2>
+  <p>Outside my own experiments, a lot of my time goes to the people side of the field: facilitating workshops for Women in Big Data India's Shakti Mentorship Program, serving as a WiDS ambassador, hosting a roundtable on human–AI cooperation for Sentient Futures and, before that, helping run Women Who Code data workshops.</p>
+  <div class="home-links"><a href="speaking.html">Talks and workshops</a><a href="consulting.html">Consulting</a></div>
 </section>
