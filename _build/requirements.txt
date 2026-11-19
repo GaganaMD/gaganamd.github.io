@@ -1,2 +1,5 @@
-# No third-party packages. The generator uses only the Python standard library.
-# Tested with Python 3.10 and 3.13.
+# Install once:  py -m pip install -r _build\requirements.txt
+# Pure-Python packages, pinned so the generated pages stay identical on every computer.
+# Needs Python 3.9 or newer.
+PyYAML==6.0.2
+Markdown==3.7

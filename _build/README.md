@@ -16,7 +16,8 @@ names start with `_`, so `_build/` is version-controlled here but not served on 
 - `content.py`: the list of pages with their titles, descriptions and structured data; it reads each page body from `pages/`.
 - `pages/*.html`: the main content of each page. **Edit these to change page text.**
   `projects.html` (a redirect to the research page) and `404.html` have no file here; their short bodies are written inline in `content.py`.
-- `requirements.txt`: none needed; standard library only (Python 3.9+).
+- `requirements.txt`: PyYAML and Markdown, pinned. Install once with `py -m pip install -r _build\requirements.txt` (Python 3.9+).
+- `render.py`: reads `_content/` (YAML and Markdown) and renders it as HTML fragments.
 
 ## Rebuild
 
@@ -32,14 +33,17 @@ changes you did not make, stop and check before committing.
 
 ## Updating News on the homepage
 
-Edit `_build/news.json`. Each item is one line:
+Edit `_content/news.yml` (the `_content/` folder is never published). Each item:
 
-```json
-{"date": "2026-11-10", "text": "Our paper ... is <a href=\"https://arxiv.org/abs/...\">on arXiv</a>."}
+```yaml
+- date: "2026-11-10"
+  text: >-
+    Our paper *Title* is [on arXiv](https://arxiv.org/abs/...).
 ```
 
-`date` is `YYYY-MM` or `YYYY-MM-DD`. Items are sorted newest first automatically; the newest five
-are shown and the rest go under "Older news" (change `NEWS_VISIBLE` in `content.py`). Then rebuild.
+`date` is `"YYYY-MM"` or `"YYYY-MM-DD"` (keep the quotes); `text` is one line of Markdown. Items are
+sorted newest first automatically; the newest five are shown and the rest go under "Older news"
+(change `NEWS_VISIBLE` in `content.py`). Then rebuild.
 
 ## Light and dark themes
 

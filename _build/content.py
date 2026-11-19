@@ -14,14 +14,15 @@ PERSON = {
 }
 
 # ---- News (homepage) -------------------------------------------------------
-# Edit _build/news.json: one entry per item, {"date": "YYYY-MM" or "YYYY-MM-DD", "text": "..."}.
+# Edit _content/news.yml: one entry per item, with date "YYYY-MM" or "YYYY-MM-DD" and one line of Markdown text.
 # Newest first is applied automatically (an exact day sorts above a bare month); the first NEWS_VISIBLE items show, the rest
-# go under "Older news". Text may contain simple HTML links.
-import json, datetime
+# go under "Older news".
+import datetime
+from render import load_yaml, inline_md
 NEWS_VISIBLE = 5
 
 def news_html():
-    items = json.loads((pathlib.Path(__file__).parent / "news.json").read_text(encoding="utf-8"))
+    items = [dict(date=str(x["date"]), text=inline_md(x["text"])) for x in load_yaml("news.yml")]
     items = sorted(items, key=lambda x: x["date"], reverse=True)  # stable: same-month order kept
     def li(x):
         d = datetime.date(int(x["date"][:4]), int(x["date"][5:7]), 1)

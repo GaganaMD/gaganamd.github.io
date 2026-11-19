@@ -1,0 +1,52 @@
+# News on the homepage. Newest first is applied automatically; the newest five are shown
+# and the rest go under "Older news" (NEWS_VISIBLE in _build/content.py).
+# date: "YYYY-MM" or "YYYY-MM-DD" (keep the quotes). text: one line of Markdown.
+# Order in this file only matters for items with the same date.
+
+- date: "2026-11-10"
+  text: >-
+    Our paper *Evaluating LLM-Generated World Models for Neuro-Symbolic Reasoning* is [on arXiv](https://arxiv.org/abs/2611.14419). It will be presented as a poster at the NeurIPS 2026 NEmo workshop on 11 December.
+
+- date: "2026-10-31"
+  text: >-
+    Scaled up Detection Is Not Containment in a preregistered follow-up across 54 matched scenarios, then ran a preregistered ablation of the monitor's output format. [What I found](detection-is-not-containment.html#follow-up)
+
+- date: "2026-10-26"
+  text: >-
+    Two team reports from Apart Research's AI Collusion Research Sprint: [peer swaps](https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r) and [tacit collusion in pricing agents](https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb).
+
+- date: "2026-10-20"
+  text: >-
+    Designed and hosted the roundtable [What makes cooperation without control work?](speaking.html#roundtable) for the Post-Control Initiative.
+
+- date: "2026-10"
+  text: >-
+    Finished at the PRISM AI Safety Research Fellowship, where I contributed technical research to our world-models project and volunteered in program support, after presenting the world-models project at the fellowship's final poster showcase.
+
+- date: "2026-09"
+  text: >-
+    Joined the Sentient Futures Project Incubator.
+
+- date: "2026-09-14"
+  text: >-
+    Published [Detection Is Not Containment](https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs), my first-author report from Apart Research's AI Incident Response Sprint.
+
+- date: "2026-05"
+  text: >-
+    Started at the PRISM AI Safety Research Fellowship, as a technical research contributor on a world-models project mentored by Jobst Heitzig and as a Program Support Volunteer. Also began AI evaluation and benchmarking research at BaseThesis Labs.
+
+- date: "2026-03"
+  text: >-
+    Gave the talk "Agentic AI: The Shift from Tools to Autonomous Actors" for Lean In Network's HIGH series.
+
+- date: "2025-12"
+  text: >-
+    Our paper [Hyperspectral BiorNet](https://doi.org/10.1109/InGARSS67683.2025.11584022) was published at IEEE InGARSS 2025.
+
+- date: "2025-01"
+  text: >-
+    Started as a research intern at IISc's DREAM Lab.
+
+- date: "2026-09-25"
+  text: >-
+    Ran the hands-on workshop "Build your personal portfolio with GitHub" for Women in Big Data India.
