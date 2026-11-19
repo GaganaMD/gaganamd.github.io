@@ -4,7 +4,7 @@ Run from anywhere:  python _build/build.py
 Output is written to the repository root (the folder above _build/).
 Jekyll on GitHub Pages does not publish folders starting with "_", so this
 source is versioned with the site but never served. See _build/README.md."""
-import json, pathlib, re, sys
+import hashlib, json, pathlib, re, sys
 
 sys.dont_write_bytecode = True  # keep _build/ free of __pycache__
 
@@ -12,6 +12,13 @@ SRC = pathlib.Path(__file__).parent / "pages"
 OUT = pathlib.Path(__file__).resolve().parent.parent  # repository root
 SITE = "https://gaganamd.github.io"
 EMAIL = "gaganaaa.dev@gmail.com"
+
+
+def v(name):
+    """Asset URL with a short content hash (e.g. styles.css?v=1a2b3c4d5e). The URL changes whenever the
+    file changes, so a browser or CDN cache can never pair new HTML with an old stylesheet or script."""
+    data = (OUT / name).read_bytes()
+    return f"{name}?v={hashlib.sha256(data).hexdigest()[:10]}"
 
 NAV = [
     ("research.html", "Research"),
@@ -82,7 +89,7 @@ def contact(eyebrow="Contact", title="Get in touch", body=None, links=None):
 def page(fname, title, desc, body, extra_head="", scripts=("script.js",), jsonld=None, og_type="website"):
     url = f"{SITE}/" if fname == "index.html" else f"{SITE}/{fname}"
     ld = f'\n<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>' if jsonld else ""
-    sc = "".join(f'\n<script src="{s}" defer></script>' for s in scripts)
+    sc = "".join(f'\n<script src="{v(s)}" defer></script>' for s in scripts)
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,7 +121,7 @@ def page(fname, title, desc, body, extra_head="", scripts=("script.js",), jsonld
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap">
-<link rel="stylesheet" href="styles.css">{ld}
+<link rel="stylesheet" href="{v('styles.css')}">{ld}
 </head>
 <body>
 {header(fname)}<main id="main">
