@@ -13,9 +13,9 @@ PAGES = ["index.html", "research.html", "detection-is-not-containment.html", "pr
 sys.dont_write_bytecode = True  # keep _build/ free of __pycache__
 problems = []
 for page in PAGES:
-    html = (ROOT / page).read_text()
+    html = (ROOT / page).read_text(encoding="utf-8")
     for name, ver in re.findall(r'(?:href|src)="([\w.-]+\.(?:css|js))\?v=([0-9a-f]+)"', html):
-        actual = hashlib.sha256((ROOT / name).read_bytes()).hexdigest()[:10]
+        actual = hashlib.sha256((ROOT / name).read_bytes().replace(b"\r\n", b"\n")).hexdigest()[:10]
         if ver != actual:
             problems.append(f"{page}: {name}?v={ver} but the file on disk is v={actual}")
     if re.search(r'(?:href|src)="(?:styles\.css|script\.js|speaking\.js)"', html):
@@ -23,9 +23,10 @@ for page in PAGES:
 before = {p: (ROOT / p).read_bytes() for p in PAGES}
 subprocess.run([sys.executable, "-B", str(ROOT / "_build" / "build.py")], check=True, capture_output=True)
 for p in PAGES:
-    if (ROOT / p).read_bytes() != before[p]:
+    if (ROOT / p).read_bytes().replace(b"\r\n", b"\n") != before[p].replace(b"\r\n", b"\n"):
         problems.append(f"{p}: out of date; rebuilding changes it (run python _build/build.py and commit the result)")
-        (ROOT / p).write_bytes(before[p])
+    if (ROOT / p).read_bytes() != before[p]:
+        (ROOT / p).write_bytes(before[p])  # always leave the working copy exactly as it was
 sys.path.insert(0, str(ROOT / "_build"))
 import privacy  # noqa: E402  (phone numbers and private files must never be committed)
 priv = privacy.problems()

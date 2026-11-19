@@ -16,8 +16,13 @@ EMAIL = "gaganaaa.dev@gmail.com"
 
 def v(name):
     """Asset URL with a short content hash, so browsers and the CDN never pair new HTML with an old file."""
-    data = (OUT / name).read_bytes()
-    return f"{name}?v={hashlib.sha256(data).hexdigest()[:10]}"
+    return f"{name}?v={fingerprint(OUT / name)}"
+
+
+def fingerprint(path):
+    """First 10 hex digits of the file's SHA-256, ignoring Windows line endings (CRLF counts as LF),
+    so the same file gets the same fingerprint on every computer."""
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()[:10]
 
 NAV = [
     ("research.html", "Research"),
@@ -138,7 +143,7 @@ def page(fname, title, desc, body, extra_head="", scripts=("script.js",), jsonld
 </body>
 </html>
 """
-    (OUT / fname).write_text(html)
+    (OUT / fname).write_bytes(html.encode("utf-8"))  # UTF-8 with LF endings on every OS
 
 
 if __name__ == "__main__":

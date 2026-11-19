@@ -2,7 +2,7 @@ import pathlib
 from build import contact, EMAIL
 
 P = pathlib.Path(__file__).parent / "pages"
-r = lambda n: (P / n).read_text()
+r = lambda n: (P / n).read_text(encoding="utf-8")
 
 PERSON = {
     "@context": "https://schema.org", "@type": "Person", "name": "Gagana M D",
@@ -21,7 +21,7 @@ import json, datetime
 NEWS_VISIBLE = 5
 
 def news_html():
-    items = json.loads((pathlib.Path(__file__).parent / "news.json").read_text())
+    items = json.loads((pathlib.Path(__file__).parent / "news.json").read_text(encoding="utf-8"))
     items = sorted(items, key=lambda x: x["date"], reverse=True)  # stable: same-month order kept
     def li(x):
         d = datetime.date(int(x["date"][:4]), int(x["date"][5:7]), 1)

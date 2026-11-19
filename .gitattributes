@@ -1,0 +1,17 @@
+# Keep text files with LF line endings on every computer, including Windows
+# (where core.autocrlf would otherwise check them out as CRLF). The site's
+# CSS/JS fingerprints and _build/check.py rely on the files being identical
+# everywhere.
+* text=auto eol=lf
+
+# Binary files: never convert.
+*.pdf   binary
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.zip   binary
+*.woff  binary
+*.woff2 binary
