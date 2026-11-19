@@ -24,7 +24,10 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+html { scroll-padding-top: 88px; }
+/* Smooth scrolling only after the page has loaded (script.js adds .smooth-scroll), so a link that
+   opens a page at #section jumps straight there and the browser keeps it in place while images load. */
+@media (prefers-reduced-motion: no-preference) { html.smooth-scroll { scroll-behavior: smooth; } }
 body {
   margin: 0;
   background: var(--bg);
@@ -602,4 +605,10 @@ html:not(.js) .theme-toggle { display: none; } /* the toggle needs JavaScript; h
   .home-research { gap: 1.6rem; }
   .home-research h3 { font-size: 1.25rem; }
   .home-pubs li, .home-recent li { font-size: 15px; }
+}
+
+/* Desktop: keep the date on the first line of long homepage rows (e.g. Service and leadership);
+   the role text wraps within its own column instead. Phones keep the stacked layout. */
+@media (min-width: 701px) {
+  .ac-list:not(.compact) .ac-row:has(> .when) { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 18px; }
 }

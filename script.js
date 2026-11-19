@@ -61,3 +61,8 @@
   });
   sync();
 })();
+
+// Enable smooth scrolling only after load, so opening a page at #section lands precisely.
+window.addEventListener('load', function () {
+  setTimeout(function () { document.documentElement.classList.add('smooth-scroll'); }, 0);
+});
