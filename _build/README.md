@@ -30,6 +30,34 @@ The script overwrites the nine generated HTML files in the repository root and n
 Rebuilding without edits reproduces the committed pages byte for byte; if `git diff` shows
 changes you did not make, stop and check before committing.
 
+## Updating News on the homepage
+
+Edit `_build/news.json`. Each item is one line:
+
+```json
+{"date": "2026-11-10", "text": "Our paper ... is <a href=\"https://arxiv.org/abs/...\">on arXiv</a>."}
+```
+
+`date` is `YYYY-MM` or `YYYY-MM-DD`. Items are sorted newest first automatically; the newest five
+are shown and the rest go under "Older news" (change `NEWS_VISIBLE` in `content.py`). Then rebuild.
+
+## Light and dark themes
+
+Light is the default. The header button switches to dark and the choice is remembered in the
+visitor's browser. Dark mode only changes the colour variables at the top of `styles.css`
+(`:root[data-theme="dark"]`); layout and type are shared.
+
+## Before every commit and push
+
+```bash
+python _build/build.py
+python _build/check.py   # must print OK
+```
+
+`check.py` fails if any page links a stylesheet or script whose `?v=` fingerprint doesn't match the
+file on disk, or if a generated page is out of date. This is what keeps new HTML and the stylesheet
+in step, so a returning visitor can never get the new page with an old stylesheet.
+
 ## Changing navigation, footer or meta tags
 
 Edit `NAV`, `FOOTER`, `contact()` or `page()` in `build.py`. These affect every page.

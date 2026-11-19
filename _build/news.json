@@ -1,0 +1,14 @@
+[
+  {"date": "2026-11-10", "text": "Our paper <em>Evaluating LLM-Generated World Models for Neuro-Symbolic Reasoning</em> is <a href=\"https://arxiv.org/abs/2611.14419\">on arXiv</a>. It will be presented as a poster at the NeurIPS 2026 NEmo workshop on 11 December."},
+  {"date": "2026-10-31", "text": "Scaled up Detection Is Not Containment in a preregistered follow-up across 54 matched scenarios, then ran a preregistered ablation of the monitor's output format. <a href=\"detection-is-not-containment.html#follow-up\">What I found</a>"},
+  {"date": "2026-10-26", "text": "Two team reports from Apart Research's AI Collusion Research Sprint: <a href=\"https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r\">peer swaps</a> and <a href=\"https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb\">tacit collusion in pricing agents</a>."},
+  {"date": "2026-10-20", "text": "Designed and hosted the roundtable <a href=\"speaking.html#roundtable\">What makes cooperation without control work?</a> for the Post-Control Initiative."},
+  {"date": "2026-10", "text": "Completed the PRISM AI Safety Research Fellowship, after presenting our world-models work at the fellowship's final poster showcase."},
+  {"date": "2026-09", "text": "Joined Sentient Futures as a Research Fellow."},
+  {"date": "2026-09-14", "text": "Published <a href=\"https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs\">Detection Is Not Containment</a>, my first-author report from Apart Research's AI Incident Response Sprint."},
+  {"date": "2026-05", "text": "Started the PRISM AI Safety Research Fellowship, mentored by Jobst Heitzig, and began AI evaluation and benchmarking research at BaseThesis Labs."},
+  {"date": "2026-03", "text": "Gave the talk \"Agentic AI: The Shift from Tools to Autonomous Actors\" for Lean In Network's HIGH series."},
+  {"date": "2025-12", "text": "Our paper <a href=\"https://doi.org/10.1109/InGARSS67683.2025.11584022\">Hyperspectral BiorNet</a> was published at IEEE InGARSS 2025."},
+  {"date": "2025-01", "text": "Started as a research intern at IISc's DREAM Lab."},
+  {"date": "2026-09-25", "text": "Ran the hands-on workshop \"Build your personal portfolio with GitHub\" for Women in Big Data India."}
+]

@@ -7,6 +7,7 @@
 <meta name="description" content="AI safety research by Gagana M D on agent monitoring, AI control, world-model evaluation and auditing under limited observability, with the status of each project.">
 <meta name="author" content="Gagana M D">
 <meta name="theme-color" content="#f8f7f3">
+<script>(function(){document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
 <link rel="canonical" href="https://gaganamd.github.io/research.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Gagana M D">
@@ -29,13 +30,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap">
-<link rel="stylesheet" href="styles.css?v=54a56d96e8">
+<link rel="stylesheet" href="styles.css?v=a945ba69f8">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="header">
   <div class="wrap nav">
     <a class="brand" href="index.html">Gagana M D<span class="brand-dot">.</span></a>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" title="Dark theme"><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="visually-hidden">Dark theme</span></button>
     <button class="menu" id="menu" type="button" aria-controls="nav-links" aria-expanded="false">Menu</button>
     <nav class="nav-links" id="nav-links" aria-label="Main">
       <a href="research.html" aria-current="page">Research</a>
@@ -99,10 +101,11 @@
         <p class="role"><strong>My part:</strong> I built and released the monitoring experiment (Phases A–F): the environment, frozen oracle, monitor views, prefix-timing metrics, invariance diagnostics, closed-loop replay, tests and release checks. Kaustubh Gupta built the incident-forensics and checklist pipeline. I'm first author on the report.</p>
         <details class="more"><summary>Method, results and limits</summary>
         <dl class="facts">
-          <dt>Method</dt><dd>Synthetic authorization environment. Three monitor views (actions; plus reasoning; plus environment telemetry). Local <code>qwen3:14b</code> monitor with a frozen prompt and oracle. Threshold calibrated on benign controls only. Oracle and monitor prompt frozen and published with SHA-256 hashes.</dd>
+          <dt>Method</dt><dd>Synthetic authorization environment. Three monitor views (actions; plus reasoning; plus environment telemetry). Local <code>qwen3:14b</code> monitor with a frozen prompt and oracle. Threshold calibrated on benign controls only. Oracle and monitor prompt frozen and published with SHA-256 hashes. The October follow-up study and format ablation were preregistered; the <a href="detection-is-not-containment.html#follow-up">case study</a> notes how that is recorded.</dd>
           <dt>Result</dt><dd>Toy environment: grounded detection was timely by one step (margin +1), and in a closed-loop replay, revoking the agent's authority at that crossing prevented the harmful action. That is prevention, shown in one environment. In the same replay, a false alarm revoked a benign agent's authority and failed its task. Decisions held in 8 of 12 meaning-preserving identifier renamings.</dd>
-          <dt>Follow-up</dt><dd>Oct 2026, solo. Across 54 matched authorized and unauthorized scenarios with Qwen3-14B, the monitor flagged 0 of 54 unauthorized actions before the safety boundary at the original threshold (1 of 54 ever). A preregistered ablation then changed one thing at a time: asking for an allow/revoke decision instead of a 0–100 score flagged 21 of 54 in time, against 0 of 54, with no false alarms on authorized runs. Two of four hypotheses were falsified: deleting two suspect prompt clauses changed nothing, and the monitor's ranking (AUC 0.69) fell short of the preregistered 0.90. The follow-up measured timely detection only. Interventions were not replayed, so it does not show prevention.</dd>
-          <dt>Limits</dt><dd>One environment, single deterministic draws, fixed prompts. Says nothing about chain-of-thought faithfulness or general control performance. The follow-up used one model, one temperature-0 output per scenario and synthetic tasks; a human-overseer pilot has one session so far, so no human results are reported.</dd>
+          <dt>Follow-up study</dt><dd>Oct 2026, solo, preregistered. Across 54 matched authorized and unauthorized scenarios with Qwen3-14B, the monitor flagged 0 of 54 unauthorized actions before the safety boundary at the original threshold (1 of 54 ever).</dd>
+          <dt>Format ablation</dt><dd>Run after the follow-up study, preregistered, on the same 54 unauthorized scenarios. Asking for an allow/revoke decision instead of a 0–100 score flagged 21 of 54 in time, against 0 of 54 for the original score format in the same rerun, with no false alarms on authorized runs. Two of its four hypotheses were falsified: deleting two suspect prompt clauses changed nothing, and the monitor's ranking (AUC 0.69) fell short of the preregistered 0.90. Both follow-ups measured timely detection only. Interventions were not replayed, so they do not show prevention.</dd>
+          <dt>Limits</dt><dd>One environment, single deterministic draws, fixed prompts. Says nothing about chain-of-thought faithfulness or general control performance. The follow-ups used one model and synthetic tasks, and the ablation used one temperature-0 output per scenario. A human-overseer pilot has one session so far, so no human results are reported.</dd>
           <dt>Check it</dt><dd><code>python -m unittest discover -s tests</code> runs the core tests with the standard library only; the claims and Phase F tests sit in their own folders. No model needed.</dd>
         </dl>
         </details>
@@ -278,7 +281,7 @@
     <article class="archive-item" data-category="research">
       <span class="category">Research code · AI control</span>
       <h3>Detection Is Not Containment</h3>
-      <p>Timing and cost of monitor-triggered interventions. The oracle and prompt are hash-frozen, and runs are deterministic and cached. An October follow-up adds 54 scenarios and a preregistered monitor-format ablation.</p>
+      <p>Timing and cost of monitor-triggered interventions. The oracle and prompt are hash-frozen, and runs are deterministic and cached. October follow-ups add a preregistered 54-scenario study and a preregistered monitor-format ablation.</p>
       <p class="evidence"><span>12 test files</span><span>Release verifier</span><span>Std-lib only</span></p>
       <p class="meta">2026 · first author, built the experiment · <a href="detection-is-not-containment.html">Case study</a> · <a href="https://github.com/GaganaMD/detection-is-not-containment">Code ↗</a></p>
     </article>
@@ -518,6 +521,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=8bd70a6dcf" defer></script>
+<script src="script.js?v=c33078612a" defer></script>
 </body>
 </html>

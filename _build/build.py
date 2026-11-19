@@ -15,8 +15,7 @@ EMAIL = "gaganaaa.dev@gmail.com"
 
 
 def v(name):
-    """Asset URL with a short content hash (e.g. styles.css?v=1a2b3c4d5e). The URL changes whenever the
-    file changes, so a browser or CDN cache can never pair new HTML with an old stylesheet or script."""
+    """Asset URL with a short content hash, so browsers and the CDN never pair new HTML with an old file."""
     data = (OUT / name).read_bytes()
     return f"{name}?v={hashlib.sha256(data).hexdigest()[:10]}"
 
@@ -28,6 +27,10 @@ NAV = [
     ("speaking.html", "Speaking"),
     ("consulting.html", "Consulting"),
 ]
+
+# Runs before first paint so a saved theme choice never flashes the other theme.
+THEME_JS = ('<script>(function(){document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");'
+            'if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>')
 
 FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E"
            "%3Crect width='64' height='64' fill='%23f8f7f3'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' "
@@ -48,6 +51,10 @@ def header(current):
         '<a class="skip" href="#main">Skip to content</a>\n'
         '<header class="header">\n  <div class="wrap nav">\n'
         '    <a class="brand" href="index.html">Gagana M D<span class="brand-dot">.</span></a>\n'
+        '    <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" title="Dark theme">'
+        '<svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>'
+        '<svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
+        '<span class="visually-hidden">Dark theme</span></button>\n'
         '    <button class="menu" id="menu" type="button" aria-controls="nav-links" aria-expanded="false">Menu</button>\n'
         '    <nav class="nav-links" id="nav-links" aria-label="Main">\n      '
         + "\n      ".join(links)
@@ -99,6 +106,7 @@ def page(fname, title, desc, body, extra_head="", scripts=("script.js",), jsonld
 <meta name="description" content="{desc}">
 <meta name="author" content="Gagana M D">
 <meta name="theme-color" content="#f8f7f3">
+{THEME_JS}
 <link rel="canonical" href="{url}">
 <meta property="og:type" content="{og_type}">
 <meta property="og:site_name" content="Gagana M D">

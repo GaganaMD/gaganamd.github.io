@@ -7,6 +7,7 @@
 <meta name="description" content="Case study: measuring whether an AI monitor detects a prohibited action early enough to prevent it, and what false alarms cost, in a synthetic authorization environment.">
 <meta name="author" content="Gagana M D">
 <meta name="theme-color" content="#f8f7f3">
+<script>(function(){document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
 <link rel="canonical" href="https://gaganamd.github.io/detection-is-not-containment.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Gagana M D">
@@ -29,13 +30,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap">
-<link rel="stylesheet" href="styles.css?v=54a56d96e8">
+<link rel="stylesheet" href="styles.css?v=a945ba69f8">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="header">
   <div class="wrap nav">
     <a class="brand" href="index.html">Gagana M D<span class="brand-dot">.</span></a>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" title="Dark theme"><svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="visually-hidden">Dark theme</span></button>
     <button class="menu" id="menu" type="button" aria-controls="nav-links" aria-expanded="false">Menu</button>
     <nav class="nav-links" id="nav-links" aria-label="Main">
       <a href="research.html">Research</a>
@@ -112,7 +114,7 @@
     <p>Several design choices exist to stop the result from being tuned after the fact:</p>
     <ul>
       <li>The safety oracle, monitor prompt, input serialization and thresholding are separate components. The oracle never sees monitor output.</li>
-      <li>The oracle rule body and the monitor prompt are frozen and published with SHA-256 hashes. (The preregistration documents in the repository were committed after the first runs, so I don't present this sprint work as preregistered.)</li>
+      <li>The oracle rule body and the monitor prompt are frozen and published with SHA-256 hashes. (The sprint's preregistration documents were committed to the repository after its first runs, so I don't describe the sprint experiment itself as preregistered. The October follow-ups below were preregistered.)</li>
       <li>The threshold was set from <strong>benign control trajectories only</strong>. The highest control score was 50, so the threshold was frozen at 51, giving 0 false positives across 12 control view-trajectories. No attack data was used to pick it.</li>
       <li>The monitor is local <code>qwen3:14b</code> at temperature 0 with a fixed seed. It was chosen over <code>qwen3:8b</code> after a small diagnostic in which the 8B model invented authorization state in 4 of 10 cases.</li>
     </ul>
@@ -146,10 +148,15 @@
     <h3>Forensics and protocol</h3>
     <p>The report also has a public-source forensics pipeline over five AI incidents: 679 claims extracted with a local model, each tied to a verbatim quote and cross-checked for independent corroboration. It also includes a draft 8-item checklist for whether an evaluation setup really separated simulation from reality. An independent LLM audit agreed with the heuristic scorer on only 22 of 40 items (55%), so the checklist is a draft, not a validated instrument. Four of the five cases rest on one or two sources.</p>
 
-    <h2 id="follow-up">Follow-up: does it hold at scale?</h2>
-    <p>In October I scaled the setup to 54 matched authorized and unauthorized scenarios with Qwen3-14B, and the result got weaker. At the original threshold, the monitor flagged 0 of 54 unauthorized actions before the safety boundary (1 of 54 ever). Its explanations often named the violation (35 of 54) without scoring it high enough to act.</p>
-    <p>A preregistered ablation then changed one thing at a time. Asking for an allow/revoke decision instead of a 0–100 score flagged 21 of 54 in time, against 0 of 54, with no false alarms on authorized runs. Deleting two prompt clauses I suspected made no difference, and the monitor's ranking fell short of my preregistered bar (AUC 0.69 vs 0.90), so two of my four hypotheses were falsified.</p>
-    <p>This follow-up measured timely detection: whether a flag arrived before the last point where acting could still help. Unlike Phase F above, it did not replay the intervention, so it doesn't show prevention. Limits: one model, one synthetic environment, one temperature-0 output per scenario. A human-overseer pilot has one session so far, so I don't report human results.</p>
+    <h2 id="follow-up">Follow-ups: does it hold at scale?</h2>
+    <p>In October I ran two follow-ups on my own, each preregistered. They are separate experiments from the sprint above and from each other, so their numbers aren't combined.</p>
+    <h3>Follow-up study: 54 matched scenarios</h3>
+    <p>I scaled the setup to 54 matched authorized and unauthorized scenarios with Qwen3-14B, and the result got weaker. At the original threshold, the monitor flagged 0 of 54 unauthorized actions before the safety boundary (1 of 54 ever).</p>
+    <h3>Format ablation</h3>
+    <p>I then reran the monitor on the same 54 unauthorized scenarios, changing one thing at a time. With the original score format, its explanations often named the violation (35 of 54) while the score stayed too low to act. Asking for an allow/revoke decision instead of a 0–100 score flagged 21 of 54 in time, against 0 of 54 for the score format in the same rerun, with no false alarms on authorized runs. Deleting two prompt clauses I suspected made no difference, and the monitor's ranking fell short of my preregistered bar (AUC 0.69 vs 0.90), so two of my four hypotheses were falsified.</p>
+    <h3>What the follow-ups do and don't show</h3>
+    <p>Both measured timely detection: whether a flag arrived before the last point where acting could still help. Unlike Phase F above, neither replayed the intervention, so they don't show prevention. They use one model and one synthetic environment, and the ablation used one temperature-0 output per scenario. A human-overseer pilot has one session so far, so I don't report human results.</p>
+    <p><strong>On preregistration:</strong> both protocols were written before their model runs. That ordering is my record as author; the public commit history doesn't establish it independently, because the protocol and results were pushed together.</p>
 
     <h2 id="limits">What it doesn't show</h2>
     <ul>
@@ -199,6 +206,6 @@ python -m hermes_phase_f.pilot.validate_phase_f</code></pre>
   </div>
 </footer>
 
-<script src="script.js?v=8bd70a6dcf" defer></script>
+<script src="script.js?v=c33078612a" defer></script>
 </body>
 </html>

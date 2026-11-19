@@ -45,3 +45,19 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 })();
+
+// Light/dark theme toggle. Light is the default; a visitor's choice is remembered.
+(function () {
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  var root = document.documentElement;
+  var current = function () { return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'; };
+  var sync = function () { btn.setAttribute('aria-pressed', String(current() === 'dark')); };
+  btn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    sync();
+  });
+  sync();
+})();

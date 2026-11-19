@@ -13,11 +13,33 @@ PERSON = {
     "sameAs": ["https://github.com/GaganaMD", "https://www.linkedin.com/in/gaganamd/", "https://orcid.org/0009-0003-2594-1026"],
 }
 
+# ---- News (homepage) -------------------------------------------------------
+# Edit _build/news.json: one entry per item, {"date": "YYYY-MM" or "YYYY-MM-DD", "text": "..."}.
+# Newest first is applied automatically (an exact day sorts above a bare month); the first NEWS_VISIBLE items show, the rest
+# go under "Older news". Text may contain simple HTML links.
+import json, datetime
+NEWS_VISIBLE = 5
+
+def news_html():
+    items = json.loads((pathlib.Path(__file__).parent / "news.json").read_text())
+    items = sorted(items, key=lambda x: x["date"], reverse=True)  # stable: same-month order kept
+    def li(x):
+        d = datetime.date(int(x["date"][:4]), int(x["date"][5:7]), 1)
+        return f'<li><time datetime="{x["date"]}">{d:%b %Y}</time><span>{x["text"]}</span></li>'
+    first, rest = items[:NEWS_VISIBLE], items[NEWS_VISIBLE:]
+    out = '<ul class="ac-news">' + "".join(li(x) for x in first) + "</ul>"
+    if rest:
+        out += ('\n  <details class="ac-older"><summary>Older news</summary><ul class="ac-news">'
+                + "".join(li(x) for x in rest) + "</ul></details>")
+    return out
+
+home = lambda: r("index.html").replace("@@NEWS@@", news_html())
+
 PAGES = [
     dict(fname="index.html",
          title="Gagana M D · AI safety research: agent monitoring and evaluations",
          desc="Gagana M D is an early-career AI safety researcher working on monitoring and evaluating AI agents. Publications, reports and code for each completed project.",
-         body=r("index.html") + contact(body="Email is the easiest way to reach me. A short note on the problem you're working on is a great start."), jsonld=PERSON),
+         body=home() + contact(body="Email is the easiest way to reach me. I'm always glad to hear from people working on similar questions, and from people just starting out in AI safety."), jsonld=PERSON),
     dict(fname="research.html", title="Research · Gagana M D",
          desc="AI safety research by Gagana M D on agent monitoring, AI control, world-model evaluation and auditing under limited observability, with the status of each project.",
          body=r("research.html") + contact()),
