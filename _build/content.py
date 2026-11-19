@@ -18,7 +18,7 @@ PERSON = {
 # Newest first is applied automatically (an exact day sorts above a bare month); the first NEWS_VISIBLE items show, the rest
 # go under "Older news".
 import datetime
-from render import load_yaml, inline_md
+from render import load_yaml, inline_md, papers_home_html, pubs_research_html
 NEWS_VISIBLE = 5
 
 def news_html():
@@ -34,7 +34,14 @@ def news_html():
                 + "".join(li(x) for x in rest) + "</ul></details>")
     return out
 
-home = lambda: r("index.html").replace("@@NEWS@@", news_html())
+def fill(text, marker, html):
+    """Replace a placeholder line such as @@PAPERS_HOME@@ in a page fragment; fail loudly if it's missing."""
+    if marker not in text:
+        raise SystemExit(f"Placeholder {marker} is missing from a page in _build/pages/.")
+    return text.replace(marker, html)
+
+home = lambda: fill(fill(r("index.html"), "@@NEWS@@", news_html()), "@@PAPERS_HOME@@", papers_home_html())
+research = lambda: fill(r("research.html"), "@@PUBS_RESEARCH@@", pubs_research_html())
 
 PAGES = [
     dict(fname="index.html",
@@ -43,7 +50,7 @@ PAGES = [
          body=home() + contact(body="Email is the easiest way to reach me. I'm always glad to hear from people working on similar questions, and from people just starting out in AI safety."), jsonld=PERSON),
     dict(fname="research.html", title="Research · Gagana M D",
          desc="AI safety research by Gagana M D on agent monitoring, AI control, world-model evaluation and auditing under limited observability, with the status of each project.",
-         body=r("research.html") + contact()),
+         body=research() + contact()),
     dict(fname="detection-is-not-containment.html", title="Detection Is Not Containment · Gagana M D",
          desc="Case study: measuring whether an AI monitor detects a prohibited action early enough to prevent it, and what false alarms cost, in a synthetic authorization environment.",
          body=r("detection-is-not-containment.html") + contact(), og_type="article"),

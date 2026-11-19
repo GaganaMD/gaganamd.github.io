@@ -45,6 +45,14 @@ Edit `_content/news.yml` (the `_content/` folder is never published). Each item:
 sorted newest first automatically; the newest five are shown and the rest go under "Older news"
 (change `NEWS_VISIBLE` in `content.py`). Then rebuild.
 
+## Updating publications
+
+Edit `_content/publications.yml`: one entry per paper or report. The file's header lists every field.
+Order in the file is the order on the Research page (grouped under Peer-reviewed / Reports /
+Manuscripts); entries with a `home:` block also appear in the homepage "Research papers" list,
+sorted by `home.order`. Keep `authors` in the officially published order and set `me` to the exact
+form of your name used there. Then rebuild.
+
 ## Light and dark themes
 
 Light is the default. The header button switches to dark and the choice is remembered in the

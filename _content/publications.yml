@@ -1,0 +1,134 @@
+# Papers and reports. One entry per publication; edit here, then rebuild.
+#
+# Order in this file = order on the Research page (grouped by `group`, groups in order of first appearance).
+# `home` (optional): show the paper in the homepage "Research papers" list, sorted by `home.order`.
+#
+# Fields
+#   id                unique, lowercase-with-dashes
+#   title             exact title (quote it if it contains ": ")
+#   url               optional: the Research page title links here
+#   authors           list, in the official published order
+#   me                the exact form of your name in `authors` (shown in bold)
+#   equal_contribution  optional: number of leading authors marked * (Research page only, adds "*Equal contribution.")
+#   group             Research page heading: Peer-reviewed | Reports | Manuscripts
+#   venue, note       one line of Markdown each (links as [text](url), anchors as [More](#slug))
+#   home.venue, home.role, home.tag   homepage texts; home.peer: true gives the green "Peer-reviewed" style
+#   home.links        list of {label, url} buttons on the homepage
+
+- id: nemo-world-models-2026
+  title: Evaluating LLM-Generated World Models for Neuro-Symbolic Reasoning
+  authors: [Souhaila Djaffal, Amna Jamal, Gagana Madhugiri Devaraja, Anidipta Pal, Jobst Heitzig]
+  me: Gagana Madhugiri Devaraja
+  equal_contribution: 4
+  group: Peer-reviewed
+  venue: >-
+    NEmo: Neuro-Symbolic Embodied Intelligence workshop, NeurIPS 2026 · Accepted workshop paper, poster (non-archival) · [arXiv:2611.14419](https://arxiv.org/abs/2611.14419)
+  note: >-
+    A 44-scenario benchmark and 410 generations from five LLMs: 134 of 135 generated games run, but mean structural F1 against the reference is 0.366. [More](#world-models)
+  home:
+    order: 1
+    venue: NeurIPS 2026 Workshop on Neuro-Symbolic Embodied Intelligence (NEmo), poster
+    role: Co-author
+    tag: Workshop paper · non-archival
+    links:
+      - {label: arXiv, url: "https://arxiv.org/abs/2611.14419"}
+      - {label: Workshop, url: "https://nemo.semantic.review/#accepted-papers"}
+
+- id: biornet-ingarss-2025
+  title: "Hyperspectral BiorNet: A Complete Wavelet Framework for Unmixing"
+  url: https://doi.org/10.1109/InGARSS67683.2025.11584022
+  authors: [Gagana M D, Ajay Kumar K, Vijayashekhar S S, Jignesh S. Bhatt]
+  me: Gagana M D
+  group: Peer-reviewed
+  venue: >-
+    2025 IEEE India Geoscience and Remote Sensing Symposium (InGARSS), Bhubaneswar, pp. 15–19. DOI [10.1109/InGARSS67683.2025.11584022](https://doi.org/10.1109/InGARSS67683.2025.11584022) · [Code](https://github.com/GaganaMD/Hyperspectral-Wavenet)
+  note: >-
+    Peer-reviewed. A wavelet-domain unmixing framework with a custom wavelet-shaped activation function. [More](#biornet)
+  home:
+    order: 2
+    venue: IEEE India Geoscience and Remote Sensing Symposium (InGARSS), 2025
+    role: First author
+    tag: Peer-reviewed
+    peer: true
+    links:
+      - {label: Paper, url: "https://doi.org/10.1109/InGARSS67683.2025.11584022"}
+
+- id: tacit-collusion-2026
+  title: "Tacit Collusion in Pricing Agents: Robustness, Detection, and a Mechanistic Probe of a Pricing LLM"
+  url: https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb
+  authors: [Sriram Bharadwaj Peddinti, Chewon Cho, Gagana MD]
+  me: Gagana MD
+  group: Reports
+  venue: >-
+    Apart Research AI Collusion Research Sprint, Oct 2026 · [Code](https://github.com/Peddinti-Sriram-Bharadwaj/Collusion/tree/gagana/latent-manifold-steering)
+  note: >-
+    Sprint report, not peer-reviewed. I implemented the mechanistic interpretability and steering experiments. [More](#collusion)
+  home:
+    order: 5
+    venue: Apart Research AI Collusion Research Sprint, Oct 2026
+    role: Co-author; implemented the interpretability and steering experiments
+    tag: Sprint report · not peer-reviewed
+    links:
+      - {label: Report, url: "https://apartresearch.com/sprints/projects/tacit-collusion-in-pricing-agents-robustness-detection-and-a-mechanistic-probe-of-a-pricing-llm-qxsb"}
+
+- id: noticing-the-move-2026
+  title: "Noticing the Move, Missing the Player: LLM Agents Detect Behavioral Shifts but Not Peer Swaps"
+  url: https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r
+  authors: [V S Siva Kumar Lakkoju, Kaustubh Gupta, Gagana M D]
+  me: Gagana M D
+  group: Reports
+  venue: Apart Research AI Collusion Research Sprint, Oct 2026
+  note: >-
+    Sprint report, not peer-reviewed. I led the covert monitor-swap experiment. [More](#collusion)
+  home:
+    order: 4
+    venue: Apart Research AI Collusion Research Sprint, Oct 2026
+    role: Co-author; led the monitor-swap study
+    tag: Sprint report · not peer-reviewed
+    links:
+      - {label: Report, url: "https://apartresearch.com/sprints/projects/noticing-the-move-missing-the-player-llm-agents-detect-behavioral-shifts-but-not-peer-swaps-uf7r"}
+
+- id: detection-is-not-containment-2026
+  title: "Detection Is Not Containment: Timely Monitoring Determines Whether AI Agent Failures Can Be Prevented"
+  url: https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs
+  authors: [Gagana M D, Kaustubh Gupta, María Inés Berdiñas]
+  me: Gagana M D
+  group: Reports
+  venue: >-
+    Apart Research AI Incident Response Sprint, Sep 2026 · [Code](https://github.com/GaganaMD/detection-is-not-containment)
+  note: Sprint report with public reviewer feedback, not peer-reviewed.
+  home:
+    order: 3
+    venue: Apart Research AI Incident Response Sprint, Sep 2026
+    role: First author
+    tag: Sprint report · not peer-reviewed
+    links:
+      - {label: Report, url: "https://apartresearch.com/sprints/projects/detection-is-not-containment-timely-monitoring-determines-whether-ai-agent-failures-can-be-prevented-oexs"}
+      - {label: Case study, url: detection-is-not-containment.html}
+
+- id: matching-law-2025
+  title: Investigating the Matching Law in Transformer-Based Reinforcement Learning Agents
+  url: https://doi.org/10.5281/zenodo.15462678
+  authors: [Y. Karakoc, E. Sharifi, M. D. Gagana, Z. Sarayloo]
+  me: M. D. Gagana
+  group: Reports
+  venue: >-
+    Zenodo, May 2025. DOI [10.5281/zenodo.15462678](https://doi.org/10.5281/zenodo.15462678) · [Code](https://github.com/GaganaMD/Investigating-the-Matching-Law-in-Transformer-Based-Reinforcement-Learning-Agents)
+  note: >-
+    Neuromatch Impact Scholars report, not peer-reviewed. I worked on the experiment design, methodology and experiments.
+  home:
+    order: 6
+    venue: Neuromatch Impact Scholars, Zenodo, 2025
+    role: Supporting author
+    tag: Report · not peer-reviewed
+    links:
+      - {label: Report, url: "https://doi.org/10.5281/zenodo.15462678"}
+
+- id: uav-fog-manuscript
+  title: Mobility-Aware Cost-Efficient Co-Scheduling of UAV Routes and Analytics across Edge and Fog Computing
+  authors: [Suman Raj, Arindam Khanda, Gagana M D, Yogesh Simmhan, Sajal K. Das]
+  me: Gagana M D
+  group: Manuscripts
+  venue: Manuscript · IISc DREAM Lab
+  note: >-
+    Drone route planning and analytics scheduling using rural buses as mobile fog nodes. [More](#uav-fog)
