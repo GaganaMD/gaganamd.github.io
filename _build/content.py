@@ -19,7 +19,8 @@ PERSON = {
 # go under "Older news".
 import datetime
 from render import (load_yaml, inline_md, papers_home_html, pubs_research_html, entries_html, ongoing_html,
-                    current_home_html, code_archive_html)
+                    current_home_html, code_archive_html, experience_home_html, service_home_html,
+                    experience_about_html)
 NEWS_VISIBLE = 5
 
 def news_html():
@@ -44,13 +45,18 @@ def fill(text, marker, html):
 def home():
     t = fill(r("index.html"), "@@NEWS@@", news_html())
     t = fill(t, "@@PAPERS_HOME@@", papers_home_html())
-    return fill(t, "@@CURRENT_HOME@@", current_home_html())
+    t = fill(t, "@@CURRENT_HOME@@", current_home_html())
+    t = fill(t, "@@EXPERIENCE_HOME@@", experience_home_html())
+    return fill(t, "@@SERVICE_HOME@@", service_home_html())
 def research():
     t = fill(r("research.html"), "@@ENTRIES_MAIN@@", entries_html("main"))
     t = fill(t, "@@ONGOING@@", ongoing_html())
     t = fill(t, "@@PUBS_RESEARCH@@", pubs_research_html())
     t = fill(t, "@@CODE_ARCHIVE@@", code_archive_html())
     return fill(t, "@@ENTRIES_EARLIER@@", entries_html("earlier"))
+
+def about():
+    return fill(r("about.html"), "@@EXPERIENCE_ABOUT@@", experience_about_html())
 
 PAGES = [
     dict(fname="index.html",
@@ -73,7 +79,7 @@ PAGES = [
          body=r("writing.html") + contact()),
     dict(fname="about.html", title="About · Gagana M D",
          desc="Background, experience, education and community work of Gagana M D, an early-career AI safety researcher.",
-         body=r("about.html") + contact()),
+         body=about() + contact()),
     dict(fname="speaking.html", title="Speaking · Gagana M D",
          desc="Talks, workshops and community programs by Gagana M D on AI safety, evaluations, research careers and technical portfolios.",
          body=r("speaking.html") + contact(eyebrow="Speaking inquiries",

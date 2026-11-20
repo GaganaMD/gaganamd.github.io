@@ -166,3 +166,50 @@ def code_archive_html():
             lines.append(f'      <p class="meta">{c["meta"]}</p>')
         lines.append("    </article>")
     return "\n".join(lines)
+
+
+# ---- Experience and service --------------------------------------------------
+def experience_home_html():
+    """Homepage Experience rows, by explicit home order."""
+    entries = sorted((x for x in load_yaml("experience.yml") if x.get("home")), key=lambda x: x["home"]["order"])
+    lines = []
+    for x in entries:
+        h = x["home"]
+        description = f'<p>{h["description"]}</p>' if h.get("description") else ""
+        lines.append(f'    <li><div class="ac-row"><span><b>{h["title"]}</b>, <span class="org">{h["org"]}</span></span><span class="when">{h["when"]}</span></div>{description}</li>')
+    return "\n".join(lines)
+
+
+def service_home_html():
+    """Homepage Service and leadership rows, in YAML order."""
+    lines = []
+    for x in load_yaml("service.yml"):
+        description = f'<p>{x["description"]}</p>' if x.get("description") else ""
+        lines.append(f'    <li><div class="ac-row"><span><b>{x["title"]}</b>, <span class="org">{x["org"]}</span></span><span class="when">{x["when"]}</span></div>{description}</li>')
+    return "\n".join(lines)
+
+
+def experience_about_html():
+    """About-page experience timeline, grouped in explicit timeline order."""
+    entries = sorted((x for x in load_yaml("experience.yml") if x.get("about")), key=lambda x: x["about"]["order"])
+    groups, group_name, group_lines = [], None, []
+    for x in entries:
+        a = x["about"]
+        if a["group"] != group_name:
+            if group_name is not None:
+                group_lines.append("  </div>")
+                groups.append("\n".join(group_lines))
+            group_name = a["group"]
+            group_lines = [f'  <h3 class="group-title">{group_name}</h3>', '  <div class="timeline">']
+        first = f'    <article class="timeline-item"><time>{a["time"]}</time><div><h4>{a["title"]}</h4><p class="position">{a["position"]}</p>'
+        paragraphs = a["paragraphs"]
+        if a.get("multiline"):
+            group_lines.append(first)
+            group_lines += [f'      <p>{paragraph}</p>' for paragraph in paragraphs[:-1]]
+            group_lines.append(f'      <p>{paragraphs[-1]}</p></div></article>')
+        else:
+            group_lines.append(first + "".join(f'<p>{paragraph}</p>' for paragraph in paragraphs) + "</div></article>")
+    if group_name is not None:
+        group_lines.append("  </div>")
+        groups.append("\n".join(group_lines))
+    return "\n\n".join(groups)

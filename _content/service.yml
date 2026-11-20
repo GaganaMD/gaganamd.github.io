@@ -1,0 +1,19 @@
+# Homepage service and leadership rows, in display order.
+- id: prism-program-support
+  title: Program Support Volunteer
+  org: PRISM AI Safety Research Fellowship
+  when: May – Oct 2026
+  description: Helped coordinate and support the fellowship's interpretability and AI control research teams.
+- id: shakti
+  title: Programs team and workshop facilitator
+  org: Shakti Mentorship Program, Women in Big Data India
+  when: 2026 – present
+- id: wids
+  title: Ambassador
+  org: WiDS Worldwide
+  when: 2026 – present
+- id: women-who-code
+  title: Volunteer
+  org: Women Who Code, Data community
+  when: 2022 – 2024
+  description: Helped organise and support technical workshops.
