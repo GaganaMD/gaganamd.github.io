@@ -53,6 +53,15 @@ Manuscripts); entries with a `home:` block also appear in the homepage "Research
 sorted by `home.order`. Keep `authors` in the officially published order and set `me` to the exact
 form of your name used there. Then rebuild.
 
+## Updating research projects and code cards
+
+- Each research project is one file in `_content/projects/` (field guide: `_content/projects/README.md`).
+  It feeds the Research page entries (`section: main` or `earlier`), the "In progress" list
+  (`section: ongoing`) and, with a `home:` block, the homepage "Current research" list.
+  Never change an existing `id`: it is the page anchor other pages link to.
+- The "All code" cards on the Research page are `_content/code.yml`, in display order. `category` must
+  match one of the filter buttons (`research`, `agents`, `rl`, `applied`).
+
 ## Light and dark themes
 
 Light is the default. The header button switches to dark and the choice is remembered in the

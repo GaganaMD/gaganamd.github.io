@@ -18,7 +18,8 @@ PERSON = {
 # Newest first is applied automatically (an exact day sorts above a bare month); the first NEWS_VISIBLE items show, the rest
 # go under "Older news".
 import datetime
-from render import load_yaml, inline_md, papers_home_html, pubs_research_html
+from render import (load_yaml, inline_md, papers_home_html, pubs_research_html, entries_html, ongoing_html,
+                    current_home_html, code_archive_html)
 NEWS_VISIBLE = 5
 
 def news_html():
@@ -40,8 +41,16 @@ def fill(text, marker, html):
         raise SystemExit(f"Placeholder {marker} is missing from a page in _build/pages/.")
     return text.replace(marker, html)
 
-home = lambda: fill(fill(r("index.html"), "@@NEWS@@", news_html()), "@@PAPERS_HOME@@", papers_home_html())
-research = lambda: fill(r("research.html"), "@@PUBS_RESEARCH@@", pubs_research_html())
+def home():
+    t = fill(r("index.html"), "@@NEWS@@", news_html())
+    t = fill(t, "@@PAPERS_HOME@@", papers_home_html())
+    return fill(t, "@@CURRENT_HOME@@", current_home_html())
+def research():
+    t = fill(r("research.html"), "@@ENTRIES_MAIN@@", entries_html("main"))
+    t = fill(t, "@@ONGOING@@", ongoing_html())
+    t = fill(t, "@@PUBS_RESEARCH@@", pubs_research_html())
+    t = fill(t, "@@CODE_ARCHIVE@@", code_archive_html())
+    return fill(t, "@@ENTRIES_EARLIER@@", entries_html("earlier"))
 
 PAGES = [
     dict(fname="index.html",
