@@ -14,7 +14,9 @@ FRAGMENTS = ROOT / "_build" / "pages"
 PAGES = ("index.html", "research.html", "detection-is-not-containment.html", "projects.html",
          "writing.html", "about.html", "speaking.html", "consulting.html", "404.html")
 ID = re.compile(r"^[A-Za-z][A-Za-z0-9_:-]*$")
-DATE = re.compile(r"^\d{4}-(?:0[1-9]|1[0-2])(?:-(?:0[1-9]|[12]\d|3[01]))?$")
+# Check the textual shape first, then let datetime give a truthful calendar-date
+# diagnostic for values such as 2026-13 or 2026-02-30.
+DATE = re.compile(r"^\d{4}-\d{2}(?:-\d{2})?$")
 
 
 def _where(path):
