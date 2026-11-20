@@ -95,3 +95,16 @@ python -B _build/site.py preview  # rebuilds and serves http://localhost:8000; w
 ```
 
 `python -B _build/site.py check` runs the same checks as `python -B _build/check.py`.
+
+## GitHub Pages automation
+
+`.github/workflows/pages.yml` builds, validates and packages the public site on pushes to `main`,
+pull requests and manual runs. Its deploy job is intentionally disabled until the repository variable
+`PAGES_ACTIONS_DEPLOY` is set to `true` during an approved cutover; branch-based Pages remains the
+production source until then. The workflow uses `package.py` to create an artifact outside the repo,
+containing public files only. To inspect one locally:
+
+```bash
+python -B _build/package.py /tmp/pages-artifact
+python -B _build/package.py --verify /tmp/pages-artifact
+```
