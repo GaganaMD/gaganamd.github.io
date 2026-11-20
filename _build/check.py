@@ -12,6 +12,9 @@ PAGES = ["index.html", "research.html", "detection-is-not-containment.html", "pr
          "writing.html", "about.html", "speaking.html", "consulting.html", "404.html"]
 sys.dont_write_bytecode = True  # keep _build/ free of __pycache__
 problems = []
+sys.path.insert(0, str(ROOT / "_build"))
+import validate  # noqa: E402
+problems += validate.content_problems()
 for page in PAGES:
     html = (ROOT / page).read_text(encoding="utf-8")
     for name, ver in re.findall(r'(?:href|src)="([\w.-]+\.(?:css|js))\?v=([0-9a-f]+)"', html):
@@ -21,13 +24,19 @@ for page in PAGES:
     if re.search(r'(?:href|src)="(?:styles\.css|script\.js|speaking\.js)"', html):
         problems.append(f"{page}: links an asset without a fingerprint")
 before = {p: (ROOT / p).read_bytes() for p in PAGES}
-subprocess.run([sys.executable, "-B", str(ROOT / "_build" / "build.py")], check=True, capture_output=True)
-for p in PAGES:
-    if (ROOT / p).read_bytes().replace(b"\r\n", b"\n") != before[p].replace(b"\r\n", b"\n"):
-        problems.append(f"{p}: out of date; rebuilding changes it (run python _build/build.py and commit the result)")
-    if (ROOT / p).read_bytes() != before[p]:
-        (ROOT / p).write_bytes(before[p])  # always leave the working copy exactly as it was
-sys.path.insert(0, str(ROOT / "_build"))
+build = None
+if not problems:  # schema errors are already actionable; do not bury them under a renderer traceback
+    build = subprocess.run([sys.executable, "-B", str(ROOT / "_build" / "build.py")], capture_output=True)
+    if build.returncode:
+        detail = (build.stderr or build.stdout).decode("utf-8", "replace").strip()
+        problems.append("BUILD: " + (detail or "python _build/build.py failed"))
+    else:
+        problems += validate.link_problems()
+    for p in PAGES:
+        if (ROOT / p).read_bytes().replace(b"\r\n", b"\n") != before[p].replace(b"\r\n", b"\n"):
+            problems.append(f"{p}: out of date; rebuilding changes it (run python _build/build.py and commit the result)")
+        if (ROOT / p).read_bytes() != before[p]:
+            (ROOT / p).write_bytes(before[p])  # always leave the working copy exactly as it was
 import privacy  # noqa: E402  (phone numbers and private files must never be committed)
 priv = privacy.problems()
 if priv is None:

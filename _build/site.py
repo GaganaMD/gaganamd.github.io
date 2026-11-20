@@ -1,13 +1,18 @@
 """One entry point for maintaining the site. Run from the repository folder.
 
-Stage 1A provides the CV commands; preview, build and check arrive in later stages.
+The site commands rebuild, preview and check the generated pages; CV commands keep private
+artifacts under _private/.
+
+  python -B _build\\site.py build       Rebuild the nine generated HTML pages
+  python -B _build\\site.py preview     Rebuild, serve http://localhost:8000, and watch sources
+  python -B _build\\site.py check       Run generated-page, content, link and privacy checks
 
   py _build\\site.py cv             Public CV preview  -> _private\\cv-public-preview.pdf (no phone number)
   py _build\\site.py cv --private   Application CV     -> _private\\cv-private.pdf (with your phone number)
 
 The private CV reads your phone number from _private\\contact.tex, which git ignores. See cv/README.md.
 The public cv.pdf on the website is built by GitHub Actions from cv/main.tex; this script never touches it."""
-import argparse, pathlib, shutil, subprocess, sys
+import argparse, functools, http.server, pathlib, shutil, subprocess, sys, threading, time
 
 sys.dont_write_bytecode = True
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -71,14 +76,71 @@ def cv(private):
     print(f"Built {out.relative_to(ROOT)}" + ("  (private: never upload or commit it)" if private else ""))
 
 
+def run_build():
+    subprocess.run([sys.executable, "-B", str(ROOT / "_build" / "build.py")], cwd=ROOT, check=True)
+
+
+def run_check():
+    result = subprocess.run([sys.executable, "-B", str(ROOT / "_build" / "check.py")], cwd=ROOT)
+    if result.returncode:
+        raise SystemExit(result.returncode)
+
+
+def source_state():
+    """Modification state for editable source only; generated root pages are deliberately excluded."""
+    state = {}
+    for directory in (ROOT / "_content", ROOT / "_build"):
+        for path in directory.rglob("*"):
+            if path.is_file() and "__pycache__" not in path.parts:
+                state[path] = path.stat().st_mtime_ns
+    return state
+
+
+def preview():
+    run_build()
+    previous = source_state()
+
+    def watch():
+        nonlocal previous
+        while True:
+            time.sleep(1)
+            current = source_state()
+            if current == previous:
+                continue
+            previous = current
+            print("Source change detected; rebuilding...")
+            try:
+                run_build()
+            except subprocess.CalledProcessError:
+                print("Rebuild failed; fix the reported error and save again.", file=sys.stderr)
+
+    threading.Thread(target=watch, daemon=True).start()
+    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(ROOT))
+    with http.server.ThreadingHTTPServer(("127.0.0.1", 8000), handler) as server:
+        print("Previewing the site at http://localhost:8000 (watching _content/ and _build/; Ctrl+C to stop)")
+        try:
+            server.serve_forever()
+        except KeyboardInterrupt:
+            print("\nPreview stopped.")
+
+
 def main():
     ap = argparse.ArgumentParser(prog="site.py", description=__doc__.split("\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("cv", help="build the public CV preview, or the private application CV")
     c.add_argument("--private", action="store_true", help="include the phone number from _private/contact.tex")
+    sub.add_parser("build", help="rebuild the nine generated HTML pages")
+    sub.add_parser("preview", help="rebuild and serve the site locally, watching _content/ and _build/")
+    sub.add_parser("check", help="run generated-page, content, link and privacy checks")
     a = ap.parse_args()
     if a.cmd == "cv":
         cv(a.private)
+    elif a.cmd == "build":
+        run_build()
+    elif a.cmd == "preview":
+        preview()
+    elif a.cmd == "check":
+        run_check()
 
 
 if __name__ == "__main__":

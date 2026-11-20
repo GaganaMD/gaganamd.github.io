@@ -79,6 +79,10 @@ python _build/check.py   # must print OK
 file on disk, or if a generated page is out of date. This is what keeps new HTML and the stylesheet
 in step, so a returning visitor can never get the new page with an old stylesheet.
 
+It also validates `_content/` before rebuilding: YAML and project front matter, required fields and
+unknown fields, news dates, duplicate IDs, publication authors and links, source templates and
+placeholders, and local page links and anchors. Errors name the file and affected item where possible.
+
 ## Changing navigation, footer or meta tags
 
 Edit `NAV`, `FOOTER`, `contact()` or `page()` in `build.py`. These affect every page.
@@ -86,5 +90,8 @@ Edit `NAV`, `FOOTER`, `contact()` or `page()` in `build.py`. These affect every 
 ## Previewing locally
 
 ```bash
-python -m http.server 8000    # from the repo root, then open http://localhost:8000
+python -B _build/site.py build
+python -B _build/site.py preview  # rebuilds and serves http://localhost:8000; watches _content/ and _build/
 ```
+
+`python -B _build/site.py check` runs the same checks as `python -B _build/check.py`.
