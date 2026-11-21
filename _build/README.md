@@ -1,8 +1,8 @@
 # _build: source of the site's HTML pages
 
 This folder is the source of truth for the generated pages of gaganamd.github.io.
-GitHub Pages builds this repository with Jekyll, and Jekyll never publishes folders whose
-names start with `_`, so `_build/` is version-controlled here but not served on the site.
+GitHub Actions builds, validates and packages the public site; `_build/` is version-controlled
+source and is not served as part of the Pages artifact.
 
 ## What is generated and what is not
 
@@ -62,6 +62,11 @@ form of your name used there. Then rebuild.
 - The "All code" cards on the Research page are `_content/code.yml`, in display order. `category` must
   match one of the filter buttons (`research`, `agents`, `rl`, `applied`).
 
+## Updating Writing links
+
+The current Writing page contains externally hosted links. Edit `_build/pages/writing.html` to
+update an existing link or its accompanying text, then rebuild and run the checks below.
+
 ## Light and dark themes
 
 Light is the default. The header button switches to dark and the choice is remembered in the
@@ -99,12 +104,14 @@ python -B _build/site.py preview  # rebuilds and serves http://localhost:8000; w
 ## GitHub Pages automation
 
 `.github/workflows/pages.yml` builds, validates and packages the public site on pushes to `main`,
-pull requests and manual runs. Its deploy job is intentionally disabled until the repository variable
-`PAGES_ACTIONS_DEPLOY` is set to `true` during an approved cutover; branch-based Pages remains the
-production source until then. The workflow uses `package.py` to create an artifact outside the repo,
-containing public files only. To inspect one locally:
+pull requests and manual runs. Production deployment uses the approved GitHub Actions Pages workflow;
+the deploy job is protected by its existing `PAGES_ACTIONS_DEPLOY` gate. The workflow uses `package.py`
+to create an artifact outside the repo containing public files only. To inspect one locally:
 
 ```bash
 python -B _build/package.py /tmp/pages-artifact
 python -B _build/package.py --verify /tmp/pages-artifact
 ```
+
+To roll back a published change, create a normal revert commit on `main`; the existing workflow deploys
+that revert. Do not force-push or change GitHub Pages settings for a routine rollback.
